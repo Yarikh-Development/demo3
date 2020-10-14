@@ -9,6 +9,7 @@ namespace demo
 {
 	public class City
 	{
+		//测试上传
 		public int ID { get; set; }
 		public string Name { get; set; }
 	}
