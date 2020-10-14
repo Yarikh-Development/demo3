@@ -1,0 +1,61 @@
+﻿<Page x:Class="demo.TextFiles"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d" 
+      d:DesignHeight="580" d:DesignWidth="880"
+      Title="TextFiles">
+
+    <Grid Background="#EEEDEF">
+
+        <ListView x:Name="Relation_ListView"  Height="580" VerticalAlignment="Top" Width="880" >
+            <!--<ListView x:Name="Relation_ListView" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="880" >-->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="LightBlue" Offset="0.5"/>
+                                <GradientStop Color="LightBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="0.4"/>
+                    <Setter Property="Height" Value="25"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="150" Header="能效编号" DisplayMemberBinding="{Binding Path=number}"/>
+                    <GridViewColumn Width="350" Header="模板编号" DisplayMemberBinding="{Binding Path=template}"/>
+                    <GridViewColumn Width="350" Header="打印机名称" DisplayMemberBinding="{Binding Path=printer}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="编辑" Click="ChangeRelationRecord"/>
+                    <MenuItem Header="添加" Click="AddRelationRecord"/>
+                    <MenuItem Header="删除" Click="DeleteRelationRecord"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+        <!--<DataGrid x:Name="Relation_DataGrid" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="880"
+                  BeginningEdit="dataGrid_BeginningEdit" CellEditEnding="dataGrid_CellEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="行号" Width="50" MinWidth="10" IsReadOnly="True" />
+                <DataGridTextColumn Width="120" Header="能效编号" Binding="{Binding Path=number}"/>
+                <DataGridTextColumn Width="200" Header="模板XML" Binding="{Binding Path=XML}"/>
+                <DataGridTextColumn Width="200" Header="模板ZPL" Binding="{Binding Path=ZPL}"/>
+                <DataGridTextColumn Width="250" Header="打印机名称" Binding="{Binding Path=printer}"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+
+    </Grid>
+</Page>

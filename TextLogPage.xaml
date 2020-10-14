@@ -1,0 +1,43 @@
+﻿<Page x:Class="demo.TextLogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d" 
+      d:DesignHeight="580" d:DesignWidth="880"
+      Title="TextLogPage">
+
+    <Grid>
+        <!--<ListView x:Name="Log_ListView" HorizontalAlignment="Left" Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">-->
+        <ListView x:Name="Log_ListView"  Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="LightBlue" Offset="0.5"/>
+                                <GradientStop Color="LightBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="0.4"/>
+                    <Setter Property="Height" Value="25"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="时间" Width="80" DisplayMemberBinding="{Binding Path=date}"/>
+                    <GridViewColumn Header="能效标签" Width="150" DisplayMemberBinding="{Binding Path=number}"/>
+                    <GridViewColumn Header="模板编号" Width="300" DisplayMemberBinding="{Binding Path=template}"/>
+                    <GridViewColumn Header="打印机" Width="300" DisplayMemberBinding="{Binding Path=printer}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <DockPanel>
+            <!--<ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="320" Height="26"/>-->
+            <ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"    VerticalAlignment="Top" Width="320" Height="26"/>
+        </DockPanel>
+    </Grid>
+</Page>
