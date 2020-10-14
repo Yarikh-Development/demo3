@@ -1,0 +1,28 @@
+﻿<Page x:Class="demo.PrinterInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PrinterInfoPage" Height="395" Width="390">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="56,30,0,0" TextWrapping="Wrap" Text="打印机" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="56,65,0,0" TextWrapping="Wrap" Text="型号" VerticalAlignment="Top" Width="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,100,0,0" TextWrapping="Wrap" Text="IP地址" VerticalAlignment="Top" Width="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,140,0,0" TextWrapping="Wrap" Text="端口" VerticalAlignment="Top" Width="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,180,0,0" TextWrapping="Wrap" Text="物理地址" VerticalAlignment="Top" Width="55"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,221,0,0" TextWrapping="Wrap" Text="分辨率" VerticalAlignment="Top" Width="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,260,0,0" TextWrapping="Wrap" Text="状态" VerticalAlignment="Top" Width="36"/>
+        <ComboBox x:Name="Printer_ComboBox" HorizontalAlignment="Left" Margin="201,30,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Type_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="IP_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="Port_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="Physical_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="Resolution_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="Printer_State_TextBox" HorizontalAlignment="Left" Height="23" Margin="201,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+
+    </Grid>
+</Page>

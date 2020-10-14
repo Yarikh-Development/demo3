@@ -1,0 +1,44 @@
+﻿<Window x:Name="demo" x:Class="demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        Deactivated="MainWindowDeactivated"
+        Activated="MainWindowActivated"
+        mc:Ignorable="d"
+        Title="" Height="700" Width="900" AllowsTransparency="True" WindowStyle="None" FontSize="14">
+
+    <StackPanel Height="auto" Width="auto">
+        <Grid x:Name="WindowTitle_Grid" Width="auto" Height="40" VerticalAlignment="Top" Background="White" MouseLeftButtonDown="WindowTitleMouseLeftButtonDown">
+            <Image x:Name="Logo_Image" Width="130" Source="logo.png" HorizontalAlignment="Left" Margin="10 10 0 0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button x:Name="MinWindow_Button" HorizontalAlignment="Right" Width="55" Height="25" Background="White" BorderBrush="White" Content="—" FontSize="16" Click="MinWindowButtonClick"/>
+                <Button x:Name="MaxWindow_Button" HorizontalAlignment="Right" Width="55" Height="25" Background="White" BorderBrush="White" Content="▢" FontSize="16" Click="MaxWindowButtonClick" IsEnabled="True"/>
+                <Button x:Name="ExitWindow_Button" HorizontalAlignment="Right" Width="55" Height="25" Background="White" BorderBrush="White" Content="╳" FontSize="16" Click="ExitWindowButtonClick"/>
+            </StackPanel>
+        </Grid>
+
+        <Menu x:Name="OP_Menu" Margin="0 5 0 2" Height="30">
+            <MenuItem Header="设置" Height="auto" Width="auto" MaxHeight="50" Margin="10 0 0 0">
+                <MenuItem Header="打印机" Click="CreatePrinterWindowClick"></MenuItem>
+                <MenuItem Header="应用" Click="CreateUserWindowClick"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="查看">
+                <MenuItem x:Name="Log_MenuItem" Header="打印记录" Click="CreateDataListWindowClick"></MenuItem>
+                <MenuItem x:Name="Relation_MenuItem" Header="关联文件" Click="CreateDataListWindowClick"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="打印模式" Height="30" Width="auto">
+                <MenuItem x:Name="Auto_MenuItem" Header="自动" IsCheckable="True" Click="PrintModeClick" IsChecked="True"></MenuItem>
+                <MenuItem x:Name="Manual_MenuItem" Header="手动" IsCheckable="True" Click="PrintModeClick"></MenuItem>
+            </MenuItem>
+
+            <MenuItem x:Name="Start_Print_MenuItem" Click="PrintClick" Header="开始打印" Height="auto" Width="auto" IsEnabled="False" />
+            <TextBlock x:Name="State_TextBox" Height="auto" Width="auto"/>
+            <Button x:Name="TestWindow" Click="TestWindow_Click" Content="测试" BorderBrush="Transparent" Background="Transparent" FontWeight="Light"/>
+        </Menu>
+        <TabControl x:Name="Displaying_TabControl" Height="623"/>
+    </StackPanel>
+
+
+</Window>

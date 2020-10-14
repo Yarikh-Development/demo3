@@ -1,0 +1,29 @@
+﻿<Window x:Class="demo.User"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        mc:Ignorable="d"
+        Title="应用设置" Height="409.4" Width="387.4" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Grid MinWidth="382.4" MinHeight="382.4" MaxWidth="382.4" MaxHeight="382.4">
+        <TextBlock HorizontalAlignment="Left" Margin="11,31,0,0" TextWrapping="Wrap" Text="关联文件" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="11,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="模板"/><Run Text="目录"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="11,94,0,0" TextWrapping="Wrap" Text="图片目录" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="11,186,0,0" TextWrapping="Wrap" Text="设置文件" VerticalAlignment="Top"/>
+        <TextBox x:Name="Relation_File_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,30,0,0" VerticalAlignment="Top" Width="235"/>
+        <TextBox x:Name="Label_Dir_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,62,0,0" VerticalAlignment="Top" Width="235"/>
+        <TextBox x:Name="Picture_Dir_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,94,0,0" VerticalAlignment="Top" Width="235"/>
+        <TextBox x:Name="Setting_File_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,187,0,0" VerticalAlignment="Top" Width="301"/>
+        <Button x:Name="Relation_File_Button" Content="浏览" HorizontalAlignment="Left" Margin="311,30,0,0" VerticalAlignment="Top" Width="58" Height="18" FontSize="10" Click="RelationFileButtonClick"/>
+        <Button x:Name="Label_Dir_Button" Click="ChoiceDirButtonClick" Content="浏览" HorizontalAlignment="Left" Margin="311,62,0,0" VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+        <Button x:Name="Picture_Dir_Button"  Click="ChoiceDirButtonClick" Content="浏览" HorizontalAlignment="Left" Margin="311,94,0,0" VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+        <Button x:Name="Log_Dir_Button" Click="ChoiceDirButtonClick" Content="浏览" HorizontalAlignment="Left" Margin="311,125,0,0" VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+        <Button x:Name="Save_Button" Content="保存" HorizontalAlignment="Left" Margin="155,311,0,0" VerticalAlignment="Top" Width="75" Click="SaveButtonClick"/>
+        <TextBlock HorizontalAlignment="Left" Margin="11,125,0,0" VerticalAlignment="Top"><Run Text="记录"/><Run Text="目录"/></TextBlock>
+        <TextBox x:Name="Log_Dir_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,125,0,0" VerticalAlignment="Top" Width="235"/>
+        <TextBlock HorizontalAlignment="Left" Margin="11,155,0,0" Text="异常文件" VerticalAlignment="Top"/>
+        <TextBox x:Name="Exception_File_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="68,155,0,0" VerticalAlignment="Top" Width="301"/>
+
+    </Grid>
+</Window>

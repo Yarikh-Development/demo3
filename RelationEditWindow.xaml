@@ -1,0 +1,19 @@
+﻿<Window x:Class="demo.RelationEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        mc:Ignorable="d"
+        Title="RelationEditWindow" Height="214.4" Width="447.4" WindowStyle="ToolWindow">
+    <Grid>
+        <Button x:Name="Sava_Button" Content="保存" Click="SavaRelationRecordClick" HorizontalAlignment="Left" Margin="175,150,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox x:Name="Printer_ComboBox" DisplayMemberPath="Name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="106,99,0,0" VerticalAlignment="Top" Width="303" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,102,0,0" TextWrapping="Wrap" Text="打印机" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="模板"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,26,0,0" TextWrapping="Wrap" Text="能效编号" VerticalAlignment="Top"/>
+        <TextBox x:Name="Template_TextBox" HorizontalAlignment="Left" Height="24" Margin="106,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" FontSize="14"/>
+        <TextBox x:Name="EE_Number_TextBox" HorizontalAlignment="Left" Height="24" Margin="106,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" FontSize="14"/>
+
+    </Grid>
+</Window>

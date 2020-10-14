@@ -1,0 +1,38 @@
+﻿<Page x:Class="demo.PrinterSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d"
+      Title="PrinterSettingPage" Height="395" Width="390">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,10,0,0" TextWrapping="Wrap" Text="打印机" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="打印"/><Run Text="  "/><Run Text="——————"/><Run Text="———————————————————"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="21,74,0,0" TextWrapping="Wrap" Text="速度" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="65,74,0,0" VerticalAlignment="Top" Width="93" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="226,74,0,0" TextWrapping="Wrap" Text="深度" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="273,74,0,0" VerticalAlignment="Top" Width="95" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="21,114,0,0" TextWrapping="Wrap" Text="模式" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="65,114,0,0" VerticalAlignment="Top" Width="93" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="194,114,0,0" TextWrapping="Wrap" Text="打印方式" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="273,114,0,0" VerticalAlignment="Top" Width="95" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="368"><Run Text="纸张"/><Run Text=" "/><Run Text="—————————————————————————"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="20,202,0,0" TextWrapping="Wrap" Text="宽度" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="225,202,0,0" TextWrapping="Wrap" Text="高度" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="64,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="272,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,240,0,0" TextWrapping="Wrap" Text="介质" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox HorizontalAlignment="Left" Margin="64,240,0,0" VerticalAlignment="Top" Width="93" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="225,240,0,0" TextWrapping="Wrap" Text="数量" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="21" Margin="272,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="368"><Run Text="其他"/><Run Text="  "/><Run Text="—————————————————————————"/></TextBlock>
+        <Button Content="应用" HorizontalAlignment="Left" Margin="64,342,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="取消" HorizontalAlignment="Left" Margin="273,342,0,0" VerticalAlignment="Top" Width="75"/>
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,133 @@
+﻿<Page x:Class="demo.TextMenuDetail"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="740"
+      Title="TextMenuDetail">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DefinedStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="#EEEDEF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid HorizontalAlignment="Center" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <RadioButton x:Name="EE_Picture_Change_Button" Click="PictureChangeButtonClick" Style="{DynamicResource BackGroundRadioButton}" Width="100" Height="30" Margin="30 0 0 0"
+                             IsEnabled="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock/>
+                        <TextBlock Text="能效图片" FontSize="14"/>
+                    </StackPanel>
+                </RadioButton>
+
+                <RadioButton Style="{DynamicResource BackGroundRadioButton}" Width="100" Height="30" Margin="30 0 0 0" x:Name="Overprint_Picture_Change_Button"  Click="PictureChangeButtonClick"
+                             IsEnabled="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock/>
+                        <TextBlock Text="套打图片" FontSize="14"/>
+                    </StackPanel>
+                </RadioButton>
+
+                <RadioButton x:Name="Preview_Picture_Change_Button"  Click="PictureChangeButtonClick" Style="{DynamicResource BackGroundRadioButton}" Width="100" Height="30" Margin="30 0 0 0"
+                             IsEnabled="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock/>
+                        <TextBlock Text="预览图片" FontSize="14"/>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <TextBox x:Name="EE_Number_TextBlock" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+                <RadioButton Style="{DynamicResource BackGroundRadioButton}" Width="100" Height="30" Margin="30 0 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock/>
+                        <TextBlock Text="套打编码" FontSize="14"/>
+                    </StackPanel>
+                </RadioButton>
+
+                <RadioButton Style="{DynamicResource BackGroundRadioButton}" Width="100" Height="30" Margin="30 0 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock/>
+                        <TextBlock Text="预览编码" FontSize="14"/>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+
+        </Grid>
+
+
+        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 0"/>
+
+        <Grid Grid.Column="1" VerticalAlignment="Top" >
+            <!--<Grid.ColumnDefinitions/>--><!--列定义-->
+            <!--<Grid.RowDefinitions Height="1*"/>行定义
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <!--<ColumnDefinition/>
+                <ColumnDefinition/>-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions >
+                <RowDefinition />
+                <RowDefinition />
+                <!--<RowDefinition />-->
+                <!--<RowDefinition />-->
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Vertical"  >
+                    <MenuItem x:Name="Auto_MenuItem" Header="自动打印"  IsCheckable="True" Click="PrintModeClick" IsChecked="True" Margin="0,0,0,-0.333"></MenuItem>
+                    <MenuItem x:Name="Manual_MenuItem" Header="手动打印" IsCheckable="True" Click="PrintModeClick"></MenuItem>
+                    <!--<MenuItem x:Name="Start_Print_MenuItem" Click="PrintClick" Header="开始打印" Height="auto" Width="auto" IsEnabled="False" />-->
+                    <!--<TextBlock x:Name="State_TextBox" Height="auto" Width="auto"/>-->
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Column="1" VerticalAlignment="Top" Grid.Row="0">
+                <StackPanel Orientation="Vertical" Width="auto" Height="auto">
+                    <!--<MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="PrintModeClick" IsChecked="True"></MenuItem>-->
+                    <!--<MenuItem x:Name="Manual_MenuItem" Header="手动打印" IsCheckable="True" Click="PrintModeClick"></MenuItem>-->
+                    <MenuItem x:Name="Start_Print_MenuItem" Click="PrintClick" Header="开始打印" Height="auto" Width="auto" IsEnabled="False" />
+                    <TextBlock x:Name="State_TextBox" Height="auto" Width="auto" Foreground="OrangeRed"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="360" Width="240">
+            <Border  Height="320" Width="240" BorderBrush="#A8A4AD" BorderThickness="1" >
+                <!-- 增加一个图片来源显示 -->
+                <!--<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="没有图源"/>-->
+                <Image x:Name="EE_Piceture_Image" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                
+            </Border>
+
+            <TextBlock  Text="图片预览" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

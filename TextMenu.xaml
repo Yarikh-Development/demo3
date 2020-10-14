@@ -1,0 +1,42 @@
+﻿<Page x:Class="demo.TextMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demo"
+      mc:Ignorable="d" 
+      d:DesignHeight="590" d:DesignWidth="740"
+      Title="TextMenu" Loaded="Page_Loaded">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DefinedStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="#EEEDEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="20 0 20 0"/>
+        <TextBlock Text="扫描打印" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 0 0"/>
+
+        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="20 0 20 0" Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <RadioButton x:Name="SimplePage"   Click="SimplePage_Click" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
+                <TextBlock Text="简洁" FontSize="16"  />
+            </RadioButton>
+
+            <RadioButton x:Name="DetailPage" Click="DetailPage_Click" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
+                <TextBlock Text="详细" FontSize="16"/>
+            </RadioButton>
+        </StackPanel>
+
+        <Frame x:Name="SkipPage" Grid.Row="2"/>
+
+    </Grid>
+</Page>
