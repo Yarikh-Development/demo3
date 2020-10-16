@@ -29,7 +29,7 @@
                         <!--<MenuItem>-->
 
                     <!--<MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="AutoPrint" IsChecked="True"></MenuItem>-->
-                    <MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="PrintModeClick" IsChecked="True"></MenuItem>
+                    <MenuItem x:Name="Auto_MenuItem" Header="自动打印" Click="PrintModeClick" IsCheckable="True" IsChecked="True"></MenuItem>
                     <MenuItem x:Name="Manual_MenuItem" Header="手动打印" IsCheckable="True" Click="PrintModeClick"></MenuItem>
                     <MenuItem x:Name="Start_Print_MenuItem" Click="PrintClick" Header="开始打印" Height="auto" Width="auto" IsEnabled="False" />
                     <TextBlock x:Name="State_TextBox" Height="auto" Width="auto" Foreground="OrangeRed"/>
