@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
+                <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -43,20 +44,20 @@
                 <UniformGrid Columns="2">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <!-- 这里需要后台写入或绑定写入打印机数量 -->
-                        <TextBlock Text="1" Margin="15 0 0 0" FontSize="11" Foreground="#696969"/>
+                        <TextBlock Name="printersCount" Margin="15 0 0 0" FontSize="11" Foreground="#696969"/>
                         <TextBlock Text="台打印机" FontSize="11" Foreground="#696969"/>
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe62b;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
 
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
 
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
+                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
                             <TextBlock Text="&#xe64d;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
                     </StackPanel>
@@ -103,43 +104,48 @@
                     </Border>
                 </StackPanel>
             </Grid>
-            <StackPanel Grid.Row="1">
+            <Grid Grid.Row="1">
 
-                <!-- 动态生成打印机列表 -->
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Printer.City}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="100" Width="200" 
-                                    Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
-                                    <!-- 显示打印机内容 -->
-                                    <TextBlock Name="txtPrintsName" Text="{Binding Name}"/>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <!-- 打印机列表,动态生成打印机列表 -->
-                <!--<Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="100" Width="200" 
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
-                    --><!-- 显示打印机内容 --><!--
-                </Border>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Style="{StaticResource for_scrollviewer}">
+                    <ScrollViewer.Content>
+                        <ItemsControl Name="itemsPrinters">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:Name="cmdTemplate">
 
-                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5" Grid.Row="1" Height="100" Width="200" 
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
-                    --><!-- 显示打印机内容 --><!--
-                </Border>
+                                    <Border Name="bdInItem" BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="60" Width="200" 
+                                            Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
+                                        <!-- 显示打印机内容 -->
+                                        <Button Name="printerMessage" Click="printerMessage_Click" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Left" 
+                                                Style="{StaticResource BackGroundButton}">
+                                            <Grid Name="gridInItem">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="40"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <!-- 添加打印机图标，正常一个，其他状态一个 -->
+                                                <TextBlock/>
+                                                <StackPanel Grid.Column="1" Margin="3 0 0 0">
+                                                    <TextBlock x:Name="txtPrintersName" Text="{Binding Name}" TextWrapping="Wrap"  />
+                                                    <!-- 显示打印机状态（正常、脱机、错误、等） -->
+                                                    <TextBlock x:Name="txtPrintersState" Text="打印机状态" FontSize="10" Foreground="#808080" FontWeight="Light"/>
+                                                </StackPanel>
 
-                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5" Grid.Row="1" Height="100" Width="200" 
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
-                    --><!-- 显示打印机内容 --><!--
-                </Border>-->
-            </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                        
+                                        
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+            </Grid>
             
 
         </Grid>
@@ -148,7 +154,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="打印机名" Margin="10 10 0 0" FontSize="14"/>
+            <TextBlock x:Name="txtPrinterName2" Text="打印机名" Margin="10 10 0 0" FontSize="14"/>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                 <RadioButton Style="{DynamicResource defaultRadioButton}" VerticalAlignment="Top" Margin="5 10 10 0" Height="20" Width="30">
@@ -167,61 +173,75 @@
             
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Name="isVisibilityForEnter" Visibility="Hidden" Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
             <!-- 显示打印机品牌（LOGO及品牌信息） -->
-            <Grid Background="#1578F6" Opacity="0.3"/>
+            <Grid Background="#1578F6" Opacity="0.3">
+                <!-- 用后端代码来实现这个功能 -->
+                <TextBlock Name="txtPrinterName" Text="{Binding ElementName=itemsPrinters, Path=ItemsSource}"/>
+            </Grid>
             
             <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
 
             <WrapPanel Grid.Row="1" Orientation="Horizontal">
                 <Border  CornerRadius="5"  Height="50" Width="200"
                     Background="#1578F6" Margin="20 20 0 10">
-                    <!-- 显示打印机内容 --> 
+                    <!-- 显示打印机内容 -->
                     <Border.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
                     </Border.Effect>
-                    <Grid>
-                        <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-                            <StackPanel>
-                                <TextBlock Text="文件绑定" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                                <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                            </StackPanel>
-                        </Button>
-                        
-                    </Grid>
-                    
+                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="文件绑定" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                        </StackPanel>
+                    </Button>
                 </Border>
 
-                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="50" Width="200"
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="20 20 0 10">
+                <Border  CornerRadius="5"  Height="50" Width="200"
+                    Background="#1578F6" Margin="20 20 0 10">
                     <!-- 显示打印机内容 -->
-                    <StackPanel>
-                        <TextBlock Text="打印测试页" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" />
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#696969"/>
-                    </StackPanel>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
+                    </Border.Effect>
+                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="打印测试页" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                        </StackPanel>
+                    </Button>
                 </Border>
 
-                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="50" Width="200"
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="20 20 0 10">
+                <Border  CornerRadius="5"  Height="50" Width="200"
+                    Background="#1578F6" Margin="20 20 0 10">
                     <!-- 显示打印机内容 -->
-                    <StackPanel>
-                        <TextBlock Text="查看打印机正在干什么" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#696969"/>
-                    </StackPanel>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
+                    </Border.Effect>
+                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="查看打印机正在干什么" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                        </StackPanel>
+                    </Button>
                 </Border>
 
-                <Border BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="50" Width="200"
-                    Background="#FFFFFF" VerticalAlignment="Top" Margin="20 20 0 10">
+                <Border  CornerRadius="5"  Height="50" Width="200"
+                    Background="#1578F6" Margin="20 20 0 10">
                     <!-- 显示打印机内容 -->
-                    <StackPanel>
-                        <TextBlock Text="自定义打印机" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#696969"/>
-                    </StackPanel>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
+                    </Border.Effect>
+                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="自定义打印机" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                        </StackPanel>
+                    </Button>
                 </Border>
             </WrapPanel>
         </Grid>

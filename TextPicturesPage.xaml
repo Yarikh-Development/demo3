@@ -29,7 +29,9 @@
                         <!--<MenuItem>-->
 
                     <!--<MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="AutoPrint" IsChecked="True"></MenuItem>-->
+
                     <MenuItem x:Name="Auto_MenuItem" Header="自动打印" Focusable="True" IsCheckable="True" Click="PrintModeClick" IsChecked="True"></MenuItem>
+
                     <MenuItem x:Name="Manual_MenuItem" Header="手动打印" IsCheckable="True" Click="PrintModeClick"></MenuItem>
                     <!--<RadioButton x:Name="Auto_MenuItem" Content="自动打印" Click="PrintModeClick" IsChecked="True"></RadioButton>
                     <RadioButton x:Name="Manual_MenuItem" Content="手动打印" Click="PrintModeClick"></RadioButton>-->

@@ -112,12 +112,44 @@ namespace demo
 			comboBox.SelectedIndex = 0;
 		}
 
+		//获取斑马打印机列表
+		public static void SetPrinters(ItemsControl itemsControl)
+		{
+			int cnt = 0;
+			List<City> list = new List<City>();
+			foreach (string printerName in PrinterSettings.InstalledPrinters)
+			{
+				if (IsZebraPrinter(printerName))
+				{
+					list.Add(new City { ID = ++cnt, Name = printerName });
+				}
+			}
+			itemsControl.ItemsSource = list;
+
+		}
+
+		//返回打印机列表
+		public static List<City> SetPrinters()
+		{
+			int cnt = 0;
+			List<City> list = new List<City>();
+			foreach (string printerName in PrinterSettings.InstalledPrinters)
+			{
+				if (IsZebraPrinter(printerName))
+				{
+					list.Add(new City { ID = ++cnt, Name = printerName });
+				}
+			}
+			return list;
+
+		}
+
 		/// <summary>
 		/// Setprinters的重构，返回一个City的集合
 		/// </summary>
 		/// <param name="list"></param>
 		/// <returns></returns>
-		public static void SetPrinters()
+		/*public static void SetPrinters()
 		{
 			int cnt = 0;
 			//List<City> list = new List<City>();
@@ -129,6 +161,6 @@ namespace demo
 				}
 			}
 			
-		}
+		}*/
 	}
 }

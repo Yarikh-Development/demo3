@@ -187,6 +187,12 @@ namespace demo
 		private void PrintModeClick(object sender, RoutedEventArgs e)
 		//public void PrintModeClick(object sender, RoutedEventArgs e)
 		{
+			/*if((bool)Auto_MenuItem.IsChecked)
+            {
+				
+				listener.Start();
+				this.HideControl(true);
+			}*/
 			System.Windows.Controls.MenuItem menuItem = sender as System.Windows.Controls.MenuItem;
 			if (menuItem.Name == "Auto_MenuItem")
 			{
