@@ -271,4 +271,59 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- 触碰和点击后背景颜色改变，用在打印机列表 -->
+    <Style x:Key="BackGroundButton" TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="border"/>
+                        <ContentPresenter x:Name="contenPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- 事件有分顺序的 -->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#C4C4C4" TargetName="border"/>
+                            <Setter Property="BorderThickness" Value="0" TargetName="border"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <!--<Setter Property="Background" Value="#E7EAED" TargetName="border"/>-->
+                            
+                            <Setter Property="Background" Value="#C4C4C4" TargetName="border"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#AAAAAA" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BackGroundButton2" TargetType="Button">
+
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#AAAAAA" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#C4C4C4" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <!--<Setter Property="Background" Value="#E7EAED" TargetName="border"/>-->
+
+                <Setter Property="Background" Value="#C4C4C4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
