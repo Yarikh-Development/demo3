@@ -23,11 +23,12 @@ namespace demo
     /// </summary>
     public partial class Window1 : Window
     {
+        /*TextFiles即是RelationPage*/
         //private TextMenu textMenu;
-        //private TextFile textFile;
+        private TextFile textFiles;
         //private TextSearchPrints textSearchPrints;
         TextSearchPrints textSearchPrints = new TextSearchPrints();
-        TextFiles textFiles = new TextFiles();
+        //TextFiles textFiles = new TextFiles();
         TextMenu textMenu = new TextMenu();
         TextLogPage textLogPage = new TextLogPage();
         //private TextLogPage textLogPage;
@@ -119,6 +120,7 @@ namespace demo
            
         }
 
+        //窗口缩放
         private void WindowSize_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized)
@@ -138,42 +140,49 @@ namespace demo
              
         }
 
+        //关闭窗口
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        //管理打印机
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
             frameShowPages.Content = textSearchPrints;          
         }
-
+        //扫描打印
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = textMenu;
         }
 
+        //文件
 		private void btnFiles_Click(object sender, RoutedEventArgs e)
 		{
 			frameShowPages.Content = textFiles;
 		}
 
+        //查看
 		private void btnLogPage_Click(object sender, RoutedEventArgs e)
 		{
 			frameShowPages.Content = textLogPage;
 		}
 
+        //主界面？
 		private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
 
+        //最小化
         private void MiniWindow_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+        //主界面？？
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = textMenu;

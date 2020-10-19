@@ -14,9 +14,11 @@ namespace demo
 	public partial class TextPicturesPage : Page
     {
 
-        private RelationPage relationPage;
-        
-        private TextLogPage textLogPage;
+        //private RelationPage relationPage;
+		TextFiles textFiles = new TextFiles();
+		TextLogPage textLogPage = new TextLogPage();
+        //private TextLogPage textLogPage;
+
         public static bool isWriteLog;
         private ScanerHook listener = new ScanerHook();
 
@@ -35,14 +37,16 @@ namespace demo
 
         public TextPicturesPage()
         {
+			//PrintModeClick=();
 			/*InitializeComponent();
 			SetData();
 			ClearNumber();*/
-			
+
 			//listener.ScanerEvent += ListenerScanerEvent;
 			if (IsOnlyOneProcess())
 			{
 				InitializeComponent();
+				
 				//SetData();
 				FileTools.Init();
 				TabItem tabitem = new TabItem();
@@ -86,7 +90,7 @@ namespace demo
 		private void ListenerScanerEvent(ScanerHook.ScanerCodes codes)
 		{
 			//设置能效编号
-			if (Auto_MenuItem.IsChecked)
+			if (Auto_MenuItem.IsChecked==true)
 			{
 				this.SetNumber(codes.Result);
 				//this.SetNumber(codes.Result);
@@ -210,6 +214,28 @@ namespace demo
 			picturesPage.Preview_Number_TextBlock.Text = "";
 			picturesPage.Preview_Picture_Image.Source = null;*/
 
+			/*System.Windows.Controls.RadioButton radioButton = sender as System.Windows.Controls.RadioButton;
+			if (radioButton.Name == "Auto_MenuItem")
+			{
+				listener.Start();
+				Manual_MenuItem.IsChecked = false;
+				Auto_MenuItem.IsChecked = true;
+				Start_Print_MenuItem.IsEnabled = false;
+				//picturesPage.HideControl(true);
+				this.HideControl(true);
+			}
+			else if (radioButton.Name == "Manual_MenuItem")
+			{
+				listener.Stop();
+				Auto_MenuItem.IsChecked = false;
+				Manual_MenuItem.IsChecked = true;
+				Start_Print_MenuItem.IsEnabled = true;
+				//picturesPage.HideControl(false);
+				this.HideControl(false);
+			}*/
+
+
+
 			this.EE_Number_TextBlock.Text = "";
 			this.EE_Piceture_Image.Source = null;
 			this.Overprint_Number_TextBlock.Text = "";
@@ -298,10 +324,10 @@ namespace demo
 		}
 
 		//消息显示
-		/*public void PrintState(string msg)
+		public void PrintState(string msg)
 		{
 			State_TextBox.Text = msg;
-		}*/
+		}
 
 		/*private void MainWindowDeactivated(object sender, EventArgs e)
 		{
@@ -423,7 +449,7 @@ namespace demo
         {
             //MainWindow mainWindow = new MainWindow();
             //if (MainWindow.isWriteLog)
-                EE_Number_TextBlock.Text = "";
+            EE_Number_TextBlock.Text = "";
             MainWindow.isWriteLog = false;
         }
 

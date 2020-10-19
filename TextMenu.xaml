@@ -27,7 +27,7 @@
 
         <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="20 0 20 0" Grid.Row="1"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <RadioButton x:Name="SimplePage"   Click="SimplePage_Click" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
+            <RadioButton x:Name="SimplePage" IsChecked="True"  Click="SimplePage_Click" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
                 <TextBlock Text="简洁" FontSize="16"  />
             </RadioButton>
 

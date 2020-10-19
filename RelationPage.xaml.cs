@@ -12,6 +12,7 @@ namespace demo
 	public partial class RelationPage : Page
 	{
 		private Window window = null;
+		private TextPicturesPage page;
 
 		public RelationPage(Window window)
 		{
@@ -44,13 +45,21 @@ namespace demo
 				streamReader.Close();
 				
 			}
-			catch (FileNotFoundException)
+			/*catch (FileNotFoundException)
 			{
 				((MainWindow)window).PrintState("文件未找到！！");
 			}
 			catch (ArgumentNullException)
 			{
 				((MainWindow)window).PrintState("路径为空！！");
+			}*/
+			catch (FileNotFoundException)
+			{
+				((TextPicturesPage)page).PrintState("文件未找到！！");
+			}
+			catch (ArgumentNullException)
+			{
+				((TextPicturesPage)page).PrintState("路径为空！！");
 			}
 		}
 
