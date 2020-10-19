@@ -23,6 +23,7 @@ namespace demo
     {
 
         private Window window = null;
+		private TextPicturesPage page;
 
 		//public TextFiles(Window window)
 		public TextFiles()
@@ -58,13 +59,21 @@ namespace demo
 				streamReader.Close();
 
 			}
+			//catch (FileNotFoundException)
+			//{
+			//	((MainWindow)window).PrintState("文件未找到！！");
+			//}
+			//catch (ArgumentNullException)
+			//{
+			//	((MainWindow)window).PrintState("路径为空！！");
+			//}
 			catch (FileNotFoundException)
 			{
-				((MainWindow)window).PrintState("文件未找到！！");
+				((TextPicturesPage)page).PrintState("文件未找到！！");
 			}
 			catch (ArgumentNullException)
 			{
-				((MainWindow)window).PrintState("路径为空！！");
+				((TextPicturesPage)page).PrintState("路径为空！！");
 			}
 		}
 
