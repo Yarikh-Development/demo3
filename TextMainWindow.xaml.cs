@@ -25,10 +25,10 @@ namespace demo
     {
         /*TextFiles即是RelationPage*/
         //private TextMenu textMenu;
-        private TextFile textFiles;
+        //private TextFile textFiles;
         //private TextSearchPrints textSearchPrints;
         TextSearchPrints textSearchPrints = new TextSearchPrints();
-        //TextFiles textFiles = new TextFiles();
+        TextFiles textFiles = new TextFiles();
         TextMenu textMenu = new TextMenu();
         TextLogPage textLogPage = new TextLogPage();
         //private TextLogPage textLogPage;
