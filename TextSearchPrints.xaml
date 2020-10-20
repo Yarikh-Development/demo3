@@ -154,7 +154,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="txtPrinterName2" Text="打印机名" Margin="10 10 0 0" FontSize="14"/>
+            <TextBlock x:Name="txtPrinterName2" Margin="10 10 0 0" FontSize="14"/>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                 <RadioButton Style="{DynamicResource defaultRadioButton}" VerticalAlignment="Top" Margin="5 10 10 0" Height="20" Width="30">

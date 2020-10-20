@@ -4,9 +4,22 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Controls;
+using System.Management;
 
 namespace demo
 {
+	enum PrinterStatus
+	{
+		其他状态 = 1,
+		未知,
+		空闲,
+		正在打印,
+		预热,
+		停止打印,
+		打印中,
+		离线
+	}
+
 	public class City
 	{
 		//测试上传
@@ -28,6 +41,21 @@ namespace demo
 		public static void GetPrinterInfo()
 		{
 			
+		}
+
+		/// <summary>
+		/// 获取打印机状态
+		/// </summary>
+		/// <param name="PrinterDevice"></param>
+		/// <returns></returns>
+		public static PrinterStatus GetPrinterStatus(string PrinterDevice)
+		{
+			PrinterStatus ret = 0;
+			string path = @"win32_printer.DeviceId='" + PrinterDevice + "'";
+			ManagementObject printer = new ManagementObject(path);
+			printer.Get();
+			ret = (PrinterStatus)Convert.ToInt32(printer.Properties["PrinterStatus"].Value);
+			return ret;
 		}
 
 		//发送文件

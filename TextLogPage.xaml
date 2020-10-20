@@ -5,12 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      d:DesignHeight="580" d:DesignWidth="880"
+      d:DesignHeight="800" d:DesignWidth="1200"
       Title="TextLogPage">
 
     <Grid>
         <!--<ListView x:Name="Log_ListView" HorizontalAlignment="Left" Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">-->
-        <ListView x:Name="Log_ListView"  Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">
+        <ListView x:Name="Log_ListView"  Height="775" VerticalAlignment="Top" Width="1200" Margin="0,25,0,0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="FontSize" Value="13"/>

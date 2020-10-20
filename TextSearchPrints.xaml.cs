@@ -27,6 +27,7 @@ namespace demo
             //Printer.SetPrinters();
             Printer.SetPrinters(itemsPrinters);
             printersCount.Text =  Printer.SetPrinters().Count.ToString();
+            //txtPrintersState.Text = Printer.GetPrinterStatus()
 
         }
 
@@ -57,7 +58,8 @@ namespace demo
                 if (button.IsFocused)
                 {
                     TextBlock txt = FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
-                    MessageBox.Show(txt.Text);
+                    //MessageBox.Show(txt.Text);
+                    txtPrinterName2.Text = txt.Text;
                 }
                     //MessageBox.Show(button.Name);                    
             }

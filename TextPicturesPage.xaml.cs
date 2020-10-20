@@ -37,16 +37,11 @@ namespace demo
 
         public TextPicturesPage()
         {
-			//PrintModeClick=();
-			/*InitializeComponent();
-			SetData();
-			ClearNumber();*/
-
+			listener.Start();
 			//listener.ScanerEvent += ListenerScanerEvent;
 			if (IsOnlyOneProcess())
 			{
-				InitializeComponent();
-				
+				InitializeComponent();				
 				//SetData();
 				FileTools.Init();
 				TabItem tabitem = new TabItem();
@@ -57,8 +52,6 @@ namespace demo
 				//tabFrame.Content = this;
 				tabitem.Content = tabFrame;
 				//Displaying_TabControl.Items.Add(tabitem);//大界面的铺满？
-				
-
 				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
