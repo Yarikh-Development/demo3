@@ -129,6 +129,12 @@
     <Compile Include="Text.xaml.cs">
       <DependentUpon>Text.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextAdminInterface.xaml.cs">
+      <DependentUpon>TextAdminInterface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextCommon.xaml.cs">
+      <DependentUpon>TextCommon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextFile.xaml.cs">
       <DependentUpon>TextFile.xaml</DependentUpon>
     </Compile>
@@ -185,6 +191,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextAdminInterface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextCommon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

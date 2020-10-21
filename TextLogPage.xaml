@@ -10,7 +10,7 @@
 
     <Grid>
         <!--<ListView x:Name="Log_ListView" HorizontalAlignment="Left" Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">-->
-        <ListView x:Name="Log_ListView"  Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">
+        <ListView x:Name="Log_ListView"  Height="555" VerticalAlignment="Top" Width="1880" Margin="0,25,0,0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="FontSize" Value="13"/>
