@@ -31,6 +31,7 @@ namespace demo
         TextFiles textFiles = new TextFiles();
         TextMenu textMenu = new TextMenu();
         TextLogPage textLogPage = new TextLogPage();
+        
         //private TextLogPage textLogPage;
 		private RelationPage relationPage;
         private TextPicturesPage textPicturesPage;
@@ -185,7 +186,9 @@ namespace demo
             wd.Show();
         }
 
+        private void LinkOSPrinters_Click(object sender, RoutedEventArgs e)
+        {
 
-
+        }
     }
 }

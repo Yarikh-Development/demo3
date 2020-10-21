@@ -132,7 +132,7 @@
                                                 <StackPanel Grid.Column="1" Margin="3 0 0 0">
                                                     <TextBlock x:Name="txtPrintersName" Text="{Binding Name}" TextWrapping="Wrap"  />
                                                     <!-- 显示打印机状态（正常、脱机、错误、等） -->
-                                                    <TextBlock x:Name="txtPrintersState" Text="打印机状态" FontSize="10" Foreground="#808080" FontWeight="Light"/>
+                                                    <TextBlock x:Name="txtPrintersState" Text="{Binding Status}" FontSize="10" Foreground="#808080" FontWeight="Light"/>
                                                 </StackPanel>
 
                                             </Grid>

@@ -45,29 +45,19 @@ namespace demo
             
         }
 
+        //展示ItemsControl里的打印机名
         private void printerMessage_Click(object sender, RoutedEventArgs e)
         {
             isVisibilityForEnter.Visibility = Visibility.Visible;
-            //TextBlock txt = FindFirstVisualChild<TextBlock>(itemsPrinters, "txtPrintersName");
-            //txtPrinterName2.Text = txt.Text;
-            List<TextBlock> collection = GetChildObjects<TextBlock>(itemsPrinters, "");//第2个参数为空，表示查找所有指定类型的控件（返回
-            List<Button> buttonItems = GetChildObjects<Button>(itemsPrinters, "");
-            
+            List<Button> buttonItems = GetChildObjects<Button>(itemsPrinters, "");            
             foreach (Button button in buttonItems)
             {                
                 if (button.IsFocused)
                 {
                     TextBlock txt = FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
-                    //MessageBox.Show(txt.Text);
                     txtPrinterName2.Text = txt.Text;
-                }
-                    //MessageBox.Show(button.Name);                    
+                }                   
             }
-            /*foreach (TextBlock item in collection) //遍历这个集合
-            {
-                if (item)
-                    MessageBox.Show(item.Text.ToString() + "被选中了!");
-            }*/
         }
 
         private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
@@ -109,6 +99,7 @@ namespace demo
             badged.Badge = i + 1;
         }*/
 
+        //查找ItemsControl里的第一个子项
         public T FindFirstVisualChild<T>(DependencyObject obj, string childName) where T : DependencyObject
 
         {
@@ -131,6 +122,7 @@ namespace demo
             return null;
         }
 
+        //查找ItemsControl里的所有子项
         public List<T> GetChildObjects<T>(DependencyObject obj, string name) where T : FrameworkElement
         {
             DependencyObject child = null;

@@ -8,7 +8,7 @@ using System.Management;
 
 namespace demo
 {
-	enum PrinterStatus
+	public enum PrinterStatus
 	{
 		其他状态 = 1,
 		未知,
@@ -22,11 +22,10 @@ namespace demo
 
 	public class City
 	{
-		//测试上传
-		//测试上传2
 		public int ID { get; set; }
 		public string Name { get; set; }
-	}
+        public PrinterStatus Status { get; set; }
+    }
 
 	class Printer
 	{
@@ -133,7 +132,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName });
+					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
 				}
 			}
 			comboBox.ItemsSource = list;
@@ -149,7 +148,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName });
+					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
 				}
 			}
 			itemsControl.ItemsSource = list;
@@ -171,24 +170,5 @@ namespace demo
 			return list;
 
 		}
-
-		/// <summary>
-		/// Setprinters的重构，返回一个City的集合
-		/// </summary>
-		/// <param name="list"></param>
-		/// <returns></returns>
-		/*public static void SetPrinters()
-		{
-			int cnt = 0;
-			//List<City> list = new List<City>();
-			foreach (string printerName in PrinterSettings.InstalledPrinters)
-			{
-				if (IsZebraPrinter(printerName))
-				{
-					Printer.Citys.Add(new City { ID = ++cnt, Name = printerName });
-				}
-			}
-			
-		}*/
 	}
 }

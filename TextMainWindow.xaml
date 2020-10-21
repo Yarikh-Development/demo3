@@ -102,6 +102,11 @@
                         <TextBlock x:Name="TextMenu" Text="&#xe698;管理打印机" FontFamily="/#iconfont" FontSize="17" Margin="10 0 0 0"/>
                     </RadioButton>
 
+                    <RadioButton x:Name="LinkOSPrinters" Click="LinkOSPrinters_Click" Style="{StaticResource leftLineRadioButton}"  Background="Transparent" BorderBrush="Transparent" Height="40"
+                        HorizontalContentAlignment="Left">
+                        <TextBlock x:Name="TextLinkOSPrinter" Text="&#xe698;高级打印机" FontFamily="/#iconfont" FontSize="17" Margin="10 0 0 0"/>
+                    </RadioButton>
+
                     <RadioButton Name="btnFiles" Click="btnFiles_Click" Style="{StaticResource leftLineRadioButton}"  Background="Transparent" BorderBrush="Transparent" Height="40"
                         HorizontalContentAlignment="Left">
                         <TextBlock x:Name="TextSearchPrint" Text="&#xe69e;文件" FontSize="17" FontFamily="/#iconfont"  Foreground="#808080" Margin="10 0 0 0"/>
