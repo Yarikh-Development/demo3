@@ -1,0 +1,64 @@
+﻿<Window x:Class="WebSocketConsole.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebSocketConsole"
+        mc:Ignorable="d"
+        Title="WebSockets" Height="450" Width="1200" WindowState="Maximized" ResizeMode="CanResizeWithGrip" Loaded="Window_Loaded">
+    <Grid Background="#F0F0F0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Service Control:" Margin="10" >
+                <Grid Background="#FFFFFF">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Button Name="cmdStart_Service" Click="cmdStart_Service_Click" Content="Start Service" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                        <Button Name="cmdStop_Serivce" Click="cmdStop_Serivce_Click" IsEnabled="False" Content="Stop Service" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                        <Button Name="cmdViewLog" Click="cmdViewLog_Click" IsEnabled="False" Content="View Logs" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                        <Button Name="cmdTest" Click="cmdTest_Click" IsEnabled="False" Content="Test" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                        <Button Name="button1" Click="button1_Click_1" Content="Settings" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                        <Button Name="dialog" Click="dialog_Click" Content="Dialog" Margin="5" Width="100" FontWeight="Bold" BorderBrush="#B7B5B5"/>
+                    </StackPanel>
+                    <Image Name="picOrange"  Grid.Column="1" Source="Printer_Pics/Oringe.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Name="picGreen"  Grid.Column="1" Source="Printer_Pics/Green.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Grid>
+                
+                
+            </GroupBox>
+            <GroupBox Grid.Column="1" Margin="10" Header="Online Devices/Subcribers:">
+                <UniformGrid Columns="2" Margin="5">
+                    <TextBox Name="txtDevices" Margin="0 0 5 0"/>
+                    <TextBox Name="txtSubscribers" Margin="5 0 0 0"/>
+                </UniformGrid>
+            </GroupBox>
+        </Grid>
+        <GroupBox Header="Devices:" Grid.Row="1" Margin="10">
+            <ListView Name="listView1" Background="#FFFFFF" Margin="5" 
+                      SelectionChanged="listView1_SelectionChanged"
+                      MouseDoubleClick="listView1_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="No." Width="50" DisplayMemberBinding="{Binding LineNo}"/>
+                        <GridViewColumn Header="Device Name" Width="150" DisplayMemberBinding="{Binding PrinterName}"/>
+                        <GridViewColumn Header="Serial Number" Width="250" DisplayMemberBinding="{Binding SerialNumber}"/>
+                        <GridViewColumn Header="FW Version" Width="150" DisplayMemberBinding="{Binding FWVersion}"/>
+                        <GridViewColumn Header="Location" Width="250" DisplayMemberBinding="{Binding Location}"/>
+                        <GridViewColumn Header="IP" Width="150" DisplayMemberBinding="{Binding IP}"/>
+                        <GridViewColumn Header="Alert" Width="150" DisplayMemberBinding="{Binding Alert}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+    </Grid>
+</Window>
