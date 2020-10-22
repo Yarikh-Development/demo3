@@ -1,0 +1,73 @@
+﻿<Window x:Class="WebSocketConsole.FrmSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebSocketConsole"
+        mc:Ignorable="d"
+        Title="Settings" Background="#F0F0F0" Height="380" Width="800" WindowStyle="ToolWindow" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="WebSocket Settings:" Margin="5">
+            <UniformGrid Rows="4" Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 2">
+                    <TextBlock Text="Listen IP/Port:" Margin="0 0 0 2"  Width="150"/>
+                    <TextBox Name="txtIPs" IsReadOnly="True" Width="380" Background="#F0F0F0"/>
+                    <TextBox Name="txtPort" Width="40"/>
+                    <TextBlock Text="Identification/Alisa:"/>
+                    <TextBox Name="txtAlias" Width="70"/>
+                </StackPanel >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0 0 0 2"  Width="150"/>
+                    <CheckBox Name="chkHTTPS" Checked="chkHTTPS_Checked" Content="HTTPS" Margin="0 0 0 2"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 2">
+                    <TextBlock Text="Certificate File:" Margin="0 0 0 2"  Width="150"/>
+                    <TextBox Name="txtAppPath" IsReadOnly="True" Background="#F0F0F0" Width="380"/>
+                    <TextBox Name="txtCertificateFile" Width="230"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Certificate password:" Margin="0 0 0 2"  Width="150"/>
+                    <PasswordBox Name="txtCertificatePassword" Width="380" HorizontalAlignment="Left" Margin="0 0 0 2"/>
+                </StackPanel>
+            </UniformGrid>
+        </GroupBox>
+
+        <GroupBox Header="DataBase Settings:" Grid.Row="1" Margin="5">
+            <UniformGrid Rows="4" Margin="5">
+                <Border BorderThickness="0 0 0 2" Margin="0 0 0 2" BorderBrush="#000000" 
+                        Width="80" HorizontalAlignment="Left">
+                    <TextBlock Name="txt" Text="SQL Client" Width="Auto"/>
+                </Border>
+                
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 2" >
+                    <TextBlock Text="Server Name/IP:" Width="150"/>
+                    <TextBox Name="txtSQLSeverName" Width="320"/>
+                    <TextBlock Text="Port:"/>
+                    <TextBox Name="txtSQLPort" Width="50" Margin="0 0 10 0"/>
+                    <TextBlock Text="Request timeout:(Secs)" />
+                    <TextBox Name="txtSQLTimeout" Width="70"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 2">
+                    <TextBlock Text="SQL Server UserName/Password:"/>
+                    <TextBox Name="txtSQLUserName" Width="100" Margin="0 0 10 0"/>
+                    <PasswordBox Name="txtSQLPassword" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 2" >
+                    <TextBlock Text="DataBase Name:" Width="150"/>
+                    <TextBox Name="txtSQLDatabaseName" Width="200"/>
+                </StackPanel>
+            </UniformGrid>
+            
+        </GroupBox>
+        <GroupBox Header="Others:" Grid.Row="2" Margin="5"/>
+        <StackPanel Grid.Row="3" Background="#E0E0E0" Margin="10" >
+            <Button Name="cmdSaveSetting" Click="cmdSaveSetting_Click" HorizontalAlignment="Right" Content="Save Settings" BorderBrush="#A4A4A4" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window>
