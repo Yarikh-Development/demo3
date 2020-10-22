@@ -80,9 +80,6 @@
     <Compile Include="FrmSettings.xaml.cs">
       <DependentUpon>FrmSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextHighPrinter.xaml.cs">
-      <DependentUpon>TextHighPrinter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WebSocketLogger.cs" />
     <Page Include="DeviceDetails.xaml">
       <SubType>Designer</SubType>
@@ -101,10 +98,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="FrmSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TextHighPrinter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,7 +137,7 @@
     <Resource Include="Printer_Pics\Red.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\project\WebSockets\WebSockets.csproj">
+    <ProjectReference Include="..\WebSockets\WebSockets.csproj">
       <Project>{d2dbcc1d-cef2-400b-a886-7e0d13a25f9c}</Project>
       <Name>WebSockets</Name>
     </ProjectReference>

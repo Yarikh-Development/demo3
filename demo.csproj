@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>demo</RootNamespace>
     <AssemblyName>demo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -136,6 +136,9 @@
     <Compile Include="TextFiles.xaml.cs">
       <DependentUpon>TextFiles.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextHighPrinter.xaml.cs">
+      <DependentUpon>TextHighPrinter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextLogPage.xaml.cs">
       <DependentUpon>TextLogPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextHighPrinter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +313,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomControls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="WebSocketConsole\WebSocketConsole.csproj">
+      <Project>{4031e1db-bc33-4799-aa32-73d3f97be22f}</Project>
+      <Name>WebSocketConsole</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

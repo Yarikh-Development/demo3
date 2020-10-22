@@ -302,6 +302,148 @@ namespace WebSocketConsole
             }
         }
 
+        public void StartService(Button radioButton)
+        {
+            _logger = new WebSocketLogger();
+            String sErr = "";
+
+            Core_Lib.Utility Utility = new Core_Lib.Utility();
+            gsSerialNumber = Utility.GetSerialNumber(ref sErr);
+            if (sErr != "")
+            {
+                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
+                radioButton.Focus();
+                return;
+            }
+
+            gsCurrentIP = Utility.GetCurrentIP(ref sErr);
+            if (sErr != "")
+            {
+                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
+                radioButton.Focus();
+                return;
+            }
+
+            gsLocalMachineName = Utility.GetLocalMachineName(ref sErr);
+            if (sErr != "")
+            {
+                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
+                radioButton.Focus();
+                return;
+            }
+
+            gsPlatForm = Utility.GetPlatFormType(ref sErr);
+            if (sErr != "")
+            {
+                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
+                radioButton.Focus();
+                return;
+            }
+
+            try
+            {
+                webRoot = AppDomain.CurrentDomain.BaseDirectory; ;
+
+                if (!System.IO.File.Exists(webRoot + Settings.Default.CertificateFile))
+                {
+                    MessageBox.Show("Certificate File does not exist!", this.Title, MessageBoxButton.OK);
+                    return;
+                }
+
+                if (!Directory.Exists(webRoot))
+                {
+                    string baseFolder = AppDomain.CurrentDomain.BaseDirectory;
+                    _logger.Warning("", typeof(MainWindow), "Webroot folder {0} not found. Using application base directory: {1}", webRoot, baseFolder);
+                    webRoot = baseFolder;
+                }
+
+                this.Cursor = Cursors.Wait;
+
+                // conect Database
+                My_CommObject = new COMM.BusinessObject();
+                My_CommObject.ApplicationName = this.Title;
+                if (Settings.Default.DB_Connection_Type == 0)
+                {
+                    My_CommObject.Protocol = "HTTP";
+                }
+                else
+                {
+                    My_CommObject.Protocol = "TCPIP";
+                }
+                My_CommObject.Server = Settings.Default.SQL_ServerName;
+                My_CommObject.Database = Settings.Default.SQL_DatabaseName;
+                if (Settings.Default.SQL_Authentication_Type == 0)
+                {
+                    My_CommObject.IntegratedSecurity = true;
+                }
+                else
+                {
+                    My_CommObject.IntegratedSecurity = false;
+                }
+                My_CommObject.Port = Settings.Default.SQL_Port;
+                My_CommObject.TimeOut = Settings.Default.SQL_TimeOut;
+                My_CommObject.UserID = Settings.Default.SQL_UserName;
+                My_CommObject.Password = My_Functions.DecryptDES(Settings.Default.SQL_Password, My_Functions.encryptKey);
+                My_CommObject.WebServiceURL = Settings.Default.WebServiceURL;
+                My_CommObject.ProxyServer = Settings.Default.ProxyName;
+                My_CommObject.ProxyPort = Settings.Default.ProxyPort;
+                My_CommObject.ProxyVerify = Settings.Default.VerifyProxyUserNamePassword;
+                My_CommObject.ProxyUser = Settings.Default.ProxyUserName;
+                My_CommObject.ProxyPassword = My_Functions.DecryptDES(Settings.Default.ProxyPassword, My_Functions.encryptKey);
+                My_CommObject.CertificateKEY = gsCertificateKEY;
+                My_CommObject.Connect(ref sErr); //开始连接
+                if (sErr != "")
+                {
+                    this.Cursor = Cursors.Arrow;
+                    MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
+                    radioButton.Focus();
+                    return;
+                }
+
+                // used to decide what to do with incoming connections
+                port = Settings.Default.Port;
+                CertificateFile = Settings.Default.CertificateFile;
+                CertificatePassword = Settings.Default.CertificatePassword;
+                CertificatePassword = My_Functions.DecryptDES(CertificatePassword, My_Functions.encryptKey);
+                Identification_Alias = Settings.Default.Identification_Alias;
+
+                serviceFactory = new ServiceFactory(webRoot, _logger, Identification_Alias, server, My_CommObject);
+                server = new WebServer(serviceFactory, _logger);
+                serviceFactory._server = server;
+                serviceFactory._My_CommObject = My_CommObject;
+                if (Settings.Default.HTTPS)
+                // if (port == 443)
+                {
+                    X509Certificate2 cert = GetCertificate(webRoot + Settings.Default.CertificateFile, My_Functions.DecryptDES(Settings.Default.CertificatePassword, My_Functions.encryptKey), ref sErr);
+                    server.Listen(port, cert);
+                }
+                else
+                {
+                    server.Listen(port);
+                }
+
+                this.Cursor = Cursors.Arrow;
+                radioButton.IsEnabled = false;
+                cmdStop_Serivce.IsEnabled = true;
+                cmdStop_Serivce.Focus();
+                cmdViewLog.IsEnabled = true;
+                // timer1.Enabled = true;
+                cmdTest.IsEnabled = true;
+                // pnlSC.BackColor = Color.Blue;
+                picOrange.Visibility = Visibility.Hidden;
+                picGreen.Visibility = Visibility.Visible;
+                txtDevices.Text = "0";
+                txtSubscribers.Text = "0";
+                listView1.Items.Clear();
+                msCurrentSelectedDeviceSN = "";
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Arrow;
+                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+            }
+        }
+
         private void cmdViewLog_Click(object sender, EventArgs e)
         {
 

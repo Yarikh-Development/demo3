@@ -31,7 +31,8 @@ namespace demo
         TextFiles textFiles = new TextFiles();
         TextMenu textMenu = new TextMenu();
         TextLogPage textLogPage = new TextLogPage();
-        
+        TextHighPrinter TextHighPrinter = new TextHighPrinter();
+
         //private TextLogPage textLogPage;
 		private RelationPage relationPage;
         private TextPicturesPage textPicturesPage;
@@ -188,7 +189,7 @@ namespace demo
 
         private void LinkOSPrinters_Click(object sender, RoutedEventArgs e)
         {
-
+            frameShowPages.Content = TextHighPrinter;
         }
     }
 }
