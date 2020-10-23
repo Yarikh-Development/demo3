@@ -40,7 +40,8 @@ namespace demo
                 
                 //skipPages.Content = deviceDetails;
                 deviceDetails = new DeviceDetails(mainWindow);
-                deviceDetails.ShowDialog();
+                //deviceDetails.ShowDialog();
+                skipPages.Content = deviceDetails;
             }
             catch (Exception ex)
             {
@@ -66,7 +67,7 @@ namespace demo
 
         private void btnStartService_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.StartService(btnStartService);
+            mainWindow.StartService(btnStartService, picOrange, picGreen);
         }
     }
 }

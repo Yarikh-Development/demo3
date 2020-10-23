@@ -37,7 +37,7 @@ namespace WebSocketConsole
                 if (sErr != "")
                 {
                     this.Cursor = Cursors.Arrow;
-                    MessageBox.Show(sErr, (string)this.Content, MessageBoxButton.OK);
+                    MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
                 }
                 this.txtPort.Text = Settings.Default.Port.ToString();
                 this.txtCertificateFile.Text = Settings.Default.CertificateFile;

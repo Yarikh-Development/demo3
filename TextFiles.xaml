@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      d:DesignHeight="580" d:DesignWidth="880"
+      Height="Auto" Width="Auto"
       Title="TextFiles">
 
     <Grid Background="#EEEDEF">

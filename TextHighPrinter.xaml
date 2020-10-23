@@ -46,12 +46,12 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Name="btnStartService" Click="btnStartService_Click" Content="开启服务"/>
                     <Button Content="暂停服务"/>
-                    <!--<Image Source="WebSocketConsole/Printer_Pics/Oringe.jpg" RenderOptions.BitmapScalingMode="HighQuality">
-                        <Image.Clip>
-                            <EllipseGeometry RadiusX="20" RadiusY="20" Center="10,10"/>
-                        </Image.Clip>
-                    </Image>-->
-                    <Border CornerRadius="15" Width="30" Background="#000000"/>
+                    <Grid>
+                        <Image Name="picOrange"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Oringe.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Image Name="picGreen"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Green.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Grid>
+                    
+                    <!--<Border CornerRadius="15" Width="30" Background="#000000"/>-->
                 </StackPanel>
                 
                 <UniformGrid Columns="2" Grid.Row="1">

@@ -81,6 +81,10 @@
       <DependentUpon>FrmSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="WebSocketLogger.cs" />
+    <Page Include="DefinedStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DeviceDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

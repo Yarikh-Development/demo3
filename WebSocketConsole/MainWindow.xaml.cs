@@ -302,7 +302,7 @@ namespace WebSocketConsole
             }
         }
 
-        public void StartService(Button radioButton)
+        public void StartService(Button radioButton,Image image1,Image image2)
         {
             _logger = new WebSocketLogger();
             String sErr = "";
@@ -430,8 +430,8 @@ namespace WebSocketConsole
                 // timer1.Enabled = true;
                 cmdTest.IsEnabled = true;
                 // pnlSC.BackColor = Color.Blue;
-                picOrange.Visibility = Visibility.Hidden;
-                picGreen.Visibility = Visibility.Visible;
+                image1.Visibility = Visibility.Hidden;
+                image2.Visibility = Visibility.Visible;
                 txtDevices.Text = "0";
                 txtSubscribers.Text = "0";
                 listView1.Items.Clear();
@@ -632,7 +632,8 @@ namespace WebSocketConsole
             {               
                 DeviceDetails frm = new DeviceDetails(this);
                 frm.Title = "Device:" + msCurrentSelectedDeviceSN;
-                frm.ShowDialog();
+                //将DeviceDetails从窗体转成页面，下面代码需要注释
+                //frm.ShowDialog();
             }
         } 
 
@@ -675,7 +676,8 @@ namespace WebSocketConsole
             {
                 DeviceDetails deviceDetails = new DeviceDetails(this);
                 deviceDetails.Title = "Device:" + msCurrentSelectedDeviceSN;
-                deviceDetails.ShowDialog();
+                //将DeviceDetails从窗体转成页面，下面代码需要注释
+                //deviceDetails.ShowDialog();
             }
             catch (Exception ex)
             {

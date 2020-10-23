@@ -17,7 +17,7 @@ namespace WebSocketConsole
     /// <summary>
     /// DeviceDetails.xaml 的交互逻辑
     /// </summary>
-    public partial class DeviceDetails : Window
+    public partial class DeviceDetails : Page
     {
         MainWindow frmMainmF = null;
         public DeviceDetails(MainWindow myWindow)
@@ -50,14 +50,14 @@ namespace WebSocketConsole
 
             if (txtDataToSend.Text == "")
             {
-                MessageBox.Show("Please input the data you want to send to the printer!", (string)this.Content, MessageBoxButton.OK);
+                MessageBox.Show("Please input the data you want to send to the printer!", this.Title, MessageBoxButton.OK);
                 txtDataToSend.Focus();
                 return;
             }
 
             if (txtSendToDeviceSN.Text == "")
             {
-                MessageBox.Show("Please input the serial number of the printer you want to send to!", (string)this.Content, MessageBoxButton.OK);
+                MessageBox.Show("Please input the serial number of the printer you want to send to!", this.Title, MessageBoxButton.OK);
                 txtSendToDeviceSN.Focus();
                 return;
             }

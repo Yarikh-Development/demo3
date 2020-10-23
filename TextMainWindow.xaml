@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
         mc:Ignorable="d"
-        Title="Window1" Height="650" Width="850" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
+        Title="Window1" MinHeight="600" MinWidth="850" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
         MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"
         Loaded="Window_Loaded">
 
@@ -80,7 +80,7 @@
                 <ColumnDefinition Width="469*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Margin="0,0,0,0.333">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -143,7 +143,7 @@
 
             <!--<Frame x:Name="frameShowPages" Grid.Column="1" Background="#EEEDEF" NavigationUIVisibility="Hidden"/>-->
 
-            <Frame x:Name="frameShowPages" Grid.Column="1" Background="#EEEDEF" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,0.333,0.333"/>
+            <Frame x:Name="frameShowPages" Grid.Column="1" Background="#EEEDEF" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
 
         </Grid>
 
