@@ -18,6 +18,7 @@
 
     <Grid Background="#EEEDEF">
         <Grid.RowDefinitions>
+            <!--行-->
             <RowDefinition Height="40"/>
             <RowDefinition Height="20"/>
             <RowDefinition/>
@@ -130,6 +131,18 @@
             </ListView>
 
         </Grid>
+
+        <Button x:Name="Textbtn" Click="Textbtn_Click" Content="常用指令窗口" Width="100" Height="20" Margin="400,5,20,20">
+            <!--<Button.ContextMenu>
+                <ContextMenu x:Name="menu">
+                    <MenuItem x:Name="menu1" Header="菜单1"/>
+
+                    　　　　　　　
+                    <Separator/>
+                    <MenuItem x:Name="menu2" Header="菜单2"/>
+                </ContextMenu>
+            </Button.ContextMenu>-->
+        </Button>
 
     </Grid>
 </Page>

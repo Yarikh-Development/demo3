@@ -10,33 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace demo
 {
-	//public struct RelationStruct
-	//{
-	//	public string name;
-	//	public List<FrameworkElement> obj;
-	//};
-
 	/// <summary>
-	/// TextCommon.xaml 的交互逻辑
+	/// TextBasicSituation.xaml 的交互逻辑
 	/// </summary>
-	public partial class TextCommon : Window
+	public partial class TextBasicSituation : Page
 	{
-		//private TextAdminInterface textAdminInterface;
-
-		public TextCommon()
+		public TextBasicSituation()
 		{
 			InitializeComponent();
-			//设置父窗口
-			//this.Owner = window;
 		}
-
-		//public TextCommon(TextAdminInterface textAdminInterface)
-		//{
-		//	this.textAdminInterface = textAdminInterface;
-		//}
 	}
 }
