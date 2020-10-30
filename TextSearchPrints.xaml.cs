@@ -21,6 +21,7 @@ namespace demo
     /// </summary>
     public partial class TextSearchPrints : Page
     {
+        Printer printer;
         public TextSearchPrints()
         {
             InitializeComponent();
@@ -48,95 +49,17 @@ namespace demo
         //展示ItemsControl里的打印机名
         private void printerMessage_Click(object sender, RoutedEventArgs e)
         {
+            printer = new Printer();
             isVisibilityForEnter.Visibility = Visibility.Visible;
-            List<Button> buttonItems = GetChildObjects<Button>(itemsPrinters, "");            
+            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");            
             foreach (Button button in buttonItems)
             {                
                 if (button.IsFocused)
                 {
-                    TextBlock txt = FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
+                    TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
                     txtPrinterName2.Text = txt.Text;
                 }                   
             }
-        }
-
-        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                    return (childItem)child;
-                else
-                {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
-
-        /*private void txtPrintersName_TouchDown(object sender, TouchEventArgs e)
-        {
-            if (itemsPrinters.SelectedIndex < 0) return;
-
-            ListBoxItem myListBoxItem = (ListBoxItem)(NewVideoListBox.ItemContainerGenerator.ContainerFromIndex(NewVideoListBox.SelectedIndex));
-            ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-            MaterialDesignThemes.Wpf.Badged badged = (MaterialDesignThemes.Wpf.Badged)myDataTemplate.FindName("CountingBadge", myContentPresenter);
-
-            TextBlock likeText = (TextBlock)myDataTemplate.FindName("LikeText", myContentPresenter);
-
-            likeText.Foreground = new SolidColorBrush(Colors.Red);
-
-
-
-            if (badged.Badge == null)
-                badged.Badge = 0;
-            int i;
-            int.TryParse(badged.Badge.ToString(), out i);
-            badged.Badge = i + 1;
-        }*/
-
-        //查找ItemsControl里的第一个子项
-        public T FindFirstVisualChild<T>(DependencyObject obj, string childName) where T : DependencyObject
-
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T && child.GetValue(NameProperty).ToString() == childName)
-                {
-                    return (T)child;
-                }
-                else
-                {
-                    T childOfChild = FindFirstVisualChild<T>(child, childName);
-                    if (childOfChild != null)
-                    {
-                        return childOfChild;
-                    }
-                }
-            }
-            return null;
-        }
-
-        //查找ItemsControl里的所有子项
-        public List<T> GetChildObjects<T>(DependencyObject obj, string name) where T : FrameworkElement
-        {
-            DependencyObject child = null;
-            List<T> childList = new List<T>();
-            for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
-            {
-                child = VisualTreeHelper.GetChild(obj, i);
-                if (child is T && (((T)child).Name == name || string.IsNullOrEmpty(name)))
-                {
-                    childList.Add((T)child);
-                }
-                childList.AddRange(GetChildObjects<T>(child, ""));//指定集合的元素添加到List队尾
-            }
-            return childList;
-        }
+        }              
     }
 }

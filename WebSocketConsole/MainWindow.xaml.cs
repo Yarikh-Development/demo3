@@ -27,6 +27,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using WebSocketsCmd;
 using Newtonsoft.Json.Linq;
+using System.Windows.Threading;
 
 namespace WebSocketConsole
 {
@@ -38,8 +39,14 @@ namespace WebSocketConsole
         public MainWindow()
         {
             InitializeComponent();
-        }
 
+            //创建定时器，监听通过WebSocket的打印机
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(Timer1_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            
+        }
+        DispatcherTimer dispatcherTimer;
         int TotalDevices = 0;
         private static IWebSocketLogger _logger;
         ServiceFactory serviceFactory = null;
@@ -60,8 +67,10 @@ namespace WebSocketConsole
         String Identification_Alias = "";
         int mnCounter = 0;
         public String msCurrentSelectedDeviceSN = "";
+        public String sTemp = "";
         private static String msFMT_Test_Label = "";
 
+        //展示打印机基础信息：固件版本、SM码、IP、打印机名（但在这里没必要）
         public String RefreshGrid(String sConnection_Info)
         {
             String sTemp = "";
@@ -409,6 +418,7 @@ namespace WebSocketConsole
 
                 serviceFactory = new ServiceFactory(webRoot, _logger, Identification_Alias, server, My_CommObject);
                 server = new WebServer(serviceFactory, _logger);
+                dispatcherTimer.Start();
                 serviceFactory._server = server;
                 serviceFactory._My_CommObject = My_CommObject;
                 if (Settings.Default.HTTPS)
@@ -441,6 +451,42 @@ namespace WebSocketConsole
             {
                 this.Cursor = Cursors.Arrow;
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+            }
+        }
+
+        public void StopService(Button btnStart,Button btnStop)
+        {
+            try
+            {
+                String sErr = "";
+
+                // timer1.Enabled = false;
+                dispatcherTimer.Stop();
+                server.Dispose();
+                server = null;
+                serviceFactory = null;
+                _logger = null;
+
+                My_CommObject.Close(ref sErr);
+                My_CommObject = null;
+
+                btnStart.IsEnabled = true;
+                btnStart.Focus();
+                btnStop.IsEnabled = false;
+                
+                //picOrange.Visibility = Visibility.Visible;
+                //picGreen.Visibility = Visibility.Hidden;
+                msCurrentSelectedDeviceSN = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+                btnStart.IsEnabled = true;
+                btnStop.IsEnabled = false;
+                
+                //picOrange.Visibility = Visibility.Visible;
+                //picGreen.Visibility = Visibility.Hidden;
+                
             }
         }
 
@@ -521,7 +567,10 @@ namespace WebSocketConsole
                     if (server != null)
                     {
                         sTemp = server.GetDevices_Info();
-                        if (sTemp != "")
+                        //return sTemp;
+                        this.sTemp = sTemp;
+                        //MessageBox.Show(sTemp);
+                        /*if (sTemp != "")
                         {
                             //txtDevices.Text = sTemp.Split('\r').Length.ToString();
                             txtDevices.Text = sTemp.Split('|')[0];
@@ -537,7 +586,7 @@ namespace WebSocketConsole
                         if (sTemp != "")
                         {
                             txtSubscribers.Text = sTemp.Split('|')[0];
-                        }
+                        }*/
 
                     }
 
@@ -545,10 +594,10 @@ namespace WebSocketConsole
                 catch (Exception ex)
                 {
                     _logger.Error("", typeof(MainWindow), ex);
+                    //return null;
                 }
             }
-
-
+            //return null;
         }
 
         private void cmdTest_Click(object sender, EventArgs e)

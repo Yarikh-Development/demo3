@@ -45,7 +45,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Button Name="btnStartService" Click="btnStartService_Click" Content="开启服务"/>
-                    <Button Content="暂停服务"/>
+                    <Button Name="btnStopService" Click="btnStopService_Click" Content="暂停服务"/>
                     <Grid>
                         <Image Name="picOrange"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Oringe.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Image Name="picGreen"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Green.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -143,9 +143,9 @@
                                                 <!-- 添加打印机图标，正常一个，其他状态一个 -->
                                                 <TextBlock/>
                                                 <StackPanel Grid.Column="1" Margin="3 0 0 0">
-                                                    <TextBlock x:Name="txtPrintersName" Text="{Binding Name}" TextWrapping="Wrap"  />
+                                                    <TextBlock x:Name="txtPrintersName" Text="{Binding DeviceName}" TextWrapping="Wrap"  />
                                                     <!-- 显示打印机状态（正常、脱机、错误、等） -->
-                                                    <TextBlock x:Name="txtPrintersState" Text="{Binding Status}" FontSize="10" Foreground="#808080" FontWeight="Light"/>
+                                                    <TextBlock x:Name="txtPrintersState" Text="{Binding SN}" FontSize="10" Foreground="#808080" FontWeight="Light"/>
                                                 </StackPanel>
 
                                             </Grid>
