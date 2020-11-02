@@ -88,7 +88,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Border>
                                         <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="通信（接口）设置" Foreground="#3F4C5D"/>
+                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
                                             <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -110,7 +110,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Border>
                                         <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="是否缺纸" Foreground="#3F4C5D"/>
+                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
                                             <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -132,7 +132,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Border>
                                         <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="标签长度" Foreground="#3F4C5D"/>
+                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
                                             <TextBlock Text="aaaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -154,7 +154,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Border>
                                         <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="打印头是否抬起" Foreground="#3F4C5D"/>
+                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
                                             <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -214,7 +214,7 @@
                             <Grid>
                                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
                                     <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                        <TextBlock Text="&#xeb67;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
@@ -236,7 +236,7 @@
                             <Grid>
                                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
                                     <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                        <TextBlock Text="&#xec26;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
@@ -258,7 +258,7 @@
                             <Grid>
                                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
                                     <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                        <TextBlock Text="&#xed1b;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
@@ -280,7 +280,7 @@
                             <Grid>
                                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
                                     <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                        <TextBlock Text="&#xec65;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
@@ -302,7 +302,7 @@
                             <Grid>
                                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
                                     <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                        <TextBlock Text="&#xec92;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
@@ -441,7 +441,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                     <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="打印模式" Foreground="#3F4C5D"/>
+                                        <TextBlock Text="预留" Foreground="#3F4C5D"/>
                                         <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                     </StackPanel>
                                 </StackPanel>
