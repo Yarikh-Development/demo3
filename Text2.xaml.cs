@@ -24,10 +24,10 @@ namespace demo
 			InitializeComponent();
 		}
 
-		private void s_Click(object sender, RoutedEventArgs e)
+		/*private void s_Click(object sender, RoutedEventArgs e)
 		{
 			this.menu.PlacementTarget = this.s;
 			this.menu.IsOpen = true;
-		}
+		}*/
 	}
 }

@@ -7,125 +7,16 @@
         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
         xmlns:dxcore="http://schemas.devexpress.com/winfx/2008/xaml/core"
         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        
         mc:Ignorable="d"
         Title="Text2" Height="450" Width="800">
     <Grid>
 
-        <!--<dxdo:DockLayoutManager x:Name="dockManager1" Background="#FF261D50" AutoHideExpandMode="MouseDown">
-            <dxdo:LayoutGroup>
-                <dxdo:LayoutControlItem>
-                    <Grid Background="White">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="250"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="White">
-                            <TextBox>在这里写内容</TextBox>
-                        </Grid>
-                    </Grid>
-                </dxdo:LayoutControlItem>
-            </dxdo:LayoutGroup>
-            <dxdo:DockLayoutManager.AutoHideGroups>
-                <dxdo:AutoHideGroup DockType="Left" >
-                    <dxdo:AutoHideGroup.Appearance>
-                        <dxdo:Appearance>
-                            <dxdo:Appearance.Normal>
-                                <dxdo:AppearanceObject Foreground="White"/>
-                            </dxdo:Appearance.Normal>
-                            <dxdo:Appearance.Active>
-                                <dxdo:AppearanceObject Foreground="White"/>
-                            </dxdo:Appearance.Active>
-                        </dxdo:Appearance>
-                    </dxdo:AutoHideGroup.Appearance>
-                    <dxdo:LayoutPanel x:Name="paneCameras" Caption="摄像头"  ShowCloseButton="False" ShowControlBox="True" ShowMaximizeButton="False" 
-                                      ShowPinButton="True"  CaptionVerticalAlignment="Stretch" CaptionHorizontalAlignment="Stretch" 
-                                      TextWrapping="WrapWithOverflow"
-                                      AllowDockToDocumentGroup="False" CaptionWidth="250" ItemWidth="150"
-                                      AllowMaximize="False"
-                                      AllowFloat="False" 
-                                    
-                                      CaptionImageLocation="AfterText"
-                                      >
-                        <dxdo:LayoutPanel.Appearance>
-                            <dxdo:Appearance>
-                                <dxdo:Appearance.Normal>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Normal>
-                                <dxdo:Appearance.Active>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Active>
-                            </dxdo:Appearance>
-                        </dxdo:LayoutPanel.Appearance>
-                        <Grid>
-                            <TreeView/>
-                        </Grid>
-                    </dxdo:LayoutPanel>
-                    <dxdo:LayoutPanel x:Name="panePerson" Caption="人员查询"  ShowCloseButton="False" ShowControlBox="True" ShowMaximizeButton="False" 
-                                      ShowPinButton="True"  CaptionVerticalAlignment="Stretch" CaptionHorizontalAlignment="Stretch" 
-                                      TextWrapping="WrapWithOverflow"
-                                      AllowDockToDocumentGroup="False" CaptionWidth="250" ItemWidth="150"
-                                      AllowMaximize="False"
-                                      AllowFloat="False"                                      
-                                      CaptionImageLocation="AfterText"
-                                      >
-                        <dxdo:LayoutPanel.Appearance>
-                            <dxdo:Appearance>
-                                <dxdo:Appearance.Normal>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Normal>
-                                <dxdo:Appearance.Active>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Active>
-                            </dxdo:Appearance>
-                        </dxdo:LayoutPanel.Appearance>
-                        <Grid>
-                            <TreeView/>
-                        </Grid>
-                    </dxdo:LayoutPanel>
-                </dxdo:AutoHideGroup>
-                <dxdo:AutoHideGroup DockType="Right" >
-                    <dxdo:AutoHideGroup.Appearance>
-                        <dxdo:Appearance>
-                            <dxdo:Appearance.Normal>
-                                <dxdo:AppearanceObject Foreground="White"/>
-                            </dxdo:Appearance.Normal>
-                            <dxdo:Appearance.Active>
-                                <dxdo:AppearanceObject Foreground="White"/>
-                            </dxdo:Appearance.Active>
-                        </dxdo:Appearance>
-                    </dxdo:AutoHideGroup.Appearance>
-                    <dxdo:LayoutPanel x:Name="paneWarning" Caption="报警信息"  ShowCloseButton="False" ShowControlBox="True" ShowMaximizeButton="False" 
-                                      ShowPinButton="True"  CaptionVerticalAlignment="Stretch" CaptionHorizontalAlignment="Stretch" 
-                                      TextWrapping="WrapWithOverflow"
-                                      AllowDockToDocumentGroup="False" CaptionWidth="250" ItemWidth="150"
-                                      AllowMaximize="False"
-                                      AllowFloat="False" 
-                                    
-                                      CaptionImageLocation="AfterText"
-                                      >
-                        <dxdo:LayoutPanel.Appearance>
-                            <dxdo:Appearance>
-                                <dxdo:Appearance.Normal>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Normal>
-                                <dxdo:Appearance.Active>
-                                    <dxdo:AppearanceObject Foreground="White"/>
-                                </dxdo:Appearance.Active>
-                            </dxdo:Appearance>
-                        </dxdo:LayoutPanel.Appearance>
-                        <Grid>
-                            <TreeView/>
-                        </Grid>
-                    </dxdo:LayoutPanel>
-
-                </dxdo:AutoHideGroup>
-            </dxdo:DockLayoutManager.AutoHideGroups>
-        </dxdo:DockLayoutManager>-->
-        <!--<Grid Grid.Column="1">
-            
-        </Grid>-->
-
-        <Button x:Name="s" Content="常用指令" Click="s_Click" Width="80" Height="20" Margin="-620,-330,0,0">
+     
+        <!--方法一：使用ContextMenu-->
+        <!--<Button x:Name="s" Content="常用指令" Click="s_Click" Width="80" Height="20" Margin="-620,-330,0,0">
             <Button.ContextMenu>
                 <ContextMenu x:Name="menu">
                     <MenuItem x:Name="menu1" Header="菜单1"/>
@@ -135,7 +26,71 @@
                     <MenuItem x:Name="menu2" Header="菜单2"/>
                 </ContextMenu>
             </Button.ContextMenu>
-        </Button>
+        </Button>-->
+
+        
+        <!--方法2-->
+        <pu:DropDown HorizontalAlignment="Right"
+                                         VerticalAlignment="Top"
+                                         Margin="0,20,40,0">
+            <pu:DropDown.Content>
+                <Grid Width="100">
+                    <TextBlock Height="30"
+                        Text="常用指令"
+                        Width="80"
+                        Background="SkyBlue"
+                        HorizontalAlignment="Center"
+                        FontSize="20">
+                    </TextBlock>
+                </Grid>
+            </pu:DropDown.Content>
+            <pu:DropDown.Child>
+                <Grid Height="170"
+                                          Width="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <Border VerticalAlignment="Bottom"
+                            BorderBrush="#EEEEEE"
+                            BorderThickness="0,0,0,1" />
+                    
+                    <Grid Grid.Row="0" Margin="15,0">
+                        <TextBlock 
+                            VerticalAlignment="Center"
+                            Foreground="Gray"
+                            Text="Enabled" />
+                        <Button VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Content="复制"/>
+                    </Grid>
+                    
+                    <Border Grid.Row="0"
+                            VerticalAlignment="Bottom"
+                            BorderBrush="#EEEEEE"
+                            BorderThickness="0,0,0,1" />
+                    
+                    <Grid Grid.Row="1" Margin="15,0">
+                        <TextBlock VerticalAlignment="Center"
+                                   Foreground="Gray"
+                                   Text="Notifycation" />
+                        <Button VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Content="复制"/>
+                    </Grid>
+                    
+                    <Border Grid.Row="1"
+                            VerticalAlignment="Bottom"
+                            BorderBrush="#EEEEEE"
+                            BorderThickness="0,0,0,1" />
+
+                </Grid>
+            </pu:DropDown.Child>
+        </pu:DropDown>
+
 
     </Grid>
 </Window>
