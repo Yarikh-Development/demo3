@@ -39,6 +39,7 @@
                     <MenuItem Header="编辑" Click="ChangeRelationRecord"/>
                     <MenuItem Header="添加" Click="AddRelationRecord"/>
                     <MenuItem Header="删除" Click="DeleteRelationRecord"/>
+                    <MenuItem Header="刷新" Click="RefreshRelationRecord"/>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>

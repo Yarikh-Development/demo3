@@ -144,6 +144,11 @@ namespace demo
             
         }
 
+        private void btnDMP_Click(object sender, RoutedEventArgs e)
+        {
+            new AnalysisDMP().Show() ;
+        }
+
         //private void 
 
         /*public void StopService(Button btnStart, Button btnStop)

@@ -24,6 +24,13 @@ namespace demo
 			Relation_ListView.SelectedIndex = 0;
 		}
 
+		private RelationPage()
+        {
+			InitializeComponent();
+			LoadData();
+			Relation_ListView.SelectedIndex = 0;
+		}
+
 		//加载关联文件
 		public void LoadData()
 		{
@@ -101,6 +108,11 @@ namespace demo
 				Relation_ListView.Items.RemoveAt(Relation_ListView.SelectedIndex);
 			}
 		}
+
+		private void RefreshRelationRecord(object sender, RoutedEventArgs e)
+        {
+			new RelationPage();
+        }
 
 		//判断点击是否在行
 		private bool IsClickLine()

@@ -85,8 +85,7 @@ namespace demo
 			//设置能效编号
 			if (Auto_MenuItem.IsChecked==true)
 			{
-				this.SetNumber(codes.Result);
-				//this.SetNumber(codes.Result);
+				//this.SetNumber(codes.Result);	//将钩子捕获到的结果集展示在界面框里，但扫描时已经扫过一次在了，会导致显示两次信息。
 				AutoPrint(codes.Result);
 			}
 		}
@@ -245,7 +244,7 @@ namespace demo
 
 		//自动打印
 		//public void AutoPrint(string number)
-			private void AutoPrint(string number)
+		private void AutoPrint(string number)
 		{
 			this.LoadPicture();
 			//this.LoadPicture();
@@ -272,7 +271,7 @@ namespace demo
 
 		//手动打印
 		//public void ManualPrint()
-			private void ManualPrint()
+		private void ManualPrint()
 		{
 			//输入编号，加载图片
 			//string result = picturesPage.LoadPicture();

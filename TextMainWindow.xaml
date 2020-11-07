@@ -26,25 +26,34 @@
         <StackPanel  Background="#1578F6">
             <Menu Background="Transparent" Width="600" HorizontalAlignment="Left">
                 <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe69e;文件" FontFamily="/#iconfont" FontWeight="DemiBold" Margin="10 5 0 5" FontSize="18">
-
-                    <MenuItem Header="打印机" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="应用" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="打开打印机配置文件" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="打开日志文件夹" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="打开标签文件夹" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="打印机" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="高级打印机" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="关闭" BorderThickness="0" Background="#1578F6"></MenuItem>
+                    <MenuItem Header="退出" BorderThickness="0" Background="#1578F6"></MenuItem>
                 </MenuItem>
 
                 <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe66d;查看" FontWeight="DemiBold" FontFamily="/#iconfont" Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="打印机" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="应用" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="打印记录" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="指令列表" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="标签列表" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="对话框" Foreground="#1578F6" BorderThickness="0"></MenuItem>
                 </MenuItem>
 
                 <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6d3;设置" FontWeight="DemiBold" FontFamily="/#iconfont" Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="打印机" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="应用" Click="CreateUserWindowClick" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="添加指令" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="绑定打印机" Click="CreateUserWindowClick" Foreground="#1578F6" BorderThickness="0"></MenuItem>
                     <!--<MenuItem Header="应用" Click="CreateUserWindowClick"></MenuItem>-->
                 </MenuItem>
 
                 <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6b4;帮助" FontWeight="DemiBold" FontFamily="/#iconfont"  Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="打印机" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="应用" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="查看帮助" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="发送反馈" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="注册产品" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="关于软件" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                    <MenuItem Header="关于业睿" Foreground="#1578F6" BorderThickness="0"></MenuItem>
                 </MenuItem>
 
                 <!--<MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6b4;打印模式" FontWeight="DemiBold" FontFamily="/#iconfont"  Margin="10 5 0 5" FontSize="18">

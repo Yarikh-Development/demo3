@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,8 @@ namespace demo
         private Window window = null;
 		private TextPicturesPage page;
 
+		ObservableCollection<PrintersTemplate> list;
+
 		//public TextFiles(Window window)
 		public TextFiles()
 		{
@@ -44,7 +47,7 @@ namespace demo
 			try
 			{
 				StreamReader streamReader = new StreamReader(FileTools.relationFilePath);
-
+				list = new ObservableCollection<PrintersTemplate>(); ;
 				string line;
 				string[] data;
 				while ((line = streamReader.ReadLine()) != null)
@@ -52,10 +55,10 @@ namespace demo
 					if (line != "")
 					{
 						data = line.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-						Relation_ListView.Items.Add(new { number = data[0], template = data[1], printer = data[2] });
+						list.Add(new PrintersTemplate { number = data[0], template = data[1], printer = data[2] });
 					}
 				}
-
+				Relation_ListView.ItemsSource = list;
 				streamReader.Close();
 
 			}
@@ -81,39 +84,78 @@ namespace demo
 		//编辑记录
 		private void ChangeRelationRecord(object sender, RoutedEventArgs e)
 		{
+            try
+            {
+				RelationEditWindow relationEditWindow = new RelationEditWindow(Relation_ListView.SelectedIndex);
+				relationEditWindow.ShowDialog();
+				//更新数据
+				List<string> lines = new List<string>(File.ReadAllLines(FileTools.relationFilePath));
+				//string[] data = lines[Relation_ListView.SelectedIndex].Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+				//if (data.Length == 3)
+				//	Relation_ListView.Items[Relation_ListView.SelectedIndex] = new { number = data[0], template = data[1], printer = data[2] };
+				LoadData();
+			}
+            catch (Exception ex)
+            {
+				MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+                
+            }
 			//创建编辑窗口
-			RelationEditWindow relationEditWindow = new RelationEditWindow(Relation_ListView.SelectedIndex);
-			relationEditWindow.ShowDialog();
-			//更新数据
-			List<string> lines = new List<string>(File.ReadAllLines(FileTools.relationFilePath));
-			string[] data = lines[Relation_ListView.SelectedIndex].Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-			if (data.Length == 3)
-				Relation_ListView.Items[Relation_ListView.SelectedIndex] = new { number = data[0], template = data[1], printer = data[2] };
+			
 		}
 
 		//添加记录
 		private void AddRelationRecord(object sender, RoutedEventArgs e)
 		{
-			//创建编辑窗口
-			RelationEditWindow relationEditWindow = new RelationEditWindow();
-			bool? flag = relationEditWindow.ShowDialog();
-			//获取新数据
-			if (flag == true)
-			{
-				List<string> lines = new List<string>(File.ReadAllLines(FileTools.relationFilePath));
-				string[] data = lines[lines.Count - 1].Split(new char[] { ';' });
-				Relation_ListView.Items.Add(new { number = data[0], template = data[1], printer = data[2] });
+            try
+            {
+				//创建编辑窗口
+				RelationEditWindow relationEditWindow = new RelationEditWindow();
+				bool? flag = relationEditWindow.ShowDialog();
+				//获取新数据
+				if (flag == true)
+				{
+					List<string> lines = new List<string>(File.ReadAllLines(FileTools.relationFilePath));
+					//string[] data = lines[lines.Count - 1].Split(new char[] { ';' });
+					//Relation_ListView.Items.Add(new { number = data[0], template = data[1], printer = data[2] });
+					LoadData();
+				}
 			}
+            catch (Exception ex)
+            {
+
+				MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+			}
+			
 		}
 
 		//删除记录
 		private void DeleteRelationRecord(object sender, RoutedEventArgs e)
 		{
-			if (IsClickLine())
-			{
-				FileTools.DeleteLine(FileTools.relationFilePath, Relation_ListView.SelectedIndex);
-				Relation_ListView.Items.RemoveAt(Relation_ListView.SelectedIndex);
+            try
+            {
+				if (IsClickLine())
+				{
+					FileTools.DeleteLine(FileTools.relationFilePath, Relation_ListView.SelectedIndex);
+					//Relation_ListView.Items.RemoveAt(Relation_ListView.SelectedIndex);
+					LoadData();
+				}
 			}
+            catch (Exception ex)
+            {
+
+				MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+            }
+			
+		}
+
+		//刷新页面
+		private void RefreshRelationRecord(object sender, RoutedEventArgs e)
+		{
+			//MessageBox.Show("刷新页面");
+			//new TextFiles();
+			//Relation_ListView.Items.Refresh();
+			LoadData();
 		}
 
 		//判断点击是否在行
@@ -121,6 +163,14 @@ namespace demo
 		{
 			return Relation_ListView.SelectedIndex != -1;
 		}
-	
-}
+
+        
+    }
+
+	public class PrintersTemplate
+    {
+        public string number { get; set; }
+        public string template { get; set; }
+        public string printer { get; set; }
+    }
 }

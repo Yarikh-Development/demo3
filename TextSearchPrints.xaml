@@ -121,7 +121,15 @@
                                             Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10">
                                         <!-- 显示打印机内容 -->
                                         <Button Name="printerMessage" Click="printerMessage_Click" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Left" 
-                                                Style="{StaticResource BackGroundButton}">
+                                                Style="{StaticResource BackGroundButton}" Initialized="printerMessage_Initialized">
+                                            <Button.ContextMenu>
+                                                <ContextMenu Name="contextMenu">
+                                                    <MenuItem Header="复制"/>
+                                                    <MenuItem Header="粘贴"/>
+                                                    <MenuItem Header="剪切"/>
+                                                    <MenuItem Header="删除"/>
+                                                </ContextMenu>
+                                            </Button.ContextMenu>
                                             <Grid Name="gridInItem">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="40"/>
@@ -188,61 +196,55 @@
             <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
 
             <WrapPanel Grid.Row="1" Orientation="Horizontal">
-                <Border  CornerRadius="5"  Height="50" Width="200"
-                    Background="#1578F6" Margin="20 20 0 10">
-                    <!-- 显示打印机内容 -->
-                    <Border.Effect>
-                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Border.Effect>
-                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-                        <StackPanel>
-                            <TextBlock Text="文件绑定" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                        </StackPanel>
-                    </Button>
-                </Border>
+                
 
-                <Border  CornerRadius="5"  Height="50" Width="200"
-                    Background="#1578F6" Margin="20 20 0 10">
-                    <!-- 显示打印机内容 -->
-                    <Border.Effect>
+                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                            Height="50" Width="200" Margin="20 20 0 10">
+                    <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Border.Effect>
-                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-                        <StackPanel>
-                            <TextBlock Text="打印测试页" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                        </StackPanel>
-                    </Button>
-                </Border>
+                    </Button.Effect>
+                    <StackPanel>
+                        <TextBlock Text="文件绑定" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                    </StackPanel>
+                </Button>
 
-                <Border  CornerRadius="5"  Height="50" Width="200"
-                    Background="#1578F6" Margin="20 20 0 10">
-                    <!-- 显示打印机内容 -->
-                    <Border.Effect>
+                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                            Height="50" Width="200" Margin="20 20 0 10">
+                    <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Border.Effect>
-                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-                        <StackPanel>
-                            <TextBlock Text="查看打印机正在干什么" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                        </StackPanel>
-                    </Button>
-                </Border>
+                    </Button.Effect>
+                    <StackPanel>
+                        <TextBlock Text="打印测试页" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                    </StackPanel>
+                </Button>
 
-                <Border  CornerRadius="5"  Height="50" Width="200"
-                    Background="#1578F6" Margin="20 20 0 10">
-                    <!-- 显示打印机内容 -->
-                    <Border.Effect>
+                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                            Height="50" Width="200" Margin="20 20 0 10">
+                    <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Border.Effect>
-                    <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-                        <StackPanel>
-                            <TextBlock Text="自定义打印机" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                            <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                        </StackPanel>
-                    </Button>
-                </Border>
+                    </Button.Effect>
+                    <StackPanel>
+                        <TextBlock Text="查看打印机正在干什么" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                    </StackPanel>
+                </Button>
+
+                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                            Height="50" Width="200" Margin="20 20 0 10">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
+                    </Button.Effect>
+                    <StackPanel>
+                        <TextBlock Text="设置高级打印机" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
+                    </StackPanel>
+                </Button>
             </WrapPanel>
         </Grid>
         

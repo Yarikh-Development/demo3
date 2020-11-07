@@ -327,4 +327,41 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- 圆角按钮，应用在打印机信息按钮上
+         鼠标放上后颜色变为浅蓝色，字体颜色变为浅灰色
+         点击后颜色变为浅蓝色
+    -->
+    <Style x:Key="CornerRadiusButton" TargetType="{x:Type Button}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border x:Name="border" CornerRadius="5"  Background="#1578F6"/>
+                        <ContentPresenter x:Name="btnPresenter" Focusable="False" Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          RecognizesAccessKey="True"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
+                            <Setter Property="Foreground" Value="#DEDEDE"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#000000" TargetName="border"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#679EE4" TargetName="border"/>
+                            <!--<Setter Property="Foreground" Value="#DEDEDE"/>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

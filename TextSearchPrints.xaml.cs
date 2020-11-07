@@ -60,6 +60,11 @@ namespace demo
                     txtPrinterName2.Text = txt.Text;
                 }                   
             }
-        }              
+        }
+
+        private void printerMessage_Initialized(object sender, EventArgs e)
+        {
+
+        }
     }
 }

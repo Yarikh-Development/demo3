@@ -107,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnalysisDMP.xaml.cs">
+      <DependentUpon>AnalysisDMP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnalysisOrderResult.cs" />
     <Compile Include="CornerButton.cs" />
     <Compile Include="FileTools.cs" />
     <Compile Include="LinkOSPrinters.cs" />
@@ -161,6 +165,10 @@
     <Compile Include="TextMainWindow.xaml.cs">
       <DependentUpon>TextMainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AnalysisDMP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DefinedStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
