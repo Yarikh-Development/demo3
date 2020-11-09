@@ -29,7 +29,7 @@
         </Button>-->
 
         
-        <!--方法2-->
+        <!--方法2点击之后无法移动“常用指令”-->
         <pu:DropDown HorizontalAlignment="Right"
                                          VerticalAlignment="Top"
                                          Margin="0,20,40,0">
@@ -91,6 +91,19 @@
             </pu:DropDown.Child>
         </pu:DropDown>
 
-
+        <!--界面切换-->
+        <!--<DockPanel LastChildFill="True" Margin="0,50,0,0">
+            
+            <Button DockPanel.Dock="Top" Content="Top">
+                
+            </Button>
+            
+            <Button DockPanel.Dock="Bottom">Bottom</Button>
+            <Button DockPanel.Dock="Left">Left</Button>
+            <Button DockPanel.Dock="Right">Right</Button>
+            <Button>Fill</Button>
+        </DockPanel>-->
+        
+        
     </Grid>
 </Window>

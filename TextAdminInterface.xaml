@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="900"
+      d:DesignHeight="800" d:DesignWidth="500"
       Title="TextAdminInterface">
 
     <Page.Resources>
@@ -20,129 +20,81 @@
         <Grid.RowDefinitions>
             <!--行-->
             <RowDefinition Height="40"/>
-            <RowDefinition Height="20"/>
+            <!--<RowDefinition Height="20"/>-->
             <RowDefinition/>
-            <!--<RowDefinition Height="60"/>-->
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="0 0 0 8">
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <RadioButton Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
-                <RadioButton Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
+                <RadioButton Click="ZPL_Click" Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
+                <RadioButton Click="SGD_Click" Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <ListView x:Name="Relation_ListView" HorizontalAlignment="Center" Height="auto" VerticalAlignment="Top" Width="900" >
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="BorderBrush">
-                            <Setter.Value>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="LightBlue" Offset="0.5"/>
-                                    <GradientStop Color="LightBlue" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="BorderThickness" Value="0.4"/>
-                        <Setter Property="Height" Value="25"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
+        <Grid x:Name="ZPL" Grid.Row="1" HorizontalAlignment="Center" Background="White" VerticalAlignment="Top" Visibility="Visible">
+
+
+            <ListView x:Name="listView" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto" BorderThickness="0,0,0,1" BorderBrush="#FFC8CCD4">
                 <ListView.View>
+                    <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
-                        <GridViewColumn Width="200" Header="指令" DisplayMemberBinding="{Binding Path=number}"/>
-                        <GridViewColumn Width="350" Header="说明" DisplayMemberBinding="{Binding Path=template}"/>
-                        <GridViewColumn Width="300" Header="操作" DisplayMemberBinding="{Binding Path=printer}"/>
-                    </GridView>
-                    
-                </ListView.View>
-              
-                
-            </ListView>
+                        <GridViewColumn Header="指令" Width="100" DisplayMemberBinding="{Binding Path=Direct}"/>
+                        <GridViewColumn Header="说明" Width="100" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Header="操作" Width="100" DisplayMemberBinding="{Binding Path=Operate}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton Width="30" Content="预览" Click="Preview_Click" />
+                                        <RadioButton Width="30" Content="复制" Click="Copy_Click" />
+                                        <RadioButton Width="30" Content="删除" Click="Copy_Click" />
+                                    </StackPanel>
 
+                                </DataTemplate>
 
-        </Grid>
-        <Grid Grid.Row="2">
-
-            <ListView x:Name="Relation_ListView2" HorizontalAlignment="Center" Height="auto" Width="900" >
-                <!--<ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="BorderBrush">
-                            <Setter.Value>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="LightBlue" Offset="0.5"/>
-                                    <GradientStop Color="LightBlue" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="BorderThickness" Value="0.4"/>
-                        <Setter Property="Height" Value="25"/>
-                    </Style>
-                </ListView.ItemContainerStyle>-->
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200" Header="^LL" />
-                        <GridViewColumn Width="350" Header="设置标签长度" />
-                        <!--<GridViewColumn Width="100"  Header="预览" DisplayMemberBinding="{Binding Path=printer}"/>
-                        <GridViewColumn Width="100"  Header="复制" DisplayMemberBinding="{Binding Path=printer}"/>
-                        <GridViewColumn Width="100"  Header="删除" DisplayMemberBinding="{Binding Path=printer}"/>-->
-                        <GridViewColumn Width="300">
-                            <StackPanel Orientation="Horizontal"  >
-
-                                <RadioButton x:Name="Preview"  IsChecked="True" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-
-                                    <TextBlock Text="预览" FontSize="16"  />
-                                </RadioButton>
-
-                                <RadioButton x:Name="Copy" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-                                    <TextBlock Text="复制" FontSize="16"/>
-                                </RadioButton>
-                                <RadioButton x:Name="Delete" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-                                    <TextBlock Text="删除" FontSize="16"/>
-                                </RadioButton>
-                            </StackPanel>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <!--<GridViewColumn.MenuItem>
-                                <MenuItem/>
-                            </GridViewColumn.MenuItem>-->
-
-                        <!--<GridViewColumn DisplayMemberBinding=
-                          "{Binding Path=LastName}" 
-                      Width="100">-->
-                        <!--<GridViewColumnHeader>预览
-                                <GridViewColumnHeader.ContextMenu>
-                                        <ContextMenu    
-                                        Name="LastNameCM">
-                                            <MenuItem Header="Ascending" />
-                                            <MenuItem Header="Descending" />
-                                        </ContextMenu>
-                                    </GridViewColumnHeader.ContextMenu>
-                                </GridViewColumnHeader>
-                            </GridViewColumn>-->
-
 
                     </GridView>
-
                 </ListView.View>
-
-
             </ListView>
+
+
+
+
+
+
+
+
 
         </Grid>
 
-        <Button x:Name="Textbtn" Click="Textbtn_Click" Content="常用指令窗口" Width="100" Height="20" Margin="400,5,20,20">
-            <!--<Button.ContextMenu>
-                <ContextMenu x:Name="menu">
-                    <MenuItem x:Name="menu1" Header="菜单1"/>
+        <Grid x:Name="SGD" Grid.Row="1" HorizontalAlignment="Center" Background="White" VerticalAlignment="Top" Visibility="Hidden">
+            <ListView x:Name="listView2" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto" BorderThickness="0,0,0,1" BorderBrush="#FFC8CCD4" >
+                <ListView.View>
+                    <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
+                    <GridView>
+                        <GridViewColumn Header="指令1" Width="100" DisplayMemberBinding="{Binding Path=Direct}"/>
+                        <GridViewColumn Header="说明" Width="100" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        
+                        <GridViewColumn Header="操作" Width="100" DisplayMemberBinding="{Binding Path=Operate}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton Width="30" Content="预览" Click="Preview_Click" />
+                                        <RadioButton Width="30" Content="复制" Click="Copy_Click" />
+                                        <RadioButton Width="30" Content="删除" Click="Copy_Click" />
+                                    </StackPanel>
+                                    
+                                </DataTemplate>
+                                
+                            </GridViewColumn.CellTemplate>
+                            
+                        </GridViewColumn>
 
-                    　　　　　　　
-                    <Separator/>
-                    <MenuItem x:Name="menu2" Header="菜单2"/>
-                </ContextMenu>
-            </Button.ContextMenu>-->
-        </Button>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
 
     </Grid>
 </Page>

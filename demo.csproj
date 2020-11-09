@@ -117,6 +117,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Binding.cs" />
     <Compile Include="CornerButton.cs" />
     <Compile Include="FileTools.cs" />
     <Compile Include="LogPage.xaml.cs">
