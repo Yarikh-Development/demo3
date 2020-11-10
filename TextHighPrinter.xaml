@@ -50,7 +50,7 @@
                         <Image Name="picOrange"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Oringe.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Image Name="picGreen"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Green.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Grid>
-                    <Button Name="btnDMP" Click="btnDMP_Click" Content="文件对比"/>
+                    <Button Name="btnDMP" Click="btnDMP_Click" Content="文件对比" IsEnabled="False"/>
                     <!--<Border CornerRadius="15" Width="30" Background="#000000"/>-->
                 </StackPanel>
                 
@@ -164,9 +164,9 @@
         </Grid>
         <Grid Grid.Column="1">
             <StackPanel Orientation="Horizontal" Margin="10 10 0 0">
-                <RadioButton Content="查看打印机" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
+                <RadioButton Name="btnPrinterDetail" Click="btnPrinterDetail_Click" Content="查看打印机" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
                 <RadioButton Name="txtDialogBox" Click="txtDialogBox_Click" Content="进行对话" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
-                <RadioButton Content="指令列表" FontSize="16" Style="{StaticResource MenuRadioButton}"/>
+                <RadioButton Name="btnOrderList" Click="btnOrderList_Click" Content="指令列表" FontSize="16" Style="{StaticResource MenuRadioButton}"/>
             </StackPanel>
         </Grid>
 

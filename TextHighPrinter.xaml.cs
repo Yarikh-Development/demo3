@@ -27,6 +27,8 @@ namespace demo
         String sTemp = "";
         List<LinkOSPrinters> linkOSPrinter;
         DeviceDetails deviceDetails;
+        TextBasicSituation basicSituation;
+        TextAdminInterface adminInterface;
         DispatcherTimer dispatcherTimer;
         WebSocketConsole.MainWindow mainWindow = new WebSocketConsole.MainWindow();
         public TextHighPrinter()
@@ -35,6 +37,7 @@ namespace demo
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(Timer);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            btnStopService.IsEnabled = false;
         }
 
         private void printerMessage_Click(object sender, RoutedEventArgs e)
@@ -76,17 +79,34 @@ namespace demo
 
         private void btnStartService_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.StartService(btnStartService, picOrange, picGreen);
+            mainWindow.StartService(btnStartService, btnStopService);
             
             dispatcherTimer.Start();
+            btnDMP.IsEnabled = true;
         }
 
         
 
         private void btnStopService_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.StopService(btnStartService,btnStopService);
-            dispatcherTimer.Stop();
+            try
+            {
+                mainWindow.StopService();
+                dispatcherTimer.Stop();
+                itemsPrinters.Items.Clear();
+                btnStartService.IsEnabled = true;
+                btnStartService.Focus();
+                btnStopService.IsEnabled = false;
+                btnDMP.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+                btnStartService.IsEnabled = true;
+                btnStartService.IsEnabled = false;
+                
+            }
+            
         }
 
         private void Timer(object sender, EventArgs e)
@@ -146,7 +166,35 @@ namespace demo
 
         private void btnDMP_Click(object sender, RoutedEventArgs e)
         {
-            new AnalysisDMP().Show() ;
+            new AnalysisDMP(mainWindow).Show() ;
+        }
+
+        private void btnPrinterDetail_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                basicSituation = new TextBasicSituation();
+                skipPages.Content = basicSituation;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+
+            }
+        }
+
+        private void btnOrderList_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                adminInterface = new TextAdminInterface();
+                skipPages.Content = adminInterface;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+
+            }
         }
 
         //private void 

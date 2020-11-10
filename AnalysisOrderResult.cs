@@ -15,13 +15,14 @@ namespace demo
         private string SN;
         public List<string> DMP;
 
-        List<DMPFile> DMPs;
+        public List<DMPFile> DMPs;
         WebSocketConsole.MainWindow frmMainmF = null;
-        public AnalysisOrderResult(String OrderResult, string SN)
+        public AnalysisOrderResult(String OrderResult, string SN, WebSocketConsole.MainWindow window)
         {
             this.OrderResult = OrderResult;
             this.SN = SN;
             DMPList();
+            this.frmMainmF = window;
         }
 
         //检索结果集里有多少个DMP文件
@@ -36,6 +37,7 @@ namespace demo
                 if (OrderResult.Contains(str))
                 {
                     //发送指令到打印机获取到DMP文件文本
+                    string teststr = "! U1 do \"file.type\" \"" + str + "\" ";
                     FileContent = frmMainmF.SendRawDataToPrinter("! U1 do \"file.type\" \"" + str + "\" ", SN);
                     //FileContent =  server.SendRawData(SN, "! U1 do \"file.type\" \"" + str + "\" ", 1500);
                     string labelID = DMPContentEstimate(FileContent);
@@ -44,11 +46,15 @@ namespace demo
                     if (FileContent != "")
                     {
                         //这里需要判断文件是否存在，有替换或取消的选项
-                        StreamWriter streamWrite = new StreamWriter(FileNameBase + str);
+                        StreamWriter streamWrite = new StreamWriter(FileNameBase + "\\" + str);
                         streamWrite.Write(FileContent);//写入数据
                         streamWrite.Close();//关闭文件
                     }                  
-                }                   
+                }
+                else
+                {
+                    break;
+                }
             }
 
         }
@@ -68,9 +74,9 @@ namespace demo
         //DMP文件内容做判断
         public string DMPContentEstimate(String FileContent)
         {
-            String str = FileContent.Split('\r')[0];
+            String strContent = FileContent.Split('\r')[0];
             //string str2 = str.Split(new char[3] { '^','F','X'})[0];
-            return str.Split('X')[1];
+            return strContent.Split('X')[1];
         }
     }
 

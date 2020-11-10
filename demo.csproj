@@ -135,6 +135,12 @@
     <Compile Include="Text.xaml.cs">
       <DependentUpon>Text.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextAdminInterface.xaml.cs">
+      <DependentUpon>TextAdminInterface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextBasicSituation.xaml.cs">
+      <DependentUpon>TextBasicSituation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextFile.xaml.cs">
       <DependentUpon>TextFile.xaml</DependentUpon>
     </Compile>
@@ -198,6 +204,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextAdminInterface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBasicSituation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,6 +346,9 @@
       <Project>{d2dbcc1d-cef2-400b-a886-7e0d13a25f9c}</Project>
       <Name>WebSockets</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\printer.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

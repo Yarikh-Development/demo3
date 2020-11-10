@@ -29,9 +29,10 @@ namespace demo
         String OrderResult = "";
         String SN = "";
         String DMPFilePath = "";
-        public AnalysisDMP()
+        public AnalysisDMP(WebSocketConsole.MainWindow window)
         {
             InitializeComponent();
+            this.frmMainmF = window;
         }
 
         private void btnFile_Click(object sender, RoutedEventArgs e)
@@ -64,7 +65,7 @@ namespace demo
         {
             try
             {
-                frmMainmF = new WebSocketConsole.MainWindow();
+                //frmMainmF = new WebSocketConsole.MainWindow();
                 if (txtSN.Text != "")
                 {
                     SN = txtSN.Text;
@@ -88,9 +89,9 @@ namespace demo
         {
             if(DMPFilePath != "")
             {
-                analysisOrderResult = new AnalysisOrderResult(OrderResult, SN);
+                analysisOrderResult = new AnalysisOrderResult(OrderResult, SN, frmMainmF);
                 analysisOrderResult.DMPFile(DMPFilePath);
-                listView.ItemsSource = analysisOrderResult.DMP;
+                listView.ItemsSource = analysisOrderResult.DMPs;
             }
             else
             {
@@ -101,10 +102,24 @@ namespace demo
 
         private void menuPreview_Click(object sender, RoutedEventArgs e)
         {
-
+            // Grid.SetColumnSpan(menuPreview, 1);
+            DMPFile dMPFile = listView.SelectedItem as DMPFile;
+            //StreamReader reader = new StreamReader(DMPFilePath + "//" + dMPFile.FileName, Encoding.Default);
+            MessageBox.Show(File.ReadAllText(DMPFilePath + "//" + dMPFile.FileName));
+            //MessageBox.Show(reader.Read().ToString());
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOpenBasePath_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCloseContent_Click(object sender, RoutedEventArgs e)
         {
 
         }

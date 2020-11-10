@@ -311,7 +311,7 @@ namespace WebSocketConsole
             }
         }
 
-        public void StartService(Button radioButton,Image image1,Image image2)
+        public void StartService(Button radioButton,Button cmdStopSerivce)
         {
             _logger = new WebSocketLogger();
             String sErr = "";
@@ -434,17 +434,10 @@ namespace WebSocketConsole
 
                 this.Cursor = Cursors.Arrow;
                 radioButton.IsEnabled = false;
-                cmdStop_Serivce.IsEnabled = true;
-                cmdStop_Serivce.Focus();
-                cmdViewLog.IsEnabled = true;
-                // timer1.Enabled = true;
-                cmdTest.IsEnabled = true;
-                // pnlSC.BackColor = Color.Blue;
-                image1.Visibility = Visibility.Hidden;
-                image2.Visibility = Visibility.Visible;
-                txtDevices.Text = "0";
-                txtSubscribers.Text = "0";
-                listView1.Items.Clear();
+                cmdStopSerivce.IsEnabled = true;
+                cmdStopSerivce.Focus();
+                //image1.Visibility = Visibility.Hidden;
+                //image2.Visibility = Visibility.Visible;
                 msCurrentSelectedDeviceSN = "";
             }
             catch (Exception ex)
@@ -454,7 +447,7 @@ namespace WebSocketConsole
             }
         }
 
-        public void StopService(Button btnStart,Button btnStop)
+        public void StopService()
         {
             try
             {
@@ -470,9 +463,7 @@ namespace WebSocketConsole
                 My_CommObject.Close(ref sErr);
                 My_CommObject = null;
 
-                btnStart.IsEnabled = true;
-                btnStart.Focus();
-                btnStop.IsEnabled = false;
+                
                 
                 //picOrange.Visibility = Visibility.Visible;
                 //picGreen.Visibility = Visibility.Hidden;
@@ -481,12 +472,9 @@ namespace WebSocketConsole
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
-                btnStart.IsEnabled = true;
-                btnStop.IsEnabled = false;
                 
                 //picOrange.Visibility = Visibility.Visible;
-                //picGreen.Visibility = Visibility.Hidden;
-                
+                //picGreen.Visibility = Visibility.Hidden;                
             }
         }
 

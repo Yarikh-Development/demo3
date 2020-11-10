@@ -44,23 +44,42 @@
                 <TextBox Name="txtFindFile" Width="200"/>
                 <Button Name="btnFindFile" Click="btnFindFile_Click" Content="搜索" Width="60"/>
                 <Button Name="btnRefresh" Click="btnRefresh_Click" Content="刷新" Width="60"/>
+                <Button Name="btnOpenBasePath" Click="btnOpenBasePath_Click" Content="查看目录" Width="60"/>
             </StackPanel>
-            
-            <ListView Name="listView" Grid.Row="1">
-                <ListView.View>
-                    <GridView x:Name="gridView1">
-                        <GridViewColumn Header="文件名" DisplayMemberBinding="{Binding ID}" Width="100"/>
-                        <GridViewColumn Header="标签码" DisplayMemberBinding="{Binding Name}" Width="100"/>
-                        <GridViewColumn Header="大小" DisplayMemberBinding="{Binding Sex}" Width="50"/>
-                    </GridView>
-                </ListView.View>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="预览" Name="menuPreview" Click="menuPreview_Click"/>
+            <Grid Name="grid1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ListView Name="listView" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView x:Name="gridView1">
+                            <GridViewColumn Header="文件名" DisplayMemberBinding="{Binding FileName}" Width="100"/>
+                            <GridViewColumn Header="标签码" DisplayMemberBinding="{Binding LaBelID}" Width="100"/>
+                            <GridViewColumn Header="大小" DisplayMemberBinding="{Binding FileSize}" Width="50"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="预览" Name="menuPreview" Click="menuPreview_Click"/>
 
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+
+                <Grid Background="#FFFFFF" Grid.Column="1" Visibility="Hidden">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnCloseContent" Click="btnCloseContent_Click" Content="✕" Background="Transparent" BorderThickness="0" 
+                            HorizontalAlignment="Right" Width="20" HorizontalContentAlignment="Center"/>
+                    <TextBox Name="txtViewContent" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="1" BorderThickness="0" 
+                     VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"/>
+                </Grid>
+                
+            </Grid>
+            
         </Grid>
         
     </Grid>
