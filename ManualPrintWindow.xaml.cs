@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace demo
 {
@@ -34,6 +35,9 @@ namespace demo
 
 		public ManualPrintWindow(TextPicturesPage textPicturesPage)
 		{
+			InitializeComponent();
+			
+			Printer.SetPrinters(Printer_List_ComboBox);
 			this.textPicturesPage = textPicturesPage;
 		}
 
@@ -49,7 +53,7 @@ namespace demo
 		{
 			if (Template_TextBox.Text == "")
             {
-				((MainWindow)this.Owner).PrintState("请选择模板！");
+				textPicturesPage.PrintState("请选择模板！");
 				return;
 			}
 			//发文件

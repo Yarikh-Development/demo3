@@ -7,14 +7,29 @@
     <ProjectGuid>{BB5E7085-448C-49E5-B043-C2F725AF2D85}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>demo</RootNamespace>
-    <AssemblyName>demo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>美的打印</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +49,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>img\LOGO01~4.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -77,6 +99,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.NameResolution, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Net.NameResolution.4.3.0\lib\net46\System.Net.NameResolution.dll</HintPath>
       <Private>True</Private>
@@ -117,9 +140,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Binding.cs" />
+    <Compile Include="AnalysisDMP.xaml.cs">
+      <DependentUpon>AnalysisDMP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnalysisOrderResult.cs" />
     <Compile Include="CornerButton.cs" />
     <Compile Include="FileTools.cs" />
+    <Compile Include="LinkOSPrinters.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="LogPage.xaml.cs">
       <DependentUpon>LogPage.xaml</DependentUpon>
     </Compile>
@@ -141,23 +170,20 @@
     <Compile Include="Text.xaml.cs">
       <DependentUpon>Text.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Text2.xaml.cs">
-      <DependentUpon>Text2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TextAdminInterface.xaml.cs">
       <DependentUpon>TextAdminInterface.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBasicSituation.xaml.cs">
       <DependentUpon>TextBasicSituation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextCommon.xaml.cs">
-      <DependentUpon>TextCommon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TextFile.xaml.cs">
       <DependentUpon>TextFile.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextFiles.xaml.cs">
       <DependentUpon>TextFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextHighPrinter.xaml.cs">
+      <DependentUpon>TextHighPrinter.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextLogPage.xaml.cs">
       <DependentUpon>TextLogPage.xaml</DependentUpon>
@@ -180,6 +206,10 @@
     <Compile Include="TextMainWindow.xaml.cs">
       <DependentUpon>TextMainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AnalysisDMP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DefinedStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,10 +242,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Text2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="TextAdminInterface.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,7 +250,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TextCommon.xaml">
+    <Page Include="TextHighPrinter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,13 +350,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Resource Include="iconfont.ttf" />
-    <Resource Include="iconfont2.ttf">
+    <Resource Include="iconfont.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="iconfont3.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="iconfont2.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -350,7 +373,35 @@
     <Folder Include="CustomControls\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="printer.PNG" />
+    <ProjectReference Include="WebSocketConsole\WebSocketConsole.csproj">
+      <Project>{4031e1db-bc33-4799-aa32-73d3f97be22f}</Project>
+      <Name>WebSocketConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="WebSockets\WebSockets.csproj">
+      <Project>{d2dbcc1d-cef2-400b-a886-7e0d13a25f9c}</Project>
+      <Name>WebSockets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\printer.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\LOGO01~4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="timgWAL0KT95.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

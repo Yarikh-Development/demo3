@@ -5,618 +5,416 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      d:DesignHeight="850" d:DesignWidth="800"
+      Height="Auto" Width="Auto"
       Title="TextBasicSituation">
-
-
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Page.Resources>
-
-
-
     <Grid  Background="#EEEDEF">
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <!--<Grid.ColumnDefinitions>
-            
-            <ColumnDefinition />
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>-->
-
-        <Grid Grid.Row="0"  HorizontalAlignment="Center" >
-            <TextBlock Text="查看基本信息" FontSize="25" Width="200"/>
-        </Grid>
-
-        <!--滚动条-->
         
-        <!--<Grid Grid.Row="1" Grid.Column="1">
+        <Border BorderThickness="0 0 0 1" BorderBrush="#A8A4AD" Margin="10 0 10 0" Panel.ZIndex="1"/>
+
+        <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
+
+            <RadioButton Content="基本信息" VerticalContentAlignment="Center" IsChecked="True"
+                         FontSize="14" Width="70" HorizontalContentAlignment="Center">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Grid>
+                                        <Border x:Name="border"/>
+                                        <ContentPresenter RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}" 
+                                                          ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                                                          ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                                          Name="contentPresenter" Margin="{TemplateBinding Control.Padding}" 
+                                                          HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                                          VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
+                                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
+                                                          Focusable="False" Grid.Column="1" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#D6D6D6" TargetName="border"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseCaptured" Value="True">
+                                            <Setter Property="Background" Value="#CDCDCD" TargetName="border"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Background" Value="#CDCDCD" TargetName="border"/>
+                                        </Trigger>
+                                        
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
             
-            <StackPanel Orientation="Vertical" Name="layerList" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="20"/>
-        </Grid>-->
+            <!--<Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 0" Margin="0 3"/>-->
+            
+            <RadioButton Content="其他信息" VerticalContentAlignment="Center" 
+                         FontSize="14" Width="70" HorizontalContentAlignment="Center">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Grid>
+                                        <Border x:Name="border"/>
+                                        <ContentPresenter RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}" 
+                                                          ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                                                          ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                                          Name="contentPresenter" Margin="{TemplateBinding Control.Padding}" 
+                                                          HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                                          VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
+                                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
+                                                          Focusable="False" Grid.Column="1" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#D6D6D6" TargetName="border"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseCaptured" Value="True">
+                                            <Setter Property="Background" Value="#CDCDCD" TargetName="border"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Background" Value="#CDCDCD" TargetName="border"/>
+                                        </Trigger>
 
-        <!--大网格+滚动条-->
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
+        </StackPanel>
+
         <ScrollViewer Grid.Row="1">
-            <Grid >
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <!--<Grid.RowDefinitions>-->
-                    <!--<RowDefinition Height="200"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>-->
-
+            <!--打印机图片-->
+            <!--<Grid Grid.Row="0" Background="#EEEDEF" >
+                        <Image x:Name="Printer" Height="auto" Width="auto" Source="img/printer.PNG" HorizontalAlignment="Center"  />
+                    </Grid>-->
+            <WrapPanel Background="#EEEDEF" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                <!--通信接口设置-->
+                <Grid Width="200" Height="100">
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
                 
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
 
-                    <!--打印机图片-->
-                    <Grid Grid.Row="0" Background="#EEEDEF" >
-                        <Image x:Name="Printer" Height="auto" Width="auto" Source="printer.PNG" HorizontalAlignment="Center"  />
-                    </Grid>
-
-                    <!--<Grid></Grid>-->
-                    
-                    <WrapPanel Grid.Row="1" Background="#EEEDEF" HorizontalAlignment="Left" VerticalAlignment="Top">
-
-                        <!--通信接口设置-->
-                        <Grid Width="200" Height="100">
-                            <Border  CornerRadius="5" Background="White" Margin="10">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                                </Border.Effect>
-                                <Grid >
-                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                        <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                            <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                <!--是否缺纸-->
+                <Grid Width="200" Height="100" >
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <Grid >
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                            <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
+                                </Border>
+                                <StackPanel Margin="15 0 0 0">
+                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
-                        
-                         <!--是否缺纸-->
-                        <Grid Width="200" Height="100" >
-                            <Border  CornerRadius="5" Background="White" Margin="10">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                                </Border.Effect>
-                                <Grid >
-                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                        <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                            <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                            <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
-                        </Grid>
-
-                        <!--标签长度-->
-                        <Grid Width="200" Height="100" >
-                            <Border  CornerRadius="5" Background="White" Margin="10">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                                </Border.Effect>
-                                <Grid >
-                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                        <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                            <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                            <TextBlock Text="aaaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
-                        </Grid>
-
-                        <!--打印头是否抬起-->
-                        <Grid Width="200" Height="100" >
-                            <Border  CornerRadius="5" Background="White" Margin="10">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                                </Border.Effect>
-                                <Grid >
-                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                        <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                            <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Margin="15 0 0 0">
-                                            <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                            <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
-                        </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </WrapPanel>
-
-
+                    </Border>
 
                 </Grid>
 
-                
-
-                <!--0,1-->
-                <WrapPanel Grid.Row="0" Grid.Column="1">
-
-                    <!--<Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>-->
-
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xeb67;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                <!--标签长度-->
+                <Grid Width="200" Height="100" >
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <Grid >
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="通信（接口）设置" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
+                                </Border>
+                                <StackPanel Margin="15 0 0 0">
+                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="aaaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
-                            </Grid>
-                        </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
 
-                    </Grid>
+                </Grid>
 
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xec26;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                <!--打印头是否抬起-->
+                <Grid Width="200" Height="100" >
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <Grid >
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="标签长度" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="dddd" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
+                                </Border>
+                                <StackPanel Margin="15 0 0 0">
+                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
-                            </Grid>
-                        </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
 
-                    </Grid>
+                </Grid>
 
-                    <Grid Width="200" Height="100">
+                <Grid Width="200" Height="100">
 
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xed1b;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xeb67;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="打印头是否抬起" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="抬起" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="通信（接口）设置" Foreground="#3F4C5D"/>
+                                <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
-
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xec65;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="碳带是否用尽" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xec92;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="热转印模式标志" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="q" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-
-                    <!--<Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="通信（接口）设置"/>
-                    </Grid>-->
-
-                    <!--<Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="是否缺纸"/>
-                    </Grid>-->
-
-                    <!--<Grid Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="标签长度" />
-                    </Grid>-->
-
-                    <!--<Grid Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="打印头是否抬起" />
-                    </Grid>-->
-
-                    <!--<Grid Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="碳带是否用尽" />
-                    </Grid>-->
-
-                    <!--<Grid Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="热转印模式标志" />
-                    </Grid>-->
-
-                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <!--<Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>-->
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10 10 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe62e;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="电源情况" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="90%" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Grid.Row="0" Grid.Column="1" Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xeb93;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="是否缺纸" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="0" Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xebe3;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="password" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="****" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="打印模式" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Width="200" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-
-
-
-
-
-
-
-
-                </WrapPanel>
-
-
-                <!--1,0-->
-                <!--<Grid Grid.Row="1" Grid.Column="0" Margin="0,20,0,0">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="33.33"/>
-                        <RowDefinition Height="33.33"/>
-                        <RowDefinition Height="33.33"/>
-                        <RowDefinition Height="33.33"/>
-                        <RowDefinition Height="33.33"/>
-                        <RowDefinition Height="33.33"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="打印模式"/>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="20,0,0,0">
-                        <TextBlock Text="打印宽度模式"/>
-                    </Grid>
-
-                    <Grid Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="20,0,0,0">
-                        <TextBlock Text="password" />
-                    </Grid>
-
-                    <Grid Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="20,0,0,0">
-                        <TextBlock Text="电源状态" />
-                    </Grid>
-
-                    <Grid Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="20,0,0,0">
-                        <TextBlock Text="其他" />
-                    </Grid>
-
-                    --><!--<Grid Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="20,0,0,0">
-                    <TextBlock Text="其他" />
-                </Grid>--><!--
-
-                </Grid>-->
-
-                <!--1,1-->
-                <!--<WrapPanel Grid.Row="1" Grid.Column="1">
-
-
-
-                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            --><!--<Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>--><!--
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10 10 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe62e;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="电源情况" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="90%" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Grid.Row="0" Grid.Column="1" Width="170" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xeb93;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="是否缺纸" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="0" Width="170" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xebe3;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="password" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="****" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                    <Grid Width="170" Height="100">
-
-                        <Border  CornerRadius="5" Background="White" Margin="10">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                            </Border.Effect>
-                            <Grid>
-                                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                    <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                        <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <StackPanel Margin="15 0 0 0">
-                                        <TextBlock Text="打印模式" Foreground="#3F4C5D"/>
-                                        <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-
-                  
-
-
-
-
-                </WrapPanel>-->
-
-
-
-
-
-
-
-
-
-
+                </Border>
 
             </Grid>
 
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xec26;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="标签长度" Foreground="#3F4C5D"/>
+                                <TextBlock Text="dddd" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xed1b;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="打印头是否抬起" Foreground="#3F4C5D"/>
+                                <TextBlock Text="抬起" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xec65;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="碳带是否用尽" Foreground="#3F4C5D"/>
+                                <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xec92;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="热转印模式标志" Foreground="#3F4C5D"/>
+                                <TextBlock Text="q" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10 10 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xe62e;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="电源情况" Foreground="#3F4C5D"/>
+                                <TextBlock Text="90%" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1" Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xeb93;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="是否缺纸" Foreground="#3F4C5D"/>
+                                <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xebe3;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="password" Foreground="#3F4C5D"/>
+                                <TextBlock Text="****" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="打印模式" Foreground="#3F4C5D"/>
+                                <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Width="200" Height="100">
+
+                <Border  CornerRadius="5" Background="White" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                    <Grid>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
+                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
+                                <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            </WrapPanel>
+
         </ScrollViewer>
-        
+
+
     </Grid>
 </Page>

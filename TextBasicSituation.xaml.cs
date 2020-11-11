@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace demo
 {
-	/// <summary>
-	/// TextBasicSituation.xaml 的交互逻辑
-	/// </summary>
-	public partial class TextBasicSituation : Page
-	{
-		public TextBasicSituation()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    /// TextBasicSituation.xaml 的交互逻辑
+    /// </summary>
+    public partial class TextBasicSituation : Page
+    {
+        public TextBasicSituation()
+        {
+            InitializeComponent();
+        }
+    }
 }

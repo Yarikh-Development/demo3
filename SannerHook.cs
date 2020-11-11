@@ -30,7 +30,11 @@ namespace BarcodeScanner
         private static extern int GetKeyboardState(byte[] pbKeyState);
         [DllImport("user32", EntryPoint = "ToAscii")]　　　　  //ToAscii职能的转换指定的虚拟键码和键盘状态的相应字符或字符
         private static extern bool ToAscii(int VirtualKey, int ScanCode, byte[] lpKeySate, ref uint lpChar, int uFlags);
-        //int VirtualKey //[in] 指定虚拟关键代码进行翻译。　　　　　　//int uScanCode, // [in] 指定的硬件扫描码的关键须翻译成英文。高阶位的这个值设定的关键，如果是（不压）　　　　　　//byte[] lpbKeyState, // [in] 指针，以256字节数组，包含当前键盘的状态。每个元素（字节）的数组包含状态的一个关键。如果高阶位的字节是一套，关键是下跌（按下）。在低比特，如/果设置表明，关键是对切换。在此功能，只有肘位的CAPS LOCK键是相关的。在切换状态的NUM个锁和滚动锁定键被忽略。　　　　　　//byte[] lpwTransKey, // [out] 指针的缓冲区收到翻译字符或字符。　　　　　　//uint fuState); // [in] Specifies whether a menu is active. This parameter must be 1 if a menu is active, or 0 otherwise.
+        //int VirtualKey //[in] 指定虚拟关键代码进行翻译。　　　　　　
+        //int uScanCode, // [in] 指定的硬件扫描码的关键须翻译成英文。高阶位的这个值设定的关键，如果是（不压）　　　　　　
+        //byte[] lpbKeyState, // [in] 指针，以256字节数组，包含当前键盘的状态。每个元素（字节）的数组包含状态的一个关键。如果高阶位的字节是一套，关键是下跌（按下）。在低比特，如/果设置表明，关键是对切换。在此功能，只有肘位的CAPS LOCK键是相关的。在切换状态的NUM个锁和滚动锁定键被忽略。　　　　　　
+        //byte[] lpwTransKey, // [out] 指针的缓冲区收到翻译字符或字符。　　　　　　
+        //uint fuState); // [in] Specifies whether a menu is active. This parameter must be 1 if a menu is active, or 0 otherwise.
 
 
 

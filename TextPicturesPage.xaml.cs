@@ -37,16 +37,11 @@ namespace demo
 
         public TextPicturesPage()
         {
-			//PrintModeClick=();
-			/*InitializeComponent();
-			SetData();
-			ClearNumber();*/
-
+			listener.Start();
 			//listener.ScanerEvent += ListenerScanerEvent;
 			if (IsOnlyOneProcess())
 			{
-				InitializeComponent();
-				
+				InitializeComponent();				
 				//SetData();
 				FileTools.Init();
 				TabItem tabitem = new TabItem();
@@ -57,13 +52,11 @@ namespace demo
 				//tabFrame.Content = this;
 				tabitem.Content = tabFrame;
 				//Displaying_TabControl.Items.Add(tabitem);//大界面的铺满？
-				
-
 				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
-			{ 
-				//this.Close(); 
+			{
+				MessageBox.Show("进程判断错误");
 			}
 		}
 
@@ -76,7 +69,7 @@ namespace demo
 			System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcesses();
 			foreach (System.Diagnostics.Process process in processList)
 			{
-				if (process.ProcessName.ToLower() == "demo")
+				if (process.ProcessName.ToLower() == "美的打印")
 					++cnt;
 			}
 
@@ -92,8 +85,7 @@ namespace demo
 			//设置能效编号
 			if (Auto_MenuItem.IsChecked==true)
 			{
-				this.SetNumber(codes.Result);
-				//this.SetNumber(codes.Result);
+				//this.SetNumber(codes.Result);	//将钩子捕获到的结果集展示在界面框里，但扫描时已经扫过一次在了，会导致显示两次信息。
 				AutoPrint(codes.Result);
 			}
 		}
@@ -252,7 +244,7 @@ namespace demo
 
 		//自动打印
 		//public void AutoPrint(string number)
-			private void AutoPrint(string number)
+		private void AutoPrint(string number)
 		{
 			this.LoadPicture();
 			//this.LoadPicture();
@@ -279,7 +271,7 @@ namespace demo
 
 		//手动打印
 		//public void ManualPrint()
-			private void ManualPrint()
+		private void ManualPrint()
 		{
 			//输入编号，加载图片
 			//string result = picturesPage.LoadPicture();

@@ -1,0 +1,136 @@
+﻿<Page x:Class="WebSocketConsole.DeviceDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:local="clr-namespace:WebSocketConsole"
+        mc:Ignorable="d"
+        Title="DeviceDetails" Height="Auto" Width="Auto" Background="#FFFFFF" 
+        Loaded="Window_Loaded">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DefinedStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        
+        <!--<GroupBox Header="Data Received:" >-->
+        <Border CornerRadius="3" Margin="5" Background="#F0F0F0">
+            <TextBox Name="txtReceived" IsReadOnly="True" Margin="5" Background="Transparent"
+                     VerticalScrollBarVisibility="Visible"
+                     BorderBrush="Transparent"/>
+        </Border>
+        
+        <Border CornerRadius="3" Grid.Row="1" Margin="5" Background="#E0E0E0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <!--<Button Style="{DynamicResource iconButton}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
+                        <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
+                    </Button>-->
+                    <pu:DropDown Style="{DynamicResource iconDropDown}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
+                        <pu:DropDown.Content>
+                            <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
+                        </pu:DropDown.Content>
+                        <pu:DropDown.Child>
+                            <Grid Width="380" Height="300" Background="#FFFFFF">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid HorizontalAlignment="Center" >
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
+                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Grid.Row="1"  Orientation="Horizontal" >
+                                    <TextBox x:Name="Instruction"  HorizontalAlignment="Left" Height="18" Margin="10 0 20 0" VerticalAlignment="Top" Width="250"/>
+                                    <Button x:Name="Copy" Content="复制" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+                                </StackPanel>
+                            </Grid>
+                        </pu:DropDown.Child>
+                    </pu:DropDown>
+                    <Button Style="{DynamicResource iconButton}" ToolTip="历史" VerticalAlignment="Center" Margin="5 0 0 0">
+                        <TextBlock Text="&#xe6fc;" FontFamily="/#iconfont" FontSize="22"/>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Grid.Column="1">
+                    <Button Name="button1" Click="button1_Click" Content="Send To" Width="100" Margin="0 5" FontWeight="Bold"
+                        BorderThickness="0" Foreground="#FFFFFF">
+                        <Button.Style>
+                            <Style TargetType="Button">
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Border x:Name="border" CornerRadius="3" Background="#1578F6"/>
+                                                <ContentPresenter x:Name="btnPresenter" Focusable="False" Margin="{TemplateBinding Padding}"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              RecognizesAccessKey="True"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="#DEDEDE"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="True">
+                                                    <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
+                                                    <!--<Setter Property="Foreground" Value="#DEDEDE"/>-->
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBox Name="txtSendToDeviceSN" VerticalContentAlignment="Center" FontSize="14" Width="200" Margin="5"/>
+                    <TextBlock Text="(Printer SN)" VerticalAlignment="Center"  Margin="0 0 10 0"/>
+                </StackPanel>
+            </Grid>
+            
+        </Border>
+
+        <!--<GroupBox Header="Data to Send:" Grid.Row="2">-->
+        <Border Grid.Row="2" CornerRadius="3" Margin="5" Background="#F0F0F0">
+            <TextBox Name="txtDataToSend" Margin="5" AcceptsReturn="True" Background="Transparent"
+                     BorderBrush="Transparent" VerticalScrollBarVisibility="Visible">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="border" SnapsToDevicePixels="True">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Name="PART_ContentHost" Focusable="False" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="BorderThickness" Value="0" TargetName="border"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </Border>
+    </Grid>
+</Page>

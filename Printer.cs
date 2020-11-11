@@ -4,16 +4,38 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Controls;
+using System.Management;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Text;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+//using System.Windows.FrameworkElement;
 
 namespace demo
 {
+	public enum PrinterStatus
+	{
+		其他状态 = 1,
+		未知,
+		空闲,
+		正在打印,
+		预热,
+		停止打印,
+		打印中,
+		离线
+	}
+
 	public class City
 	{
-		//测试上传
-		//测试上传2
 		public int ID { get; set; }
 		public string Name { get; set; }
-	}
+        public PrinterStatus Status { get; set; }
+    }
 
 	class Printer
 	{
@@ -28,6 +50,21 @@ namespace demo
 		public static void GetPrinterInfo()
 		{
 			
+		}
+
+		/// <summary>
+		/// 获取打印机状态
+		/// </summary>
+		/// <param name="PrinterDevice"></param>
+		/// <returns></returns>
+		public static PrinterStatus GetPrinterStatus(string PrinterDevice)
+		{
+			PrinterStatus ret = 0;
+			string path = @"win32_printer.DeviceId='" + PrinterDevice + "'";
+			ManagementObject printer = new ManagementObject(path);
+			printer.Get();
+			ret = (PrinterStatus)Convert.ToInt32(printer.Properties["PrinterStatus"].Value);
+			return ret;
 		}
 
 		//发送文件
@@ -105,7 +142,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName });
+					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
 				}
 			}
 			comboBox.ItemsSource = list;
@@ -121,7 +158,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName });
+					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
 				}
 			}
 			itemsControl.ItemsSource = list;
@@ -144,23 +181,83 @@ namespace demo
 
 		}
 
-		/// <summary>
-		/// Setprinters的重构，返回一个City的集合
-		/// </summary>
-		/// <param name="list"></param>
-		/// <returns></returns>
-		/*public static void SetPrinters()
+		//查找ItemsControl里的第一个子项
+		public T FindFirstVisualChild<T>(DependencyObject obj, string childName) where T : DependencyObject
+
 		{
-			int cnt = 0;
-			//List<City> list = new List<City>();
-			foreach (string printerName in PrinterSettings.InstalledPrinters)
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
 			{
-				if (IsZebraPrinter(printerName))
+				DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+				if (child != null && child is T && child.GetValue(FrameworkElement.NameProperty).ToString() == childName)
 				{
-					Printer.Citys.Add(new City { ID = ++cnt, Name = printerName });
+					return (T)child;
+				}
+				else
+				{
+					T childOfChild = FindFirstVisualChild<T>(child, childName);
+					if (childOfChild != null)
+					{
+						return childOfChild;
+					}
 				}
 			}
-			
-		}*/
+			return null;
+		}
+
+		//查找ItemsControl里的所有子项
+		public List<T> GetChildObjects<T>(DependencyObject obj, string name) where T : FrameworkElement
+		{
+			DependencyObject child = null;
+			List<T> childList = new List<T>();
+			for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
+			{
+				child = VisualTreeHelper.GetChild(obj, i);
+				if (child is T && (((T)child).Name == name || string.IsNullOrEmpty(name)))
+				{
+					childList.Add((T)child);
+				}
+				childList.AddRange(GetChildObjects<T>(child, ""));//指定集合的元素添加到List队尾
+			}
+			return childList;
+		}
+
+		private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+		{
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+			{
+				DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+				if (child != null && child is childItem)
+					return (childItem)child;
+				else
+				{
+					childItem childOfChild = FindVisualChild<childItem>(child);
+					if (childOfChild != null)
+						return childOfChild;
+				}
+			}
+			return null;
+		}
+
+		/*private void txtPrintersName_TouchDown(object sender, TouchEventArgs e)
+        {
+            if (itemsPrinters.SelectedIndex < 0) return;
+
+            ListBoxItem myListBoxItem = (ListBoxItem)(NewVideoListBox.ItemContainerGenerator.ContainerFromIndex(NewVideoListBox.SelectedIndex));
+            ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+            MaterialDesignThemes.Wpf.Badged badged = (MaterialDesignThemes.Wpf.Badged)myDataTemplate.FindName("CountingBadge", myContentPresenter);
+
+            TextBlock likeText = (TextBlock)myDataTemplate.FindName("LikeText", myContentPresenter);
+
+            likeText.Foreground = new SolidColorBrush(Colors.Red);
+
+
+
+            if (badged.Badge == null)
+                badged.Badge = 0;
+            int i;
+            int.TryParse(badged.Badge.ToString(), out i);
+            badged.Badge = i + 1;
+        }*/
 	}
 }
