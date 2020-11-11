@@ -10,20 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace demo
 {
-    /// <summary>
-    /// TextAdminInterface.xaml 的交互逻辑
-    /// </summary>
-    public partial class TextAdminInterface : Page
-    {
-        public TextAdminInterface()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Text2.xaml 的交互逻辑
+	/// </summary>
+	public partial class Text2 : Window
+	{
+		public Text2()
+		{
+			InitializeComponent();
+		}
 
+		/*private void s_Click(object sender, RoutedEventArgs e)
+		{
+			this.menu.PlacementTarget = this.s;
+			this.menu.IsOpen = true;
+		}*/
+	}
 }

@@ -1,0 +1,41 @@
+﻿<Window x:Class="demo.TextCommon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        mc:Ignorable="d"
+        Title="常用指令" Height="409.4" Width="387.4" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DefinedStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid MinWidth="382.4" MinHeight="382.4" MaxWidth="382.4" MaxHeight="382.4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="380"/>
+            <RowDefinition/>
+            <!--<RowDefinition Height="60"/>-->
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+            <RadioButton Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
+            <RadioButton Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
+        </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" >
+            <TextBox x:Name="Instruction"  HorizontalAlignment="Left" Height="18" Margin="10 0 20 0" VerticalAlignment="Top" Width="250"/>
+            <Button x:Name="Copy" Content="复制" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+            
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>
