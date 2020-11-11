@@ -115,8 +115,8 @@
                             <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                         </Border.Effect>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
-                            <Border Width="70" Height="70" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
-                                <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">

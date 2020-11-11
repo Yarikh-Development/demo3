@@ -48,8 +48,7 @@ namespace demo
         private void txtDialogBox_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                
+            {                
                 //skipPages.Content = deviceDetails;
                 deviceDetails = new DeviceDetails(mainWindow);
                 //deviceDetails.ShowDialog();
@@ -57,8 +56,7 @@ namespace demo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, this.Title,MessageBoxButton.OK);
-                
+                MessageBox.Show(ex.Message, this.Title,MessageBoxButton.OK);                
             }
             
         }

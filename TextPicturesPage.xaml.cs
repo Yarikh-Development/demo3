@@ -55,8 +55,8 @@ namespace demo
 				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
-			{ 
-				//this.Close(); 
+			{
+				MessageBox.Show("进程判断错误");
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace demo
 			System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcesses();
 			foreach (System.Diagnostics.Process process in processList)
 			{
-				if (process.ProcessName.ToLower() == "demo")
+				if (process.ProcessName.ToLower() == "美的打印")
 					++cnt;
 			}
 

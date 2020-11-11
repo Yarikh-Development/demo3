@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         xmlns:local="clr-namespace:WebSocketConsole"
         mc:Ignorable="d"
         Title="DeviceDetails" Height="Auto" Width="Auto" Background="#FFFFFF" 
@@ -36,9 +37,32 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{DynamicResource iconButton}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <!--<Button Style="{DynamicResource iconButton}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
                         <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
-                    </Button>
+                    </Button>-->
+                    <pu:DropDown Style="{DynamicResource iconDropDown}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
+                        <pu:DropDown.Content>
+                            <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
+                        </pu:DropDown.Content>
+                        <pu:DropDown.Child>
+                            <Grid Width="380" Height="300" Background="#FFFFFF">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid HorizontalAlignment="Center" >
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
+                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Grid.Row="1"  Orientation="Horizontal" >
+                                    <TextBox x:Name="Instruction"  HorizontalAlignment="Left" Height="18" Margin="10 0 20 0" VerticalAlignment="Top" Width="250"/>
+                                    <Button x:Name="Copy" Content="复制" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+                                </StackPanel>
+                            </Grid>
+                        </pu:DropDown.Child>
+                    </pu:DropDown>
                     <Button Style="{DynamicResource iconButton}" ToolTip="历史" VerticalAlignment="Center" Margin="5 0 0 0">
                         <TextBlock Text="&#xe6fc;" FontFamily="/#iconfont" FontSize="22"/>
                     </Button>
