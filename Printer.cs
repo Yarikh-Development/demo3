@@ -14,6 +14,9 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Net.NetworkInformation;
+using Zebra.Sdk.Comm;
+using Zebra.Sdk.Printer;
 //using System.Windows.FrameworkElement;
 
 namespace demo
@@ -40,6 +43,8 @@ namespace demo
 	class Printer
 	{
 		private static List<City> citys = new List<City>();
+		private static ZebraPrinter printerHTTP = null;
+
 		public static List<City> Citys
         {
 			get { return citys; }
@@ -179,6 +184,75 @@ namespace demo
 			}
 			return list;
 
+		}
+
+		//链接打印机
+		public static string LinkPrinter(string printerName, int port)
+		{
+			try
+			{
+				string ip = GetRegistryData(printerName + "\\DsSpooler", "portName");
+
+				if (ip == "" || ip.Split(new char[] { '.' }).Length != 4)
+					throw new ConnectionException("没找到IP");
+				foreach (string s in ip.Split(new char[] { '.' }))
+					int.Parse(s);
+
+				Ping pingSender = new Ping();
+				PingReply reply = pingSender.Send(ip, 1);//第一个参数为ip地址，第二个参数为ping的时间
+				if (reply.Status != IPStatus.Success)
+					throw new ConnectionException("链接失败！");
+
+				TcpConnection connection = new TcpConnection(ip, port);
+				connection.Open();
+				printerHTTP = ZebraPrinterFactory.GetInstance(connection);
+			}
+			catch (ConnectionException e)
+			{
+				printerHTTP = null;
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + printerName + e.Message);
+				return printerName + e.Message;
+			}
+			catch (FormatException e)
+			{
+				printerHTTP = null;
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + printerName + "IP地址不正确！");
+				return printerName + "IP地址不正确！";
+			}
+
+			return "";
+		}
+
+		//发送文件
+		public static bool SendFile(string filePath)
+		{
+			if (printerHTTP != null && filePath != "")
+			{
+				printerHTTP.SendFileContents(filePath);
+				return true;
+			}
+			return false;
+		}
+
+		//发送指令
+		public static bool SendPrinterCommand(string command)
+        {
+			if (printerHTTP != null && command != "")
+            {
+				printerHTTP.SendCommand(command);
+				return true;
+			}			
+			return false;
+        }
+
+		//关闭链接
+		public static void ClosePrinter()
+		{
+			if (printerHTTP != null)
+			{
+				printerHTTP.Connection.Close();
+				printerHTTP = null;
+			}
 		}
 
 		//查找ItemsControl里的第一个子项

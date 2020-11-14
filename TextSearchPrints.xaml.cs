@@ -66,5 +66,29 @@ namespace demo
         {
 
         }
+
+        private void btnSentFile_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text,btnSendFile.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnHighSetting_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnHighSetting.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnPrintSetting_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnPrintSetting.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnBasicMessage_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnBasicMessage.Name);
+            normalPrinter.ShowDialog();
+        }
     }
 }

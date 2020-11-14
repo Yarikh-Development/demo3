@@ -78,6 +78,13 @@ namespace demo
             //string str2 = str.Split(new char[3] { '^','F','X'})[0];
             return strContent.Split('X')[1];
         }
+
+        //DMP文件内容判断的第二种方法，适用于陆逊梯卡标签
+        public string DMPContentEstimate2(String FileContent)
+        {
+            String strContent = FileContent.Split('^')[7];
+            return strContent.Substring(2);
+        }
     }
 
     public class DMPFile

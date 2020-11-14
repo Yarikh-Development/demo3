@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="COMM">
+    <Reference Include="COMM, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\MineSociety\Work\公司\业睿科技\斑马产品\部署LinkOS\DataService\WebSockets_Console\COMM.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Core_Lib">
       <HintPath>..\..\..\..\MineSociety\Work\公司\业睿科技\斑马产品\部署LinkOS\DataService\WebSockets_Console\Core_Lib.dll</HintPath>
