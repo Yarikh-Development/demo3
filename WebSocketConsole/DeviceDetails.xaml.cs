@@ -31,6 +31,17 @@ namespace WebSocketConsole
             
         }
 
+        private void ZPL_Click(object sender, RoutedEventArgs e)
+        {
+            this.ZPL.Visibility = Visibility.Visible;
+            this.SGD.Visibility = Visibility.Hidden;
+        }
+        private void SGD_Click(object sender, RoutedEventArgs e)
+        {
+            this.SGD.Visibility = Visibility.Visible;
+            this.ZPL.Visibility = Visibility.Hidden;
+        }
+
         /*private void FrmDeviceDetails_Load(object sender, EventArgs e)
         {
             txtDataToSend.Text = "";

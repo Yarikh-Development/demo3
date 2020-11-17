@@ -25,26 +25,26 @@ namespace demo
 			InitializeComponent();
 
 			///绑定数据
-			this.list.ItemsSource = _bindingClass.ShowList;
+			//this.list.ItemsSource = _bindingClass.ShowList;
 
 		}
 
 
-        private demo.Binding _bindingClass = new demo.Binding();
+        //private demo.Binding _bindingClass = new demo.Binding();
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             //删除选中的某项
-            var btn = sender as Button;
-            var c = btn.DataContext as demo.CShowTag;
+           /* var btn = sender as Button;
+            //var c = btn.DataContext as demo.CShowTag;
             int index = int.Parse(c.Id);
             this.list.Items.GetItemAt(index);
             MessageBoxResult boxResult = MessageBox.Show($"确定删除：id={c.Id},Qr={c.Qr} 吗？", "提示", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (boxResult == MessageBoxResult.Yes)
             {
-                _bindingClass.ShowList.Remove(c);
+                //_bindingClass.ShowList.Remove(c);
                 this.list.Items.Refresh();
             }
-            return;
+            return;*/
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace demo
         /// <param name="e"></param>
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            _bindingClass.LoadData();
+            //_bindingClass.LoadData();
         }
     
 

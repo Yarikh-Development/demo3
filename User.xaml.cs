@@ -15,7 +15,6 @@ namespace demo
     /// </summary>
     public partial class User : Window
     {
-
         RelationStruct[] texts = new RelationStruct[3];
 
         public User(Window window)
