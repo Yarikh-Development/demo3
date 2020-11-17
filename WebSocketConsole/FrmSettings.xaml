@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebSocketConsole"
         mc:Ignorable="d"
-        Title="Settings" Background="#F5F5F5" Height="380" Width="600" 
+        Title="Settings" Background="#F5F5F5" Height="400" Width="620" ResizeMode="NoResize"
         WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
@@ -72,6 +72,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="40"/>
@@ -164,7 +165,7 @@
                         <Border Height="25" Margin="0 5 0 0" HorizontalAlignment="Right">
                             <TextBlock Text="登录数据库：" FontSize="14" VerticalAlignment="Center"/>
                         </Border>
-                        
+
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <Border Height="25"/>
@@ -199,9 +200,8 @@
                         <TextBox Name="txtSQLDatabaseName" Margin="0 5 0 0" Height="25"/>
                     </StackPanel>
                 </Grid>
-                
+
             </Grid>
         </Grid>
     </Grid>
-    
 </Window>

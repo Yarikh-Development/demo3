@@ -4,7 +4,6 @@
     <Style x:Key="defaultMenuStyle" TargetType="MenuItem">
         <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Light"/>
     </Style>
     <Style x:Key="leftLineRadioButton" TargetType="RadioButton">
         <Setter Property="Background" Value="Transparent"/>

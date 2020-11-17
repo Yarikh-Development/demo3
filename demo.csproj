@@ -152,6 +152,7 @@
       <DependentUpon>AnalysisDMP.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnalysisOrderResult.cs" />
+    <Compile Include="Control\ControlAttachProperty.cs" />
     <Compile Include="CornerButton.cs" />
     <Compile Include="FileTools.cs" />
     <Compile Include="LinkOSPrinters.cs">
@@ -188,9 +189,6 @@
     <Compile Include="TextBasicSituation.xaml.cs">
       <DependentUpon>TextBasicSituation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextFile.xaml.cs">
-      <DependentUpon>TextFile.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TextFiles.xaml.cs">
       <DependentUpon>TextFiles.xaml</DependentUpon>
     </Compile>
@@ -205,9 +203,6 @@
     </Compile>
     <Compile Include="TextMenuDetail.xaml.cs">
       <DependentUpon>TextMenuDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TextMenuSimple.xaml.cs">
-      <DependentUpon>TextMenuSimple.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextSearchPrints.xaml.cs">
       <DependentUpon>TextSearchPrints.xaml</DependentUpon>
@@ -298,10 +293,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TextFile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="TextFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,10 +306,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextMenuDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TextMenuSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

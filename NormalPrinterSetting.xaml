@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
-        mc:Ignorable="d" Background="#F5F5F5" Loaded="Window_Loaded"
+        mc:Ignorable="d" Background="#F5F5F5" Loaded="Window_Loaded" ResizeMode="NoResize"
         Title="设置" Height="450" Width="600" WindowStyle="None" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
     <Window.Resources>
         <ResourceDictionary>

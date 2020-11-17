@@ -13,45 +13,27 @@ namespace demo
 	/// </summary>
 	public partial class TextPicturesPage : Page
     {
-
-        //private RelationPage relationPage;
 		TextFiles textFiles = new TextFiles();
 		TextLogPage textLogPage = new TextLogPage();
-        //private TextLogPage textLogPage;
 
         public static bool isWriteLog;
         private ScanerHook listener = new ScanerHook();
-
-		//传递
-		//private TextPicturesPage State_TextBox;
-		//public static string State_TextBox;
-		//public static string Auto_MenuItem;
-		//public static string Manual_MenuItem;
-		//public static string Start_Print_MenuItem;
-
-		//public static string AutoPrint;
-
-
-
 		private RelationStruct[] texts = new RelationStruct[3];
 
         public TextPicturesPage()
         {
-			listener.Start();
+			
 			//listener.ScanerEvent += ListenerScanerEvent;
 			if (IsOnlyOneProcess())
 			{
-				InitializeComponent();				
+				InitializeComponent();
 				//SetData();
+				
 				FileTools.Init();
 				TabItem tabitem = new TabItem();
 				tabitem.Header = "图片";
 				Frame tabFrame = new Frame();
-				//textPicturesPage = new TextPicturesPage();
-				//tabFrame.Content = textPicturesPage;
-				//tabFrame.Content = this;
 				tabitem.Content = tabFrame;
-				//Displaying_TabControl.Items.Add(tabitem);//大界面的铺满？
 				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
@@ -77,7 +59,7 @@ namespace demo
 				return true;
 			else
 				return false;
-		}
+		}	
 
 		//钩子事件处理
 		private void ListenerScanerEvent(ScanerHook.ScanerCodes codes)
@@ -97,87 +79,8 @@ namespace demo
 			p.ShowDialog();
 		}
 
-
-		//创建用户设置界面
-		/*private void CreateUserWindowClick(object sender, RoutedEventArgs e)
-		{
-			User userWindow = new User(this);
-			userWindow.ShowDialog();
-		}*/
-
-		//创建DataList界面
-		/*private void CreateDataListWindowClick(object sender, RoutedEventArgs e)
-		{
-			System.Windows.Controls.MenuItem menuItem = sender as System.Windows.Controls.MenuItem;
-			if (menuItem.Name == Log_MenuItem.Name && logPage == null)
-			{
-				TabItem tabitem = new TabItem();
-				tabitem.Header = "记录";
-				Frame tabFrame = new Frame();
-				logPage = new LogPage(this);
-				tabFrame.Content = logPage;
-				tabitem.Content = tabFrame;
-				Displaying_TabControl.Items.Add(tabitem);
-				if (relationPage == null)
-					Displaying_TabControl.SelectedIndex = 1;
-				else
-					Displaying_TabControl.SelectedIndex = 2;
-			}
-			else if (menuItem.Name == Relation_MenuItem.Name && relationPage == null)
-			{
-				TabItem tabitem = new TabItem();
-				tabitem.Header = "关联";
-				Frame tabFrame = new Frame();
-				relationPage = new RelationPage(this);
-				tabFrame.Content = relationPage;
-				tabitem.Content = tabFrame;
-				Displaying_TabControl.Items.Add(tabitem);
-				if (logPage == null)
-					Displaying_TabControl.SelectedIndex = 1;
-				else
-					Displaying_TabControl.SelectedIndex = 2;
-			}
-		}*/
-
-		//获取关联页面
-		/*public RelationPage GetRelationPage()
-		{
-			return relationPage;
-		}
-
-		//获取记录页面
-		public TextLogPage GetLogPage()
-		{
-			return textLogPage;
-		}*/
-
-		//标题按钮设置
-		/*private void MinWindowButtonClick(object sender, RoutedEventArgs e)
-		{
-			WindowState = WindowState.Minimized;
-		}
-
-		private void MaxWindowButtonClick(object sender, RoutedEventArgs e)
-		{
-			if (WindowState == WindowState.Maximized)
-				WindowState = WindowState.Normal;
-			else
-				WindowState = WindowState.Maximized;
-		}
-
-		private void ExitWindowButtonClick(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
-
-		private void WindowTitleMouseLeftButtonDown(object sender, RoutedEventArgs e)
-		{
-			DragMove();
-		}*/
-
 		//打印模式选择
 		private void PrintModeClick(object sender, RoutedEventArgs e)
-		//public void PrintModeClick(object sender, RoutedEventArgs e)
 		{
 			/*if((bool)Auto_MenuItem.IsChecked)
             {
@@ -204,36 +107,6 @@ namespace demo
 				//picturesPage.HideControl(false);
 				this.HideControl(false);
 			}
-
-			/*picturesPage.EE_Number_TextBlock.Text = "";
-			picturesPage.EE_Piceture_Image.Source = null;
-			picturesPage.Overprint_Number_TextBlock.Text = "";
-			picturesPage.Overprint_Picture_Image.Source = null;
-			picturesPage.Preview_Number_TextBlock.Text = "";
-			picturesPage.Preview_Picture_Image.Source = null;*/
-
-			/*System.Windows.Controls.RadioButton radioButton = sender as System.Windows.Controls.RadioButton;
-			if (radioButton.Name == "Auto_MenuItem")
-			{
-				listener.Start();
-				Manual_MenuItem.IsChecked = false;
-				Auto_MenuItem.IsChecked = true;
-				Start_Print_MenuItem.IsEnabled = false;
-				//picturesPage.HideControl(true);
-				this.HideControl(true);
-			}
-			else if (radioButton.Name == "Manual_MenuItem")
-			{
-				listener.Stop();
-				Auto_MenuItem.IsChecked = false;
-				Manual_MenuItem.IsChecked = true;
-				Start_Print_MenuItem.IsEnabled = true;
-				//picturesPage.HideControl(false);
-				this.HideControl(false);
-			}*/
-
-
-
 			this.EE_Number_TextBlock.Text = "";
 			this.EE_Piceture_Image.Source = null;
 			this.Overprint_Number_TextBlock.Text = "";
@@ -326,25 +199,6 @@ namespace demo
 		{
 			State_TextBox.Text = msg;
 		}
-
-		/*private void MainWindowDeactivated(object sender, EventArgs e)
-		{
-			this.listener.Stop();
-		}
-
-		private void MainWindowActivated(object sender, EventArgs e)
-		{
-			this.listener.Start();
-		}
-
-		private void TestWindow_Click(object sender, RoutedEventArgs e)
-		{
-			Window1 wd = new Window1();
-			wd.Show();
-		}*/
-
-
-
 
 		public void SetNumber(string name)
         {
@@ -451,6 +305,14 @@ namespace demo
             MainWindow.isWriteLog = false;
         }
 
-		
-	}
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+			listener.Stop();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+			listener.Start();
+		}
+    }
 }
