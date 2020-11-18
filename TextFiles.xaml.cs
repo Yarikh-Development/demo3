@@ -23,8 +23,8 @@ namespace demo
     public partial class TextFiles : Page
     {
 
-        private Window window = null;
-		private TextPicturesPage page;
+        //private Window window = null;
+		private TextPicturesPage page = new TextPicturesPage();
 
 		ObservableCollection<PrintersTemplate> list;
 

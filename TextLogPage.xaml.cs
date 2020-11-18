@@ -29,7 +29,7 @@ namespace demo
 		{
 			InitializeComponent();
 
-			this.window = window;
+			
 			LoadData(FileTools.logDirPath+"\\"+DateTime.Now.ToString("yyyy-MM-dd")+".txt");
 			SetComboBox();
 		}
@@ -88,6 +88,10 @@ namespace demo
 			}
 			catch (FileNotFoundException)
 			{
+				FileTools.WriteLineFile(DateTime.Now.ToString() + " " + FileTools.exceptionFilePath, "未找到文件！");
+			}
+			catch(DirectoryNotFoundException)
+            {
 				FileTools.WriteLineFile(DateTime.Now.ToString() + " " + FileTools.exceptionFilePath, "未找到文件！");
 			}
 		}

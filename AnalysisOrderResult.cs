@@ -40,8 +40,10 @@ namespace demo
                     string teststr = "! U1 do \"file.type\" \"" + str + "\" ";
                     FileContent = frmMainmF.SendRawDataToPrinter("! U1 do \"file.type\" \"" + str + "\" ", SN);
                     //FileContent =  server.SendRawData(SN, "! U1 do \"file.type\" \"" + str + "\" ", 1500);
-                    string labelID = DMPContentEstimate(FileContent);
-                    DMPs.Add(new DMPFile { FileName = str, LaBelID = labelID });
+                    //string labelID = DMPContentEstimate(FileContent);
+                    //改用陆逊梯卡的模板
+                    string labelID = DMPContentEstimate2(FileContent);
+                    DMPs.Add(new DMPFile { FileName = str, LaBelID = labelID, FileSize = FileContent.Length });
 
                     if (FileContent != "")
                     {
@@ -82,8 +84,16 @@ namespace demo
         //DMP文件内容判断的第二种方法，适用于陆逊梯卡标签
         public string DMPContentEstimate2(String FileContent)
         {
-            String strContent = FileContent.Split('^')[7];
-            return strContent.Substring(2);
+            try
+            {
+                String strContent = FileContent.Split('^')[7];
+                return strContent.Substring(2);
+            }
+            catch (Exception)
+            {
+                return "null";               
+            }
+            
         }
     }
 

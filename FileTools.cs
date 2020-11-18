@@ -9,8 +9,8 @@ namespace demo
 	class FileTools
 	{
 		
-		private static readonly string Base = Directory.GetParent(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase).Parent.FullName;
-
+		//private static readonly string Base = Directory.GetParent(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase).Parent.FullName;
+		private static readonly string Base = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName;
 		public static string relationFilePath { get; private set; } = Base + "\\relation.txt";
 		public static string labelDirPath { get; private set; } = Base + "\\labelLib";
 		public static string pictureDirPath { get; private set; } = Base + "\\picture";

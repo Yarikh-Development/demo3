@@ -13,7 +13,7 @@ namespace demo
 	/// </summary>
 	public partial class TextPicturesPage : Page
     {
-		TextFiles textFiles = new TextFiles();
+		//TextFiles textFiles = new TextFiles();
 		TextLogPage textLogPage = new TextLogPage();
 
         public static bool isWriteLog;
@@ -22,24 +22,24 @@ namespace demo
 
         public TextPicturesPage()
         {
-			
+			InitializeComponent();
+			//SetData();
+
+			//FileTools.Init();
+			TabItem tabitem = new TabItem();
+			tabitem.Header = "图片";
+			Frame tabFrame = new Frame();
+			tabitem.Content = tabFrame;
+			listener.ScanerEvent += ListenerScanerEvent;
 			//listener.ScanerEvent += ListenerScanerEvent;
-			if (IsOnlyOneProcess())
+			/*if (IsOnlyOneProcess())
 			{
-				InitializeComponent();
-				//SetData();
 				
-				FileTools.Init();
-				TabItem tabitem = new TabItem();
-				tabitem.Header = "图片";
-				Frame tabFrame = new Frame();
-				tabitem.Content = tabFrame;
-				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
 			{
 				MessageBox.Show("进程判断错误");
-			}
+			}*/
 		}
 
 
@@ -51,10 +51,9 @@ namespace demo
 			System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcesses();
 			foreach (System.Diagnostics.Process process in processList)
 			{
-				if (process.ProcessName.ToLower() == "美的打印")
+				if (process.ProcessName.ToLower() == "Online Super Printing")
 					++cnt;
 			}
-
 			if (cnt == 1)
 				return true;
 			else
@@ -128,7 +127,6 @@ namespace demo
 			bool result = Printer.SendFile(data[2], FileTools.labelDirPath + "\\" + data[1] + ".png");
 			if (!result)
 			{
-				//State_TextBox = DateTime.Now.ToShortTimeString().ToString() + "发送文件失败！";
 				State_TextBox.Text = DateTime.Now.ToShortTimeString().ToString() + "发送文件失败！";
 				return;
 			}

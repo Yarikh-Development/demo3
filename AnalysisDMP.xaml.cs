@@ -105,7 +105,8 @@ namespace demo
             // Grid.SetColumnSpan(menuPreview, 1);
             DMPFile dMPFile = listView.SelectedItem as DMPFile;
             //StreamReader reader = new StreamReader(DMPFilePath + "//" + dMPFile.FileName, Encoding.Default);
-            MessageBox.Show(File.ReadAllText(DMPFilePath + "//" + dMPFile.FileName));
+            gridShowDMPContent.Visibility = Visibility.Visible;
+            txtViewContent.Text = File.ReadAllText(DMPFilePath + "//" + dMPFile.FileName);
             //MessageBox.Show(reader.Read().ToString());
         }
 
@@ -121,7 +122,7 @@ namespace demo
 
         private void btnCloseContent_Click(object sender, RoutedEventArgs e)
         {
-
+            gridShowDMPContent.Visibility = Visibility.Hidden;
         }
     }
 }
