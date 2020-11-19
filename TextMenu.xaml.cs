@@ -20,8 +20,6 @@ namespace demo
     /// </summary>
     public partial class TextMenu : Page
     {
-
-        TextMenuSimple simple = new TextMenuSimple();
         TextPicturesPage simplePage = new TextPicturesPage();
         TextMenuDetail detailPage = new TextMenuDetail();
         public TextMenu()
@@ -31,8 +29,6 @@ namespace demo
 
         public void SkipPages()
         {   
-            SkipPage.Content = simple;
-
         }
 
         private void SimplePage_Click(object sender, RoutedEventArgs e)

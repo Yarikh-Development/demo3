@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,9 @@ namespace demo
     public partial class TextHighPrinter : Page
     {
         WebServer server = null;
+        Printer printer = null;
         String sTemp = "";
-        List<LinkOSPrinters> linkOSPrinter;
+        ObservableCollection<LinkOSPrinters> linkOSPrinter;
         DeviceDetails deviceDetails;
         TextBasicSituation basicSituation;
         TextAdminInterface adminInterface;
@@ -40,7 +42,7 @@ namespace demo
             btnStopService.IsEnabled = false;
         }
 
-        private void printerMessage_Click(object sender, RoutedEventArgs e)
+        private void aaa(object sender, RoutedEventArgs e)
         {
 
         }
@@ -89,9 +91,10 @@ namespace demo
         {
             try
             {
-                mainWindow.StopService();
+                mainWindow.StopService();                
+                linkOSPrinter.Clear();
+                printersCount.Text = "0";
                 dispatcherTimer.Stop();
-                itemsPrinters.Items.Clear();
                 btnStartService.IsEnabled = true;
                 btnStartService.Focus();
                 btnStopService.IsEnabled = false;
@@ -101,7 +104,7 @@ namespace demo
             {
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
                 btnStartService.IsEnabled = true;
-                btnStartService.IsEnabled = false;
+                btnStopService.IsEnabled = false;
                 
             }
             
@@ -113,7 +116,7 @@ namespace demo
             {
                 int linkosPrinterNum = 0;
                 String sTempLine = "";
-                linkOSPrinter = new List<LinkOSPrinters>();
+                linkOSPrinter = new ObservableCollection<LinkOSPrinters>();
                 sTemp = mainWindow.sTemp;
                 if (sTemp != "" && sTemp != "0|")
                 {
@@ -192,6 +195,42 @@ namespace demo
             {
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
 
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            /*//读取打印机列表的第一项
+            printer = new Printer();
+            btnPrinterDetail.IsChecked = true;
+            basicSituation = new TextBasicSituation();
+            skipPages.Content = basicSituation;
+            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
+            if(buttonItems.Count > 0)
+            {
+                Button button = buttonItems.First();
+                TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
+                txtPrinterSN.Text = txt.Text;
+            }*/
+            
+        }
+
+        //点击按钮找到打印机列表的SN码
+        private void printerMessage_Click_1(object sender, RoutedEventArgs e)
+        {
+            printer = new Printer();
+            //isVisibilityForEnter.Visibility = Visibility.Visible;
+            btnPrinterDetail.IsChecked = true;
+            basicSituation = new TextBasicSituation();
+            skipPages.Content = basicSituation;
+            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
+            foreach (Button button in buttonItems)
+            {
+                if (button.IsFocused)
+                {
+                    TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
+                    txtPrinterSN.Text = txt.Text;
+                }
             }
         }
 

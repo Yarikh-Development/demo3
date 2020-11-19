@@ -34,16 +34,18 @@ namespace demo
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //int cnt = 0;
-            //List<City> list = new List<City>();
-            //foreach (string printerName in PrinterSettings.InstalledPrinters)
-            //{
-            //    if (Printer.IsZebraPrinter(printerName))
-            //    {
-            //        Printer.Citys.Add(new City { ID = ++cnt, Name = printerName });
-            //    }
-            //}
+            //读取打印机列表的第一项
+            printer = new Printer();
+            isVisibilityForEnter.Visibility = Visibility.Visible;
+            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
+            if (buttonItems.Count > 0)
+            {
+                Button button = buttonItems.First();
+                TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
+                txtPrinterName2.Text = txt.Text;
+            }
             
+
         }
 
         //展示ItemsControl里的打印机名
@@ -65,6 +67,30 @@ namespace demo
         private void printerMessage_Initialized(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSentFile_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text,btnSendFile.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnHighSetting_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnHighSetting.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnPrintSetting_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnPrintSetting.Name);
+            normalPrinter.ShowDialog();
+        }
+
+        private void btnBasicMessage_Click(object sender, RoutedEventArgs e)
+        {
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnBasicMessage.Name);
+            normalPrinter.ShowDialog();
         }
     }
 }

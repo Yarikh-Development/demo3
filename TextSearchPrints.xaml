@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
+      xmlns:c="clr-namespace:demo.Control"
       mc:Ignorable="d" 
       d:DesignHeight="590" d:DesignWidth="740"
       Title="TextSearchPrints" Loaded="Page_Loaded">
@@ -122,14 +123,14 @@
                                         <!-- 显示打印机内容 -->
                                         <Button Name="printerMessage" Click="printerMessage_Click" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Left" 
                                                 Style="{StaticResource BackGroundButton}" Initialized="printerMessage_Initialized">
-                                            <Button.ContextMenu>
+                                            <!--<Button.ContextMenu>
                                                 <ContextMenu Name="contextMenu">
                                                     <MenuItem Header="复制"/>
                                                     <MenuItem Header="粘贴"/>
                                                     <MenuItem Header="剪切"/>
                                                     <MenuItem Header="删除"/>
                                                 </ContextMenu>
-                                            </Button.ContextMenu>
+                                            </Button.ContextMenu>-->
                                             <Grid Name="gridInItem">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="40"/>
@@ -199,50 +200,54 @@
             <WrapPanel Grid.Row="1" Orientation="Horizontal">
                 
 
-                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                            Height="50" Width="200" Margin="20 20 0 10">
+                <Button Name="btnSendFile" Click="btnSentFile_Click"
+                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                        Height="50" Width="200" Margin="20 20 0 10">
                     <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
                     </Button.Effect>
                     <StackPanel>
-                        <TextBlock Text="文件绑定" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="发送文件" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
                         <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
                     </StackPanel>
                 </Button>
 
-                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                            Height="50" Width="200" Margin="20 20 0 10">
+                <Button Name="btnBasicMessage" Click="btnBasicMessage_Click"
+                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                        Height="50" Width="200" Margin="20 20 0 10">
                     <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
                     </Button.Effect>
                     <StackPanel>
-                        <TextBlock Text="打印测试页" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="基本信息" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
                         <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
                     </StackPanel>
                 </Button>
 
-                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                            Height="50" Width="200" Margin="20 20 0 10">
+                <Button Name="btnPrintSetting" Click="btnPrintSetting_Click"
+                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                        Height="50" Width="200" Margin="20 20 0 10">
                     <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
                     </Button.Effect>
                     <StackPanel>
-                        <TextBlock Text="查看打印机正在干什么" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="打印设置" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
                         <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
                     </StackPanel>
                 </Button>
 
-                <Button BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                            Height="50" Width="200" Margin="20 20 0 10">
+                <Button Name="btnHighSetting" Click="btnHighSetting_Click"
+                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
+                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                        Height="50" Width="200" Margin="20 20 0 10">
                     <Button.Effect>
                         <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
                     </Button.Effect>
                     <StackPanel>
-                        <TextBlock Text="设置高级打印机" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
+                        <TextBlock Text="高级设置" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
                         <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
                     </StackPanel>
                 </Button>
