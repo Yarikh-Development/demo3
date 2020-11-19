@@ -40,6 +40,7 @@
                     <!--<Button Style="{DynamicResource iconButton}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
                         <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
                     </Button>-->
+                    
                     <pu:DropDown Style="{DynamicResource iconDropDown}" ToolTip="常用指令" VerticalAlignment="Center" Margin="5 0 0 0">
                         <pu:DropDown.Content>
                             <TextBlock Text="&#xe6fa;" FontFamily="/#iconfont" FontSize="22"/>
@@ -52,17 +53,23 @@
                                 </Grid.RowDefinitions>
                                 <Grid HorizontalAlignment="Center" >
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
-                                        <RadioButton Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
+                                        <RadioButton  Click="ZPL_Click" Style="{StaticResource BackGroundRadioButton}" Margin="0 0 20 0" Content="ZPL" FontSize="15" IsChecked="True" Width="100"/>
+                                        <RadioButton  Click="SGD_Click" Style="{StaticResource BackGroundRadioButton}" Content="SGD" FontSize="15" Width="100"/>
                                     </StackPanel>
                                 </Grid>
-                                <StackPanel Grid.Row="1"  Orientation="Horizontal" >
+                                <StackPanel x:Name="ZPL" Grid.Row="1"  Orientation="Horizontal" Visibility="Visible">
                                     <TextBox x:Name="Instruction"  HorizontalAlignment="Left" Height="18" Margin="10 0 20 0" VerticalAlignment="Top" Width="250"/>
                                     <Button x:Name="Copy" Content="复制" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
+                                </StackPanel>
+                                <StackPanel x:Name="SGD" Grid.Row="1"  Orientation="Horizontal" Visibility="Hidden">
+                                    <TextBox  HorizontalAlignment="Left" Height="18" Margin="10 0 20 0" VerticalAlignment="Top" Width="250"/>
+                                    <Button  Content="复制1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="58" Height="18" FontSize="10"/>
                                 </StackPanel>
                             </Grid>
                         </pu:DropDown.Child>
                     </pu:DropDown>
+                    
+                    
                     <Button Style="{DynamicResource iconButton}" ToolTip="历史" VerticalAlignment="Center" Margin="5 0 0 0">
                         <TextBlock Text="&#xe6fc;" FontFamily="/#iconfont" FontSize="22"/>
                     </Button>

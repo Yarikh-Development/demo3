@@ -129,81 +129,71 @@
                 
 
                 <!--是否缺纸-->
-                <Grid Width="200" Height="100" >
+                <Grid Width="200" Height="100">
                     <Border  CornerRadius="5" Background="White" Margin="10">
                         <Border.Effect>
                             <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                         </Border.Effect>
-                        <Grid >
-                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                                <StackPanel Margin="15 0 0 0">
-                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                </StackPanel>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Border>
-
                 </Grid>
 
                 <!--标签长度-->
-                <Grid Width="200" Height="100" >
+                <Grid Width="200" Height="100">
                     <Border  CornerRadius="5" Background="White" Margin="10">
                         <Border.Effect>
                             <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                         </Border.Effect>
-                        <Grid >
-                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                                <StackPanel Margin="15 0 0 0">
-                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="aaaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                </StackPanel>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Border>
-
                 </Grid>
 
                 <!--打印头是否抬起-->
-                <Grid Width="200" Height="100" >
+                <Grid Width="200" Height="100">
                     <Border  CornerRadius="5" Background="White" Margin="10">
                         <Border.Effect>
                             <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                         </Border.Effect>
-                        <Grid >
-                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                                <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                    <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                                <StackPanel Margin="15 0 0 0">
-                                    <TextBlock Text="预留" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
-                                </StackPanel>
+                            </Border>
+                            <StackPanel Margin="15 0 0 0">
+                                <TextBlock Text="预留" Foreground="#3F4C5D"/>
+                                <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Border>
-
                 </Grid>
 
                 <Grid Width="200" Height="100">
 
                 <Border  CornerRadius="5" Background="White" Margin="10">
-                    <Border.Effect>
-                        <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
-                    </Border.Effect>
-                    <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xeb67;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <StackPanel  VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                <TextBlock Text="&#xeb67;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -211,7 +201,7 @@
                                 <TextBlock Text="aaa" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                             </StackPanel>
                         </StackPanel>
-                    </Grid>
+                    
                 </Border>
 
             </Grid>
@@ -223,9 +213,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xec26;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xec26;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -245,9 +235,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xed1b;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xed1b;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -267,9 +257,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xec65;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xec65;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -289,9 +279,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xec92;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xec92;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -308,9 +298,9 @@
 
                 <Border  CornerRadius="5" Background="White" Margin="10">
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10 10 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xe62e;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xe62e;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -330,9 +320,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xeb93;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xeb93;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -352,9 +342,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xebe3;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xebe3;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -374,9 +364,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -396,9 +386,9 @@
                         <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
                     </Border.Effect>
                     <Grid>
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 15">
-                            <Border Width="50" Height="50" Background="#FFF1F1" CornerRadius="10">
-                                <TextBlock Text="&#xe640;" Foreground="#FF7261" FontFamily="/#iconfont"  FontSize="25"
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="15 0 0 0">
@@ -414,6 +404,7 @@
             </WrapPanel>
 
         </ScrollViewer>
+
 
     </Grid>
 </Page>

@@ -9,6 +9,65 @@
       Title="Text">
 
     <Grid>
-        
+
+        <StackPanel>
+            <Button x:Name="loadBtn" Content="加载数据" Click="LoadBtn_Click" Margin="20" Width="200"/>
+
+            <Border BorderBrush="Orange" BorderThickness="5" CornerRadius="6" Padding="4">
+                <ListView x:Name="list" ItemsSource="{Binding ShowList}" Height="333" Margin="0.2,0,-0.2,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="50"  DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="QrStart" Width="100"   DisplayMemberBinding="{Binding QrStart}" />
+                            <GridViewColumn Header="QR" Width="100"   DisplayMemberBinding="{Binding Qr}"/>
+                            <GridViewColumn Header="STATE" Width="100"  DisplayMemberBinding="{Binding Res}" />
+                            <GridViewColumn Header="Time" Width="100"  DisplayMemberBinding="{Binding Span}" />
+                            <GridViewColumn Header="编辑" Width="100" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="删除" x:Name="deleteBtn" Click="DeleteBtn_Click"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+        </StackPanel>
+
     </Grid>
+
+
+
+
+    <!--<Grid>
+        
+    </Grid>-->
+
+    <!--<Grid  HorizontalAlignment="Center" VerticalAlignment="Center"  Height="200" Width="200" Grid.ColumnSpan="8" Grid.RowSpan="6">
+        <DataGrid x:Name="DG_SP" IsReadOnly="True" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" CanUserReorderColumns="False" AlternationCount="2"  RowHeaderWidth="0" CanUserAddRows="False" VerticalAlignment="Top" Visibility="Hidden" SelectedCellsChanged="DG_SP_SelectedCellsChanged">
+            <DataGrid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#FFE6F2F7" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.1"/>
+                        <GradientStop Color="White" Offset="0.4"/>
+                        <GradientStop Color="#FFE6F2F7" Offset="0.81"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </DataGrid.Background>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="行号" Binding="{Binding number}" Width="80" />
+                <DataGridTextColumn Header="编码" Visibility="Collapsed" Binding="{Binding CommodityInforID}"  Width="10"/>
+                <DataGridTextColumn Header="商品条码" Binding="{Binding CommodityCode}" Width="120" />
+                --><!--<DataGridTextColumn Header="打开"  Visibility="Collapsed" Binding="{Binding as_passenger_type_id}"  Width="10"  />--><!--
+                <DataGridTextColumn Header="店内码" Binding="{Binding SecondCode}"  Width="70"  />
+                <DataGridTextColumn Header="商品名称" Binding="{Binding CommodityName}"  Width="80" />
+                <DataGridTextColumn Header="数量" Binding="{Binding ss}"  Width="70"  />
+                <DataGridTextColumn Header="金额" Binding="{Binding ee}"  Width="70"  />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>-->
+
 </Page>

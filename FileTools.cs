@@ -19,6 +19,9 @@ namespace demo
 		public static string exceptionFilePath { get; private set; } = Base + "\\exception.txt";
 		public static string settingFilePath { get; private set; } = Base + "\\setting.txt";
 
+
+		public static string instructionsFilePath { get; private set; } = Base + "\\instructions.txt";
+
 		//读取设置文件，读取相关路径进行初始化
 		public static void Init()
 		{
@@ -36,7 +39,7 @@ namespace demo
 				{
 					settingReader.Close();
 					fileStream.Close();
-					SaveSettingFile(settingFilePath, new string[] { relationFilePath, labelDirPath, pictureDirPath, logDirPath });
+					SaveSettingFile(settingFilePath, new string[] { relationFilePath, labelDirPath, pictureDirPath, logDirPath  });
 					return;
 				}
 				
@@ -47,7 +50,7 @@ namespace demo
 			}
 			catch(FileNotFoundException)
             {
-				SaveSettingFile(settingFilePath, new string[] { relationFilePath, labelDirPath, pictureDirPath, logDirPath });
+				SaveSettingFile(settingFilePath, new string[] { relationFilePath, labelDirPath, pictureDirPath, logDirPath  });
 			}
 			catch(IOException e)
             {
