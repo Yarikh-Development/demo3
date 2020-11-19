@@ -9,7 +9,7 @@
       Title="RelationPage">
 
     <Grid>
-        <ListView x:Name="Relation_ListView" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="880" >
+        <ListView x:Name="Relation_ListView" HorizontalAlignment="Left" Height="880" VerticalAlignment="Top" Width="1880" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="FontSize" Value="13"/>

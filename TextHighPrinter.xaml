@@ -71,7 +71,7 @@
                         </RadioButton>
 
                         <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
-                            <TextBlock Text="&#xe64d;" FontFamily="/#iconfont" FontSize="15"/>
+                            <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
                     </StackPanel>
                 </UniformGrid>
@@ -169,6 +169,21 @@
                 <RadioButton Name="txtDialogBox" Click="txtDialogBox_Click" Content="进行对话" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
                 <RadioButton Name="btnOrderList" Click="btnOrderList_Click" Content="指令列表" FontSize="16" Style="{StaticResource MenuRadioButton}"/>
             </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <RadioButton   Style="{DynamicResource defaultRadioButton}" ToolTip="增加" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                    <TextBlock Text="&#xed1c;" FontFamily="/#iconfont" FontSize="15"/>
+                </RadioButton>
+
+                <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="删除" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                    <TextBlock Text="&#xec07;" FontFamily="/#iconfont" FontSize="15"/>
+                </RadioButton>
+
+                <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="其他" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
+                    <TextBlock Text="&#xec21;" FontFamily="/#iconfont" FontSize="15"/>
+                </RadioButton>
+            </StackPanel>
+
         </Grid>
 
         <Grid Name="isVisibilityForEnter" Grid.Row="1" Grid.Column="1">
