@@ -21,7 +21,7 @@ namespace demo
 	/// </summary>
 	public partial class TextLogPage : Page
 	{
-		private Window window = null;
+		//private Window window = null;
 		private Window1 window1;
 
 		//public TextLogPage(Window window)
@@ -30,7 +30,7 @@ namespace demo
 			InitializeComponent();
 
 			
-			LoadData(FileTools.logDirPath+"\\"+DateTime.Now.ToString("yyyy-MM-dd")+".txt");
+			//LoadData(FileTools.logDirPath+"\\"+DateTime.Now.ToString("yyyy-MM-dd")+".txt");
 			SetComboBox();
 		}
 
@@ -60,7 +60,12 @@ namespace demo
 			}
 			catch (ArgumentNullException)
 			{
-				FileTools.WriteLineFile(DateTime.Now.ToString() + FileTools.exceptionFilePath, " 路径为空！！");
+				//FileTools.WriteLineFile(DateTime.Now.ToString() + FileTools.exceptionFilePath, " 路径为空！！");
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, " 路径为空！！");
+			}
+            catch (DirectoryNotFoundException)
+            {
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, " 路径为空！！");
 			}
 		}
 
@@ -88,11 +93,11 @@ namespace demo
 			}
 			catch (FileNotFoundException)
 			{
-				FileTools.WriteLineFile(DateTime.Now.ToString() + " " + FileTools.exceptionFilePath, "未找到文件！");
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, "未找到文件！");
 			}
 			catch(DirectoryNotFoundException)
             {
-				FileTools.WriteLineFile(DateTime.Now.ToString() + " " + FileTools.exceptionFilePath, "未找到文件！");
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, "未找到文件！");
 			}
 		}
 
