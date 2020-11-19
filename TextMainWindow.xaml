@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Window1" MinHeight="600" MinWidth="850" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
         MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,46 +24,57 @@
         </Grid.RowDefinitions>
 
         <StackPanel  Background="#1578F6">
-            <Menu Background="Transparent" Width="600" HorizontalAlignment="Left">
-                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe69e;文件" FontFamily="/#iconfont" FontWeight="DemiBold" Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="打开打印机配置文件" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="打开日志文件夹" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="打开标签文件夹" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="打印机" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="高级打印机" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="关闭" BorderThickness="0" Background="#1578F6"></MenuItem>
-                    <MenuItem Header="退出" BorderThickness="0" Background="#1578F6"></MenuItem>
+            <Menu Background="Transparent" Width="Auto" HorizontalAlignment="Left">
+                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe69e; 文件" FontFamily="/#iconfont" Margin="10 5 0 5" Height="20">
+                    <MenuItem Header="打开文件" BorderThickness="0" Foreground="#000000">
+                        <MenuItem Name="btnOpenPrinterConfigFile" Click="btnOpenPrinterConfigFile_Click"
+                                  Header="打开打印机配置文件" BorderThickness="0"></MenuItem>
+                        <MenuItem Name="btnOpenLogPath" Click="btnOpenLogPath_Click"
+                                  Header="打开日志文件夹" BorderThickness="0"></MenuItem>
+                        <MenuItem Name="btnOpenLabelPath" Click="btnOpenLabelPath_Click"
+                                  Header="打开标签文件夹" BorderThickness="0"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Name="btnNormalPrinters" Click="btnNormalPrinters_Click"
+                              Header="打印机" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnHighPrinters" Click="btnHighPrinters_Click"
+                              Header="高级打印机" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnClosingWindow" Click="btnClosingWindow_Click"
+                              Header="关闭" BorderThickness="0" Foreground="#000000"></MenuItem>
                 </MenuItem>
 
-                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe66d;查看" FontWeight="DemiBold" FontFamily="/#iconfont" Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="打印记录" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="指令列表" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="标签列表" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="对话框" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe66d; 查看" FontFamily="/#iconfont" Margin="10 5 0 5">
+                    <MenuItem Name="btnPrintLogs" Click="btnPrintLogs_Click"
+                              Header="打印记录" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnOrderList" Click="btnOrderList_Click"
+                              Header="指令列表" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnLabelList" Click="btnLabelList_Click"
+                              Header="标签列表" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnDeviceDetails" Click="btnDeviceDetails_Click"
+                              Header="对话框" BorderThickness="0" Foreground="#000000"></MenuItem>
                 </MenuItem>
 
-                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6d3;设置" FontWeight="DemiBold" FontFamily="/#iconfont" Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="添加指令" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="绑定打印机" Click="CreateUserWindowClick" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6d3; 设置" FontFamily="/#iconfont" Margin="10 5 0 5">
+                    <MenuItem Name="btnAddOrder" Click="btnAddOrder_Click"
+                              Header="添加指令" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnBindingFile" Click="CreateUserWindowClick"
+                              Header="绑定文件"  BorderThickness="0" Foreground="#000000"></MenuItem>
                     <!--<MenuItem Header="应用" Click="CreateUserWindowClick"></MenuItem>-->
                 </MenuItem>
 
-                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6b4;帮助" FontWeight="DemiBold" FontFamily="/#iconfont"  Margin="10 5 0 5" FontSize="18">
-                    <MenuItem Header="查看帮助" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="发送反馈" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="注册产品" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="关于软件" Foreground="#1578F6" BorderThickness="0"></MenuItem>
-                    <MenuItem Header="关于业睿" Foreground="#1578F6" BorderThickness="0"></MenuItem>
+                <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6b4; 帮助" FontFamily="/#iconfont" Margin="10 5 0 5">
+                    <MenuItem Name="btnHelp" Click="btnHelp_Click" 
+                              Header="查看帮助" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnSendFeedBack" Click="btnSendFeedBack_Click"
+                              Header="发送反馈" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnSignInProduct" Header="注册产品" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnAboutApp" Click="btnAboutApp_Click"
+                              Header="关于软件" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnAboutYarikh" Click="btnAboutYarikh_Click"
+                              Header="关于业睿" BorderThickness="0" Foreground="#000000"></MenuItem>
                 </MenuItem>
-
-                <!--<MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe6b4;打印模式" FontWeight="DemiBold" FontFamily="/#iconfont"  Margin="10 5 0 5" FontSize="18">
-                    <MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="PrintModeClick" IsChecked="True"></MenuItem>
-                    <MenuItem x:Name="Manual_MenuItem" Header="手动打印" IsCheckable="True" Click="PrintModeClick" ></MenuItem>
-                </MenuItem>-->
 
             </Menu>
         </StackPanel>
-
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top">
             <Button x:Name="MiniWindow" Click="MiniWindow_Click" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Width="40" Height="30"

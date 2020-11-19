@@ -10,7 +10,7 @@
 
     <Grid Background="#EEEDEF">
 
-        <ListView x:Name="Relation_ListView"  Height="580" VerticalAlignment="Top" Width="880" >
+        <ListView x:Name="Relation_ListView" Height="775" VerticalAlignment="Top">
             <!--<ListView x:Name="Relation_ListView" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="880" >-->
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">

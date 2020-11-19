@@ -14,8 +14,8 @@
         <StackPanel Orientation="Horizontal">
             <Button Name="btnFile" Click="btnFile_Click" Content="文件" Width="60"/>
             <Button Name="btnSetting" Click="btnSetting_Click" Content="设置" Width="60"/>
-            
-            
+
+
         </StackPanel>
 
         <Border BorderThickness="0 1 0 0" Margin="10 5 10 0" BorderBrush="#838383" Grid.Row="1"/>
@@ -66,22 +66,19 @@
                         </ContextMenu>
                     </ListView.ContextMenu>
                 </ListView>
-
-                <Grid Background="#FFFFFF" Grid.Column="1" Visibility="Hidden">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Button Name="btnCloseContent" Click="btnCloseContent_Click" Content="✕" Background="Transparent" BorderThickness="0" 
+                <Border Name="gridShowDMPContent" Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="#838383" Visibility="Hidden">
+                    <Grid  Background="#FFFFFF" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Name="btnCloseContent" Click="btnCloseContent_Click" Content="✕" Background="Transparent" BorderThickness="0" 
                             HorizontalAlignment="Right" Width="20" HorizontalContentAlignment="Center"/>
-                    <TextBox Name="txtViewContent" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="1" BorderThickness="0" 
+                        <TextBox Name="txtViewContent" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="1" BorderThickness="0" 
                      VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"/>
-                </Grid>
-                
+                    </Grid>
+                </Border>
             </Grid>
-            
         </Grid>
-        
     </Grid>
-    
 </Window>

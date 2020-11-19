@@ -122,8 +122,9 @@ namespace demo
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = textMenu;
-            this.MaxHeight = Screen.PrimaryScreen.Bounds.Height;
-            WindowState = WindowState.Maximized;
+            //System.Windows.Application.MainWindow = this;
+            //this.MaxHeight = Screen.PrimaryScreen.Bounds.Height;
+            //WindowState = WindowState.Maximized;
         }
 
         //创建用户设置界面
@@ -190,6 +191,91 @@ namespace demo
         private void LinkOSPrinters_Click(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = TextHighPrinter;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void btnOpenPrinterConfigFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOpenLogPath_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOpenLabelPath_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNormalPrinters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnHighPrinters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClosingWindow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrintLogs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOrderList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLabelList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeviceDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBindingFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSendFeedBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAboutApp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAboutYarikh_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
