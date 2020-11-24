@@ -7,12 +7,18 @@
       mc:Ignorable="d" 
       Height="Auto" Width="Auto"
       Title="TextFiles">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid Background="#EEEDEF">
 
-        <ListView x:Name="Relation_ListView" Height="775" VerticalAlignment="Top">
+        <ListView x:Name="Relation_ListView" Height="775" VerticalAlignment="Top" Foreground="#FFFFFF">
             <!--<ListView x:Name="Relation_ListView" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="880" >-->
-            <ListView.ItemContainerStyle>
+            <!--<ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="FontSize" Value="13"/>
                     <Setter Property="BorderBrush">
@@ -26,7 +32,7 @@
                     <Setter Property="BorderThickness" Value="0.4"/>
                     <Setter Property="Height" Value="25"/>
                 </Style>
-            </ListView.ItemContainerStyle>
+            </ListView.ItemContainerStyle>-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="150" Header="能效编号" DisplayMemberBinding="{Binding Path=number}"/>

@@ -5,12 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      Height="800" Width="900"
+      Height="Auto" Width="Auto" Loaded="Page_Loaded" Unloaded="Page_Unloaded"
       Title="TextAdminInterface">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
+                <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -97,27 +98,23 @@
 
         </Grid>-->
 
-        <Grid x:Name="ZPL" Grid.Row="1" HorizontalAlignment="Center" Background="White" VerticalAlignment="Top" Visibility="Visible">
+        <Grid x:Name="ZPL" Grid.Row="1" Background="White" VerticalAlignment="Top" Visibility="Visible">
 
 
-            <ListView x:Name="listView" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto" BorderThickness="0,0,0,1" BorderBrush="#FFC8CCD4">
+            <ListView x:Name="listView" VerticalAlignment="Top" BorderThickness="0" Foreground="#FFFFFF">
                 <ListView.View>
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
-                        <GridViewColumn Header="指令" Width="100" DisplayMemberBinding="{Binding Path=Direct}"/>
-                        <GridViewColumn Header="说明" Width="100" DisplayMemberBinding="{Binding Path=Explain}"/>
-                        <GridViewColumn Header="操作" Width="100" DisplayMemberBinding="{Binding Path=Operate}">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <RadioButton Width="30" Content="预览" Click="Preview_Click" />
-                                        <RadioButton Width="30" Content="复制" Click="Copy_Click" />
-                                        <RadioButton Width="30" Content="删除" Click="Delete_Click" />
-                                    </StackPanel>
+                        <GridViewColumn Header="指令" Width="300" DisplayMemberBinding="{Binding Path=Direct}"/>
+                        <GridViewColumn Header="说明" Width="200" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Header="设置" Width="200" DisplayMemberBinding="{x:Null}">
 
-                                </DataTemplate>
+                            <!--<StackPanel Orientation="Horizontal">
+                                        <Button Width="30" Content="预览" Click="Preview_Click" />
+                                        <Button Width="30" Content="复制" Click="Copy_Click" />
+                                        <Button Width="30" Content="删除" Click="Delete_Click" />
+                            </StackPanel>-->
 
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                     </GridView>
@@ -126,21 +123,20 @@
 
         </Grid>
 
-        <Grid x:Name="SGD" Grid.Row="1" HorizontalAlignment="Center" Background="White" VerticalAlignment="Top" Visibility="Hidden">
-            <ListView x:Name="listView2" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto" BorderThickness="0,0,0,1" BorderBrush="#FFC8CCD4" >
+        <Grid x:Name="SGD" Grid.Row="1"  Background="White" VerticalAlignment="Top" Visibility="Hidden">
+            <ListView x:Name="listView2" Height="auto" BorderThickness="0" Foreground="#FFFFFF" >
                 <ListView.View>
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
-                        <GridViewColumn Header="指令1" Width="100" DisplayMemberBinding="{Binding Path=Direct}"/>
-                        <GridViewColumn Header="说明" Width="100" DisplayMemberBinding="{Binding Path=Explain}"/>
-
-                        <GridViewColumn Header="操作" Width="100" DisplayMemberBinding="{Binding Path=Operate}">
+                        <GridViewColumn x:Name="col1" Width="300" Header="指令1" DisplayMemberBinding="{Binding Path=Direct}"/>
+                        <GridViewColumn Width="200" Header="说明" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Width="200" Header="操作" DisplayMemberBinding="{Binding Path=Operate}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <RadioButton Width="30" Content="预览" Click="Preview_Click" />
-                                        <RadioButton Width="30" Content="复制" Click="Copy_Click" />
-                                        <RadioButton Width="30" Content="删除" Click="Copy_Click" />
+                                        <RadioButton Width="50" Content="预览" Click="Preview_Click" />
+                                        <RadioButton Width="50" Content="复制" Click="Copy_Click" />
+                                        <RadioButton Width="50" Content="删除" Click="Copy_Click" />
                                     </StackPanel>
 
                                 </DataTemplate>
@@ -152,7 +148,17 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            
         </Grid>
-
+        <Grid Visibility="Hidden" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="re_col1" Width="{Binding ElementName=col1, Path=ActualWidth}"/>
+                <ColumnDefinition Name="col2" Width="*"/>
+                <ColumnDefinition Name="col3" Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+            <Grid Grid.Column="1" x:Name="helperField"/>
+        </Grid>
     </Grid>
 </Page>

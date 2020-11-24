@@ -26,7 +26,7 @@ namespace demo
         {
             InitializeComponent();
 
-			LoadData(FileTools.instructionsFilePath);
+			//LoadData(FileTools.instructionsFilePath);
 			SetComboBox();
 
 		}
@@ -54,22 +54,7 @@ namespace demo
 		private void ZPL_Click(object sender, RoutedEventArgs e)
 		{
 			this.ZPL.Visibility = Visibility.Visible;
-			this.SGD.Visibility = Visibility.Hidden;
-
-			OpenFileDialog ofd = new OpenFileDialog();
-			if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				using (StreamReader sr = new StreamReader(ofd.FileName))
-				{
-					string s = sr.ReadToEnd();
-					string[] lines = s.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-					foreach (var i in lines)
-					{
-						string[] data = i.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-						listView.Items.Add(new { Direct = data[0], Explain = data[1] });
-					}
-				}
-			}
+			this.SGD.Visibility = Visibility.Hidden;		
 		}
 		private void SGD_Click(object sender, RoutedEventArgs e)
 		{
@@ -101,36 +86,6 @@ namespace demo
 			return;*/
 		}
 
-
-		//加载记录文件
-		public void LoadData(string filePath)
-		{
-			//DateTime.Now.ToShortTimeString().ToString();
-			//DateTime.Now.ToString();
-			//DateTime.Now.ToShortTimeString().ToString();
-
-			try
-			{
-				FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-				StreamReader streamReader = new StreamReader(fileStream);
-
-				string line;
-				string[] data;
-				while ((line = streamReader.ReadLine()) != null)
-				{
-					data = line.Split(new char[] { ';' });
-					/*Log_ListView.Items.Add(new { date = data[0], number = data[1], template = data[2], printer = data[3], success = data[4] });*/
-					listView.Items.Add(new { Direct = data[0], Explain = data[1],success = data[2] });
-				}
-
-				streamReader.Close();
-			}
-			catch (FileNotFoundException)
-			{
-				FileTools.WriteLineFile(DateTime.Now.ToString() + " " + FileTools.exceptionFilePath, "未找到文件！");
-			}
-		}
-
 		//写记录到listView
 		public void WriteDataToListView(string[] data)
 		{
@@ -144,8 +99,49 @@ namespace demo
 			}
 		}
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+			try
+			{
+				string filePathZPL = FileTools.commandPath + "\\commandZPL.txt";
+				FileStream fileStreamZPL = new FileStream(filePathZPL, FileMode.OpenOrCreate, FileAccess.Read);
+				StreamReader streamReaderZPL = new StreamReader(fileStreamZPL);
 
+				string filePathSGD = FileTools.commandPath + "\\commandSGD.txt";
+				FileStream fileStreamSGD = new FileStream(filePathSGD, FileMode.OpenOrCreate, FileAccess.Read);
+				StreamReader streamReaderSGD = new StreamReader(fileStreamSGD);
 
-	}
+				string line;
+				string[] data;
+				while ((line = streamReaderSGD.ReadLine()) != null)
+				{
+					data = line.Split(';');
+					listView2.Items.Add(new { Direct = data[0], Explain = data[1] });
+				}
+				//Array.Clear(data, 0, data.Length);
+				while ((line = streamReaderZPL.ReadLine()) != null)
+				{
+					data = line.Split(';');
+					listView.Items.Add(new { Direct = data[0], Explain = data[1] });
+				}
+				streamReaderZPL.Close();
+				streamReaderSGD.Close();
+			}
+			catch (FileNotFoundException)
+			{
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, "未找到指令文件！");
+			}
+			catch (DirectoryNotFoundException)
+			{
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, " 指令文件路径为空！！");
+			}
+		}
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+			listView.Items.Clear();
+			listView2.Items.Clear();
+		}
+    }
 
 }

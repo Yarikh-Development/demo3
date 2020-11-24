@@ -90,13 +90,12 @@ namespace WebSocketConsole
                     return;
                 }
 
-                //1118暂时注释
-                /*if (txtCertificateFile.Text == "")
+                if (txtCertificateFile.Text == "")
                 {
                     MessageBox.Show("Please input Certificate File Name!", this.Title, MessageBoxButton.OK);
                     txtCertificateFile.Focus();
                     return;
-                }*/
+                }
 
                 if (txtCertificateFile.Text != "")
                 {
@@ -109,13 +108,12 @@ namespace WebSocketConsole
                 }
 
 
-                //1118暂时注释
-                /*if (txtCertificatePassword.Password == "")
+                if (txtCertificatePassword.Password == "")
                 {
                     MessageBox.Show("Please input Certificate Password!", this.Title, MessageBoxButton.OK);
                     txtCertificatePassword.Focus();
                     return;
-                }*/
+                }
 
                 if (txtSQLSeverName.Text == "")
                 {
@@ -144,17 +142,17 @@ namespace WebSocketConsole
 
                 Settings.Default.Port = int.Parse(txtPort.Text);
                 Settings.Default.Identification_Alias = txtAlias.Text;
-                //Settings.Default.CertificateFile = txtCertificateFile.Text;
-                //Settings.Default.CertificatePassword = My_Functions.EncryptDES(txtCertificatePassword.Password, My_Functions.encryptKey);
+                Settings.Default.CertificateFile = txtCertificateFile.Text;
+                Settings.Default.CertificatePassword = My_Functions.EncryptDES(txtCertificatePassword.Password, My_Functions.encryptKey);
                 //1118暂时上线
-                if (txtCertificateFile.Text == "")
+                /*if (txtCertificateFile.Text == "")
                 {
                     Settings.Default.CertificateFile = "yserver.yarikh.cn.p12";
                 }
                 if (txtCertificatePassword.Password == "")
                 {
                     Settings.Default.CertificatePassword = My_Functions.EncryptDES("yarikh2019", My_Functions.encryptKey);
-                }
+                }*/
                 
                 Settings.Default.HTTPS = (bool)chkHTTPS.IsChecked;
                 Settings.Default.SQL_ServerName = txtSQLSeverName.Text;

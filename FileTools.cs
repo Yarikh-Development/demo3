@@ -9,18 +9,16 @@ namespace demo
 	class FileTools
 	{
 
-		//private static readonly string Base = Directory.GetParent(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase).Parent.FullName;
-		private static readonly string Base = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName;
-		//private static readonly string Base = AppDomain.CurrentDomain.BaseDirectory;
+		//private static readonly string Base = Directory.GetParent(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase).Parent.FullName;	//安装路径的上级目录
+		private static readonly string Base = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName;								//调试路径的上级目录
+		//private static readonly string Base = AppDomain.CurrentDomain.BaseDirectory;																	//调试目录
 		public static string relationFilePath { get; private set; } = Base + "\\relation.txt";
 		public static string labelDirPath { get; private set; } = Base + "\\labelLib";
 		public static string pictureDirPath { get; private set; } = Base + "\\picture";
 		public static string logDirPath { get; private set; } = Base + "\\log";
 		public static string exceptionFilePath { get; private set; } = Base + "\\exception.txt";
 		public static string settingFilePath { get; private set; } = Base + "\\setting.txt";
-
-
-		public static string instructionsFilePath { get; private set; } = Base + "\\instructions.txt";
+		public static string commandPath { get; private set; } = Base + "\\Command";
 
 		//读取设置文件，读取相关路径进行初始化
 		public static void Init()

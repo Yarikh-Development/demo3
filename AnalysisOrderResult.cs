@@ -30,7 +30,6 @@ namespace demo
         {
             DMPs = new List<DMPFile>();
             String FileContent = "";
-            //string FileNameBase = "E:\\CS\\TestStreamFile\\";
             foreach (string str in DMP)
             {
                 //如果结果集有DMP文件，就把文件保存起来
