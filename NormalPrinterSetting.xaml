@@ -142,6 +142,85 @@
                 </StackPanel>
             </Grid>
             
+            <!-- 基本信息 -->
+            <Grid Name="gridMessage" Margin="20" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Right">
+                    <Border Height="25" HorizontalAlignment="Right">
+                        <TextBlock Text="打印头情况" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="30"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="耗材情况" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="30"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="标签情况" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="30"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="打印模式" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Button Name="TestAllSettings" Click="TestAllSettings_Click" Content="测试设置"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Border Height="25"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="是否抬起：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="是否过热：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="切纸：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="碳带：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="标签长度：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="剩余标签：" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Grid.Column="2">
+                    <Border Height="25"/>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtIsHeadOpen" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtIsTooHot" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtIsPaperOut" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtIsRibbonOut" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="30"/>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtLableLength" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtLabelRemain" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Name="txtPrinterMode" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            
             <!-- 高级设置 -->
             <Grid Name="gridHighSetting" Margin="20" Visibility="Hidden">
                 <Grid.ColumnDefinitions>

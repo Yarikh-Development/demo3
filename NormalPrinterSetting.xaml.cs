@@ -28,7 +28,8 @@ namespace demo
             this.printerName = printerName;
             txtPrinterName.Text = printerName;
             RadioButton radioButton = panelMenu.FindName(buttonName) as RadioButton;
-            radioButton.IsChecked = true;          
+            radioButton.IsChecked = true;
+            PrinterHeadStatus();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -37,21 +38,25 @@ namespace demo
             {
                 gridSendFile.Visibility = Visibility.Visible;
                 gridHighSetting.Visibility = Visibility.Hidden;
+                gridMessage.Visibility = Visibility.Hidden;
             }
             if ((bool)btnPrintSetting.IsChecked)
             {
                 gridSendFile.Visibility = Visibility.Hidden;
                 gridHighSetting.Visibility = Visibility.Hidden;
+                gridMessage.Visibility = Visibility.Hidden;
             }
             if ((bool)btnBasicMessage.IsChecked)
             {
                 gridSendFile.Visibility = Visibility.Hidden;
                 gridHighSetting.Visibility = Visibility.Hidden;
+                gridMessage.Visibility = Visibility.Visible;
             }
             if ((bool)btnHighSetting.IsChecked)
             {
                 gridSendFile.Visibility = Visibility.Hidden;
                 gridHighSetting.Visibility = Visibility.Visible;
+                gridMessage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -74,24 +79,28 @@ namespace demo
         {
             gridSendFile.Visibility = Visibility.Visible;
             gridHighSetting.Visibility = Visibility.Hidden;
+            gridMessage.Visibility = Visibility.Hidden;
         }
 
         private void btnBasicMessage_Click(object sender, RoutedEventArgs e)
         {
             gridSendFile.Visibility = Visibility.Hidden;
             gridHighSetting.Visibility = Visibility.Hidden;
+            gridMessage.Visibility = Visibility.Visible;
         }
 
         private void btnPrintSet_Click(object sender, RoutedEventArgs e)
         {
             gridSendFile.Visibility = Visibility.Hidden;
             gridHighSetting.Visibility = Visibility.Hidden;
+            gridMessage.Visibility = Visibility.Hidden;
         }
 
         private void btnHigtSet_Click(object sender, RoutedEventArgs e)
         {
             gridSendFile.Visibility = Visibility.Hidden;
             gridHighSetting.Visibility = Visibility.Visible;
+            gridMessage.Visibility = Visibility.Hidden;
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -181,6 +190,76 @@ namespace demo
             zpl = Printer.SendPrinterCommand(command);
             if (!zpl)
                 MessageBox.Show("指令发送失败！");
+            Printer.ClosePrinter();
+        }
+
+        private void PrinterHeadStatus()
+        {
+            Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+            if (Printer.IsPrinterOnline())
+            {
+                //警告为红色字体
+                if (Printer.IsHeadOpen())
+                {
+                    txtIsHeadOpen.Text = "打印头打开";
+                    txtIsHeadOpen.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
+                }
+                else
+                {
+                    txtIsHeadOpen.Text = "打印头正常";
+                }
+                if (Printer.IsHeadTooHot())
+                {
+                    txtIsTooHot.Text = "打印头过热";
+                    txtIsTooHot.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
+                }
+                else
+                {
+                    txtIsTooHot.Text = "温度正常";
+                }
+                if (Printer.IsPaperOut())
+                {
+                    txtIsPaperOut.Text = "缺纸";
+                    txtIsPaperOut.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
+                }
+                else
+                {
+                    txtIsPaperOut.Text = "纸张正常";
+                }
+                if (Printer.IsRibbonOut())
+                {
+                    txtIsRibbonOut.Text = "碳带缺失";
+                    txtIsRibbonOut.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
+                }
+                else
+                {
+                    txtIsRibbonOut.Text = "碳带正常";
+                }
+                txtLableLength.Text = Printer.LabelLength().ToString();
+                txtLabelRemain.Text = Printer.LabelsRemainingInBatch().ToString();
+                txtPrinterMode.Text = Printer.PrinterMode().ToString();
+            }
+            else
+            {
+                txtIsHeadOpen.Text = "";
+                txtIsTooHot.Text = "";
+                txtIsPaperOut.Text = "";
+                txtIsRibbonOut.Text = "";
+                txtLableLength.Text = "";
+                txtLabelRemain.Text = "";
+                txtPrinterMode.Text = "";
+            }
+            Printer.ClosePrinter();
+        }
+
+        private void TestAllSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+            if (Printer.GetPrinterSettingValus() != null)
+                MessageBox.Show(Printer.GetPrinterSettingValus());
+            else
+                MessageBox.Show("连接失败！");
+            //Printer.GetPrinterAllSetting();
             Printer.ClosePrinter();
         }
     }

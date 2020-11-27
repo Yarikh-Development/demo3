@@ -44,6 +44,10 @@ namespace demo
 	{
 		private static List<City> citys = new List<City>();
 		private static ZebraPrinter printerHTTP = null;
+		private static Zebra.Sdk.Printer.PrinterStatus printerStatus = null;
+		private static ZebraPrinterLinkOs linkOsPrinter = null;
+		//Zebra.Sdk.Settings.
+		//public static bool isPrinterOnline = false;
 
 		public static List<City> Citys
         {
@@ -206,6 +210,8 @@ namespace demo
 				TcpConnection connection = new TcpConnection(ip, port);
 				connection.Open();
 				printerHTTP = ZebraPrinterFactory.GetInstance(connection);
+				linkOsPrinter = ZebraPrinterFactory.CreateLinkOsPrinter(printerHTTP);
+				printerStatus = printerHTTP.GetCurrentStatus();
 			}
 			catch (ConnectionException e)
 			{
@@ -221,6 +227,41 @@ namespace demo
 			}
 
 			return "";
+		}
+
+		public static void GetPrinterAllSetting()
+        {
+			if (printerHTTP != null && linkOsPrinter != null)
+            {
+
+				//HashSet<string> availableSettings = linkOsPrinter.GetAvailableSettings();
+				Dictionary<string, string> allSettingValues = linkOsPrinter.GetAllSettingValues();
+				/*foreach (string setting in availableSettings)
+				{
+					MessageBox.Show($"{setting}: Range = ({linkOsPrinter.GetSettingRange(setting)})");
+				}*/
+				foreach (string settingName in allSettingValues.Keys)
+				{
+					MessageBox.Show($"{settingName}:{allSettingValues[settingName]}");
+					//Console.WriteLine($"{settingName}:{allSettingValues[settingName]}");
+				}
+				//return allSettingValues;
+			}
+            else
+            {
+				MessageBox.Show("连接失败！");
+            }
+			//return null;
+		}
+
+		public static string GetPrinterSettingValus()
+        {
+			if (printerHTTP != null && linkOsPrinter != null)
+            {
+				return linkOsPrinter.GetSettingValue("weblink.ip.conn1.location");
+            }
+			return null;
+
 		}
 
 		//发送文件
@@ -252,7 +293,63 @@ namespace demo
 			{
 				printerHTTP.Connection.Close();
 				printerHTTP = null;
+				printerStatus = null;
+				linkOsPrinter = null;
 			}
+		}
+		
+		//查看打印机打印头是否打开
+		public static bool IsHeadOpen()
+        {
+			return printerStatus.isHeadOpen;
+		}
+
+		//打印机打印头温度是否过高
+		public static bool IsHeadTooHot()
+        {
+			return printerStatus.isHeadTooHot;
+        }
+
+		//打印机切纸是否用尽
+		public static bool IsPaperOut()
+        {
+			return printerStatus.isPaperOut;
+        }
+
+		//打印机是否准备好
+		public static bool IsReadyToPrint()
+        {
+			return printerStatus.isReadyToPrint;
+        }
+
+		//碳带是否用尽
+		public static bool IsRibbonOut()
+        {
+			return printerStatus.isRibbonOut;
+        }
+
+		//标签长度
+		public static int LabelLength()
+        {
+			return printerStatus.labelLengthInDots;
+        }
+
+		//剩余标签
+		public static int LabelsRemainingInBatch()
+        {
+			return printerStatus.labelsRemainingInBatch;
+        }
+
+		//打印模式
+		public static ZplPrintMode PrinterMode()
+        {
+			return printerStatus.printMode;
+        }
+
+		//打印机是否在线
+		public static bool IsPrinterOnline()
+        {
+			return printerHTTP != null && printerStatus != null;
 		}
 
 		//查找ItemsControl里的第一个子项

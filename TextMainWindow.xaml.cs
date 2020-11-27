@@ -23,37 +23,18 @@ namespace demo
     /// </summary>
     public partial class Window1 : Window
     {
-        /*TextFiles即是RelationPage*/
-        //private TextMenu textMenu;
-        //private TextFile textFiles;
-        //private TextSearchPrints textSearchPrints;
-        TextSearchPrints textSearchPrints = new TextSearchPrints();
-        TextFiles textFiles = new TextFiles();
-        TextMenu textMenu = new TextMenu();
-        TextLogPage textLogPage = new TextLogPage();
-        TextHighPrinter TextHighPrinter = new TextHighPrinter();
-
-        //private TextLogPage textLogPage;
+        private TextSearchPrints textSearchPrints = new TextSearchPrints();
+        private TextFiles textFiles = null;
+        private TextMenu textMenu = new TextMenu();
+        private TextLogPage textLogPage = null;
+        private TextHighPrinter TextHighPrinter = new TextHighPrinter();
 		private RelationPage relationPage;
-        private TextPicturesPage textPicturesPage;
-
-        //private RadioButton radioButton;
-
-
         public static bool isWriteLog;
         private ScanerHook listener = new ScanerHook();
-
-
-		//string State_TextBoxs = TextPicturesPage.State_TextBox;
-
-
         public Window1()
         {
             InitializeComponent();
             FileTools.Init();
-            TabItem tabitem = new TabItem();
-            tabitem.Header = "图片";
-            Frame tabFrame = new Frame();
         }
 
         //窗口缩放
@@ -85,7 +66,6 @@ namespace demo
         //管理打印机
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
             frameShowPages.Content = textSearchPrints;          
         }
         //扫描打印
@@ -97,13 +77,15 @@ namespace demo
         //文件
 		private void btnFiles_Click(object sender, RoutedEventArgs e)
 		{
-			frameShowPages.Content = textFiles;
+            textFiles = new TextFiles();
+            frameShowPages.Content = textFiles;
 		}
 
         //查看
 		private void btnLogPage_Click(object sender, RoutedEventArgs e)
 		{
-			frameShowPages.Content = textLogPage;
+            textLogPage = new TextLogPage();
+            frameShowPages.Content = textLogPage;
 		}
 
         //主界面？

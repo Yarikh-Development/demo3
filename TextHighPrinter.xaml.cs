@@ -42,11 +42,6 @@ namespace demo
             btnStopService.IsEnabled = false;
         }
 
-        private void aaa(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void txtDialogBox_Click(object sender, RoutedEventArgs e)
         {
             try
