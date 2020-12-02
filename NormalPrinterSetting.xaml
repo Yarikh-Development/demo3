@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
+                <ResourceDictionary Source="Style/RadioButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="14"/>
@@ -68,6 +69,27 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="PasswordBox">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="PasswordBox">
+                            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}" 
+                                    Background="{TemplateBinding Panel.Background}" 
+                                    Name="border" SnapsToDevicePixels="True">
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="PART_ContentHost" Focusable="False" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#1578F6" TargetName="border"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid >
@@ -78,6 +100,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="2" >
             <TextBlock Name="txtPrinterName" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top"
@@ -93,7 +116,7 @@
             </StackPanel>
         </Grid>
 
-        <Border Grid.Row="1" BorderBrush="#A8A4AD" BorderThickness="0 0 1 0" Margin="0 10"/>
+        <Border Grid.Row="1" Grid.RowSpan="2" BorderBrush="#A8A4AD" BorderThickness="0 0 1 0" Margin="0 10"/>
 
         <StackPanel Name="panelMenu" Grid.Row="1" VerticalAlignment="Top" Margin="0 10 0 0">
             <RadioButton Name="btnSendFile" Click="btnSendFile_Click" Content="发送文件" Height="30" HorizontalContentAlignment="Center"
@@ -143,7 +166,7 @@
             </Grid>
             
             <!-- 基本信息 -->
-            <Grid Name="gridMessage" Margin="20" Visibility="Visible">
+            <Grid Name="gridMessage" Margin="20" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="80"/>
@@ -165,9 +188,9 @@
                     </Border>
                     <Border Height="30"/>
                     <Border Height="30"/>
-                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                    <!--<Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
                         <TextBlock Text="打印模式" VerticalAlignment="Center" FontSize="14"/>
-                    </Border>
+                    </Border>-->
                     <Button Name="TestAllSettings" Click="TestAllSettings_Click" Content="测试设置"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
@@ -215,9 +238,95 @@
                     <Border Height="25" Margin="0 5 0 0">
                         <TextBlock Name="txtLabelRemain" VerticalAlignment="Center" FontSize="14"/>
                     </Border>
-                    <Border Height="25" Margin="0 5 0 0">
+                    <!--<Border Height="25" Margin="0 5 0 0">
                         <TextBlock Name="txtPrinterMode" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>-->
+                </StackPanel>
+            </Grid>
+            
+            <!-- 打印设置 -->
+            <Grid Name="gridPrintSetting" Margin="20" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Right">
+                    <Border Height="25" HorizontalAlignment="Right">
+                        <TextBlock Text="修改密码" VerticalAlignment="Center" FontSize="14"/>
                     </Border>
+                    <Border Height="18"/>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="打印速度" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="打印浓度" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="操作模式" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="纸张类型" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                    <Border Height="25" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="跟踪模式" VerticalAlignment="Center" FontSize="14"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <!-- 密码 -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="25">
+                        <PasswordBox Name="cbbPassword1" Width="40" Background="White" Margin="0 0 10 0" MaxLength="1"/>
+                        <PasswordBox Name="cbbPassword2" Width="40" Background="White" Margin="0 0 10 0" MaxLength="1"/>
+                        <PasswordBox Name="cbbPassword3" Width="40" Background="White" Margin="0 0 10 0" MaxLength="1"/>
+                        <PasswordBox Name="cbbPassword4" Width="40" Background="White" Margin="0 0 10 0" MaxLength="1"/>
+                    </StackPanel>
+                    <TextBlock Text="输入4位0-9的密码！" FontSize="10" Height="16" Margin="0 2 0 0"/>
+                    <ComboBox Name="cbbPrintSpeed" Margin="0 5 0 0" Height="25" Width="60" HorizontalAlignment="Left" SelectedIndex="0">
+                        <ComboBoxItem Content="1.0"/>
+                        <ComboBoxItem Content="2.0"/>
+                        <ComboBoxItem Content="3.0"/>
+                        <ComboBoxItem Content="4.0"/>
+                        <ComboBoxItem Content="5.0"/>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <!--<ComboBox Name="cbbPrintRibbon" Margin="0 5 0 0" Height="25" Width="60" HorizontalAlignment="Left" SelectedIndex="0"/>-->
+                        <TextBox Name="txtPrintRibbon" Margin="0 5 0 0" Height="25" Width="60" HorizontalAlignment="Left" MaxLength="4"
+                                 KeyDown="txtPrintRibbon_KeyDown" TextChanged="txtPrintRibbon_TextChanged"/>
+                    </StackPanel>
+                    
+                    <ComboBox Name="cbbPrintMode" Margin="0 5 0 0" Height="25" FontSize="14">
+                        <!--<ComboBoxItem Content="撕纸"/>
+                        <ComboBoxItem Content="剥纸"/>
+                        <ComboBoxItem Content="回卷"/>
+                        <ComboBoxItem Content="切刀"/>
+                        <ComboBoxItem Content="延迟剪切"/>
+                        <ComboBoxItem Content="无背衬剥纸"/>
+                        <ComboBoxItem Content="无背衬回卷"/>
+                        <ComboBoxItem Content="无背衬切纸"/>
+                        <ComboBoxItem Content="粘贴器"/>
+                        <ComboBoxItem Content="流"/>
+                        <ComboBoxItem Content="RFID"/>
+                        <ComboBoxItem Content=""/>-->
+                        <ComboBoxItem Content="tear off"/>
+                        <ComboBoxItem Content="peel off"/>
+                        <ComboBoxItem Content="rewind"/>
+                        <ComboBoxItem Content="applicator"/>
+                        <ComboBoxItem Content="cutter"/>
+                        <ComboBoxItem Content="delayed cut"/>
+                        <ComboBoxItem Content="RFID"/>
+                        <ComboBoxItem Content="linerless peel"/>
+                        <ComboBoxItem Content="linerless rewind"/>
+                        <ComboBoxItem Content="kiosk"/>
+                        <ComboBoxItem Content="linerless tear"/>
+                        <ComboBoxItem Content="stream"/>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Height="25" >
+                        <RadioButton Name="btnThermalDirect" Style="{StaticResource RadioButtonStyle1}"
+                                     Content="热敏" FontSize="14" Margin="0 0 20 0" VerticalAlignment="Center"/>
+                        <RadioButton Name="btnThermalTranster" Content="热转印" FontSize="14" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Border Height="30"/>
+                    <Button Name="btnSave" Click="btnSave_Click" Content="保存" Margin="0 10 0 0" Height="25" HorizontalAlignment="Left" Width="60"/>
                 </StackPanel>
             </Grid>
             
@@ -244,5 +353,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <Border Grid.Row="2" Grid.Column="1" CornerRadius="3" BorderThickness="0" Margin="10" Background="#CBCBCB">
+            <TextBlock Name="txtLogMessage" Margin="5 0 0 0" Foreground="#FF0000" VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </Window>

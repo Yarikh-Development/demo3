@@ -69,6 +69,27 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="PasswordBox">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="PasswordBox">
+                            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}" 
+                                    Background="{TemplateBinding Panel.Background}" 
+                                    Name="border" SnapsToDevicePixels="True">
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="PART_ContentHost" Focusable="False" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#1578F6" TargetName="border"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>

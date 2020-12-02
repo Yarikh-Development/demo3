@@ -21,7 +21,7 @@ using Zebra.Sdk.Printer;
 
 namespace demo
 {
-	public enum PrinterStatus
+	/*public enum PrinterStatus
 	{
 		其他状态 = 1,
 		未知,
@@ -31,6 +31,11 @@ namespace demo
 		停止打印,
 		打印中,
 		离线
+	}*/
+	public enum PrinterStatus
+	{
+		离线,
+		在线
 	}
 
 	public class City
@@ -66,7 +71,7 @@ namespace demo
 		/// </summary>
 		/// <param name="PrinterDevice"></param>
 		/// <returns></returns>
-		public static PrinterStatus GetPrinterStatus(string PrinterDevice)
+		/*public static PrinterStatus GetPrinterStatus(string PrinterDevice)
 		{
 			PrinterStatus ret = 0;
 			string path = @"win32_printer.DeviceId='" + PrinterDevice + "'";
@@ -74,6 +79,25 @@ namespace demo
 			printer.Get();
 			ret = (PrinterStatus)Convert.ToInt32(printer.Properties["PrinterStatus"].Value);
 			return ret;
+		}*/
+
+		//获取网络打印机在线状态
+		private static PrinterStatus GetPrinterStatus(string printerName)
+        {
+            try
+            {
+				PrinterStatus ret = 0;
+				string result = LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+				if (IsPrinterOnline())
+					ret = (PrinterStatus)1;
+				else
+					ret = (PrinterStatus)0;
+				return ret;
+			}
+            finally
+            {
+				ClosePrinter();
+            }
 		}
 
 		//发送文件
@@ -254,15 +278,7 @@ namespace demo
 			//return null;
 		}
 
-		public static string GetPrinterSettingValus()
-        {
-			if (printerHTTP != null && linkOsPrinter != null)
-            {
-				return linkOsPrinter.GetSettingValue("weblink.ip.conn1.location");
-            }
-			return null;
-
-		}
+		
 
 		//发送文件
 		public static bool SendFile(string filePath)
@@ -346,6 +362,28 @@ namespace demo
 			return printerStatus.printMode;
         }
 
+		//通过指令ID设置打印机（! U1 setvar "input.capture" "run"，其中的"input.capture"为指令ID）
+		public static bool SetPrintSetting(string settingID, string value)
+        {
+			if (printerHTTP != null && linkOsPrinter != null)
+			{
+				linkOsPrinter.SetSetting(settingID, value);
+				return true;
+			}
+			return false;
+        }
+
+		//通过指令ID获取打印机设置信息
+		public static string GetPrinterSettingValus(string settingID)
+		{
+			if (printerHTTP != null && linkOsPrinter != null)
+			{
+				return linkOsPrinter.GetSettingValue(settingID);
+			}
+			return "";
+
+		}
+
 		//打印机是否在线
 		public static bool IsPrinterOnline()
         {
@@ -408,27 +446,5 @@ namespace demo
 			}
 			return null;
 		}
-
-		/*private void txtPrintersName_TouchDown(object sender, TouchEventArgs e)
-        {
-            if (itemsPrinters.SelectedIndex < 0) return;
-
-            ListBoxItem myListBoxItem = (ListBoxItem)(NewVideoListBox.ItemContainerGenerator.ContainerFromIndex(NewVideoListBox.SelectedIndex));
-            ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-            MaterialDesignThemes.Wpf.Badged badged = (MaterialDesignThemes.Wpf.Badged)myDataTemplate.FindName("CountingBadge", myContentPresenter);
-
-            TextBlock likeText = (TextBlock)myDataTemplate.FindName("LikeText", myContentPresenter);
-
-            likeText.Foreground = new SolidColorBrush(Colors.Red);
-
-
-
-            if (badged.Badge == null)
-                badged.Badge = 0;
-            int i;
-            int.TryParse(badged.Badge.ToString(), out i);
-            badged.Badge = i + 1;
-        }*/
 	}
 }

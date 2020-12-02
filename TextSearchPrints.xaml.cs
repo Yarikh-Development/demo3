@@ -22,6 +22,7 @@ namespace demo
     public partial class TextSearchPrints : Page
     {
         Printer printer;
+        private string printerName = "";
         public TextSearchPrints()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace demo
                 Button button = buttonItems.First();
                 TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
                 txtPrinterName2.Text = txt.Text;
+                
             }
             
 
@@ -60,6 +62,7 @@ namespace demo
                 {
                     TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
                     txtPrinterName2.Text = txt.Text;
+                    printerName = txt.Text;
                 }                   
             }
         }
@@ -71,26 +74,32 @@ namespace demo
 
         private void btnSentFile_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text,btnSendFile.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnSendFile.Name);
             normalPrinter.ShowDialog();
         }
 
         private void btnHighSetting_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnHighSetting.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnHighSetting.Name);
             normalPrinter.ShowDialog();
         }
 
         private void btnPrintSetting_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnPrintSetting.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnPrintSetting.Name);
             normalPrinter.ShowDialog();
         }
 
         private void btnBasicMessage_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(txtPrinterName2.Text, btnBasicMessage.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnBasicMessage.Name);
             normalPrinter.ShowDialog();
+        }
+
+        private void btnRafresh_Click(object sender, RoutedEventArgs e)
+        {
+            Printer.SetPrinters(itemsPrinters);
+            printersCount.Text = Printer.SetPrinters().Count.ToString();
         }
     }
 }

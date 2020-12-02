@@ -54,7 +54,8 @@
                             <TextBlock Text="&#xec83;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
 
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                        <RadioButton Name="btnRafresh" Click="btnRafresh_Click" Style="{DynamicResource defaultRadioButton}" 
+                                     ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="15"/>
                         </RadioButton>
 
