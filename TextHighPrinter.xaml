@@ -62,17 +62,18 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <RadioButton x:Name="btnSetting" Click="btnSetting_Click" Style="{DynamicResource defaultRadioButton}" ToolTip="设置" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                        <Button x:Name="btnSetting" Click="btnSetting_Click" Style="{DynamicResource iconButton}" 
+                                ToolTip="设置" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe6d3;" FontFamily="/#iconfont" FontSize="15"/>
-                        </RadioButton>
+                        </Button>
 
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
+                        <Button Style="{DynamicResource iconButton}" ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="15"/>
-                        </RadioButton>
+                        </Button>
 
-                        <RadioButton Style="{DynamicResource defaultRadioButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
+                        <Button Style="{DynamicResource iconButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
                             <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
-                        </RadioButton>
+                        </Button>
                     </StackPanel>
                 </UniformGrid>
 

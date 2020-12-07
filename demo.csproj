@@ -156,6 +156,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPrinter.xaml.cs">
+      <DependentUpon>AddPrinter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AnalysisDMP.xaml.cs">
       <DependentUpon>AnalysisDMP.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
     <Compile Include="TextMainWindow.xaml.cs">
       <DependentUpon>TextMainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddPrinter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AnalysisDMP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

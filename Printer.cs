@@ -42,7 +42,8 @@ namespace demo
 	{
 		public int ID { get; set; }
 		public string Name { get; set; }
-        public PrinterStatus Status { get; set; }
+        public PrinterStatus NetStatus { get; set; }
+        public string Port { get; set; }
     }
 
 	class Printer
@@ -166,6 +167,13 @@ namespace demo
 			return "";
 		}
 
+		//获取注册表打印机的端口
+		private static string GetprinterPort(string printerName)
+        {
+			string port = GetRegistryData(printerName + "\\DsSpooler", "portName");
+			return port;
+        }
+
 		//获取斑马打印机列表
 		public static void SetPrinters(ComboBox comboBox)
         {
@@ -175,7 +183,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
+					list.Add(new City { ID = ++cnt, Name = printerName, NetStatus = GetPrinterStatus(printerName) });
 				}
 			}
 			comboBox.ItemsSource = list;
@@ -191,7 +199,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName, Status = GetPrinterStatus(printerName) });
+					list.Add(new City { ID = ++cnt, Name = printerName, NetStatus = GetPrinterStatus(printerName) });
 				}
 			}
 			itemsControl.ItemsSource = list;
@@ -206,8 +214,8 @@ namespace demo
 			foreach (string printerName in PrinterSettings.InstalledPrinters)
 			{
 				if (IsZebraPrinter(printerName))
-				{
-					list.Add(new City { ID = ++cnt, Name = printerName });
+				{					
+					list.Add(new City { ID = ++cnt, Name = printerName, Port = GetprinterPort(printerName) });
 				}
 			}
 			return list;

@@ -101,5 +101,10 @@ namespace demo
             Printer.SetPrinters(itemsPrinters);
             printersCount.Text = Printer.SetPrinters().Count.ToString();
         }
+
+        private void btnAddPrinter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
