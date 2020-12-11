@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Net.NetworkInformation;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer;
+using System.IO;
 //using System.Windows.FrameworkElement;
 
 namespace demo
@@ -38,11 +39,18 @@ namespace demo
 		在线
 	}
 
+	public enum PrinterReadyStatus
+    {
+		空,
+		已准备,
+		未准备
+    }
 	public class City
 	{
 		public int ID { get; set; }
 		public string Name { get; set; }
         public PrinterStatus NetStatus { get; set; }
+		public string WareStatus { get; set; }
         public string Port { get; set; }
     }
 
@@ -52,10 +60,13 @@ namespace demo
 		private static ZebraPrinter printerHTTP = null;
 		private static Zebra.Sdk.Printer.PrinterStatus printerStatus = null;
 		private static ZebraPrinterLinkOs linkOsPrinter = null;
-		//Zebra.Sdk.Settings.
-		//public static bool isPrinterOnline = false;
+		private static PrinterStatus ret;
+		private static PrinterReadyStatus rets;
+		public static int printerCount { get; set; }
+        //Zebra.Sdk.Settings.
+        //public static bool isPrinterOnline = false;
 
-		public static List<City> Citys
+        public static List<City> Citys
         {
 			get { return citys; }
             set { citys = value; }
@@ -83,17 +94,25 @@ namespace demo
 		}*/
 
 		//获取网络打印机在线状态
-		private static PrinterStatus GetPrinterStatus(string printerName)
+		private static void GetPrinterStatus(string printerName)
         {
             try
             {
-				PrinterStatus ret = 0;
+				ret = 0;
+				rets = 0;
 				string result = LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
 				if (IsPrinterOnline())
+                {
 					ret = (PrinterStatus)1;
+					if (IsReadyToPrint())
+						rets = (PrinterReadyStatus)1;
+					else
+						rets = (PrinterReadyStatus)2;
+				}					
 				else
+                {
 					ret = (PrinterStatus)0;
-				return ret;
+				}				
 			}
             finally
             {
@@ -183,7 +202,7 @@ namespace demo
 			{
 				if (IsZebraPrinter(printerName))
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName, NetStatus = GetPrinterStatus(printerName) });
+					list.Add(new City { ID = ++cnt, Name = printerName });
 				}
 			}
 			comboBox.ItemsSource = list;
@@ -193,16 +212,32 @@ namespace demo
 		//获取斑马打印机列表
 		public static void SetPrinters(ItemsControl itemsControl)
 		{
-			int cnt = 0;
-			List<City> list = new List<City>();
-			foreach (string printerName in PrinterSettings.InstalledPrinters)
-			{
-				if (IsZebraPrinter(printerName))
+            try
+            {
+				int cnt = 0;
+				List<City> list = new List<City>();
+				string filePathExecutePrinter = FileTools.executePrintersFilePath;
+				FileStream fileStreamExecutePrinter = new FileStream(filePathExecutePrinter, FileMode.OpenOrCreate, FileAccess.Read);
+				StreamReader streamReaderExecutePrinter = new StreamReader(fileStreamExecutePrinter);
+				string line;
+				string[] data;
+				while ((line = streamReaderExecutePrinter.ReadLine()) != null)
 				{
-					list.Add(new City { ID = ++cnt, Name = printerName, NetStatus = GetPrinterStatus(printerName) });
+					data = line.Split(';');
+					GetPrinterStatus(data[0]);
+					list.Add(new City {
+						ID = ++cnt, Name = data[0], Port = data[1], NetStatus = ret, WareStatus = rets == 0 ? "" : rets.ToString()
+					});
 				}
+				printerCount = list.Count;
+				streamReaderExecutePrinter.Close();
+				itemsControl.ItemsSource = list;
 			}
-			itemsControl.ItemsSource = list;
+            catch (Exception e)
+            {
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + e.Message);
+            }
+			
 
 		}
 

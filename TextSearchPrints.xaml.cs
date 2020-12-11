@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,14 +25,16 @@ namespace demo
     {
         Printer printer;
         private string printerName = "";
+        private AddPrinter add = null;
+        //private ObservableCollection<AddPrintersMessage> executePrinters = null;
         public TextSearchPrints()
         {
             InitializeComponent();
             //Printer.SetPrinters();
             Printer.SetPrinters(itemsPrinters);
-            printersCount.Text =  Printer.SetPrinters().Count.ToString();
+            printersCount.Text =  Printer.printerCount.ToString();
             //txtPrintersState.Text = Printer.GetPrinterStatus()
-
+            //AddExecutePrinters();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -99,12 +103,13 @@ namespace demo
         private void btnRafresh_Click(object sender, RoutedEventArgs e)
         {
             Printer.SetPrinters(itemsPrinters);
-            printersCount.Text = Printer.SetPrinters().Count.ToString();
+            printersCount.Text = Printer.printerCount.ToString();
         }
 
         private void btnAddPrinter_Click(object sender, RoutedEventArgs e)
         {
-
+            add = new AddPrinter();
+            add.ShowDialog();
         }
     }
 }
