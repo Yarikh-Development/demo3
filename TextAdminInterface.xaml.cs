@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,15 +15,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Button = System.Windows.Controls.Button;
 
 namespace demo
 {
+
+	public class CommandContent
+    {
+        public string Direct { get; set; }
+        public string Explain { get; set; }
+    }
+
     /// <summary>
     /// TextAdminInterface.xaml 的交互逻辑
     /// </summary>
     public partial class TextAdminInterface : Page
     {
-        public TextAdminInterface()
+		private ObservableCollection<CommandContent> commandContentSGD = null;
+		private ObservableCollection<CommandContent> commandContentZPL = null;
+		public TextAdminInterface()
         {
             InitializeComponent();
 
@@ -103,10 +114,12 @@ namespace demo
         {
 			try
 			{
+				commandContentZPL = new ObservableCollection<CommandContent>();
 				string filePathZPL = FileTools.commandPath + "\\commandZPL.txt";
 				FileStream fileStreamZPL = new FileStream(filePathZPL, FileMode.OpenOrCreate, FileAccess.Read);
 				StreamReader streamReaderZPL = new StreamReader(fileStreamZPL);
 
+				commandContentSGD = new ObservableCollection<CommandContent>();
 				string filePathSGD = FileTools.commandPath + "\\commandSGD.txt";
 				FileStream fileStreamSGD = new FileStream(filePathSGD, FileMode.OpenOrCreate, FileAccess.Read);
 				StreamReader streamReaderSGD = new StreamReader(fileStreamSGD);
@@ -116,14 +129,17 @@ namespace demo
 				while ((line = streamReaderSGD.ReadLine()) != null)
 				{
 					data = line.Split(';');
-					listView2.Items.Add(new { Direct = data[0], Explain = data[1] });
+					commandContentSGD.Add(new CommandContent{ Direct = data[0], Explain = data[1] });
 				}
-				//Array.Clear(data, 0, data.Length);
+				listView2.ItemsSource = commandContentSGD;
+
 				while ((line = streamReaderZPL.ReadLine()) != null)
 				{
 					data = line.Split(';');
-					listView.Items.Add(new { Direct = data[0], Explain = data[1] });
+					commandContentZPL.Add(new CommandContent{ Direct = data[0], Explain = data[1] });
 				}
+				listView.ItemsSource = commandContentZPL;
+
 				streamReaderZPL.Close();
 				streamReaderSGD.Close();
 			}
@@ -139,9 +155,24 @@ namespace demo
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-			listView.Items.Clear();
-			listView2.Items.Clear();
+			commandContentZPL.Clear();
+			commandContentSGD.Clear();
 		}
-    }
+
+        private void btnSGDDelete_Click(object sender, RoutedEventArgs e)
+        {
+			var btn = sender as Button;
+
+			var c = btn.DataContext as CommandContent;
+
+			//MessageBox.Show(c.id);
+
+			//移除当前点击按钮所在行
+			commandContentSGD.Remove(c);
+
+			//刷新item
+			//list1.Items.Refresh();
+		}
+	}
 
 }

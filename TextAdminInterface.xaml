@@ -9,19 +9,46 @@
       Title="TextAdminInterface">
     <Page.Resources>
         <ResourceDictionary>
+            <Style x:Key="OperateButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Name="border2" BorderBrush="#707070" BorderThickness="1" Panel.ZIndex="0"/>
+                                <Border Name="border"/>
+                                <ContentPresenter Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#000000" TargetName="border"/>
+                                    <Setter Property="Opacity" Value="0.1" TargetName="border"/>
+                                    <!--<Setter Property="BorderBrush" Value="#1578F6" TargetName="border2"/>-->
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#000000" TargetName="border"/>
+                                    <Setter Property="Opacity" Value="0.2" TargetName="border"/>
+                                    <!--<Setter Property="BorderBrush" Value="#1578F6" TargetName="border2"/>-->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
     <Grid Background="#EEEDEF">
         <Grid.RowDefinitions>
-            <!--行-->
             <RowDefinition Height="40"/>
-            <!--<RowDefinition Height="20"/>-->
             <RowDefinition/>
-            <!--<RowDefinition Height="60"/>-->
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="0 0 0 8">
@@ -33,70 +60,20 @@
             </StackPanel>
         </Grid>
 
-        <!--<Grid Grid.Row="1">
-            <ListView x:Name="Relation_ListView" HorizontalAlignment="Center" Height="auto" VerticalAlignment="Top" Width="900" >
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="BorderBrush">
-                            <Setter.Value>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="LightBlue" Offset="0.5"/>
-                                    <GradientStop Color="LightBlue" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="BorderThickness" Value="0.4"/>
-                        <Setter Property="Height" Value="25"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200" Header="指令" DisplayMemberBinding="{Binding Path=number}"/>
-                        <GridViewColumn Width="350" Header="说明" DisplayMemberBinding="{Binding Path=template}"/>
-                        <GridViewColumn Width="300" Header="操作" DisplayMemberBinding="{Binding Path=printer}"/>
-                    </GridView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 5 0 0">
+            <Button x:Name="btnSetting" Style="{DynamicResource iconButton}" 
+                    ToolTip="保存" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
+                <TextBlock Text="&#xec09;" FontFamily="/#iconfont" FontSize="18"/>
+            </Button>
 
-                </ListView.View>
+            <Button Style="{DynamicResource iconButton}" ToolTip="添加" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
+                <TextBlock Text="&#xeb8c;" FontFamily="/#iconfont" FontSize="18"/>
+            </Button>
 
-
-            </ListView>
-
-
-        </Grid>
-        <Grid Grid.Row="2">
-
-            <ListView x:Name="Relation_ListView2" HorizontalAlignment="Center" Height="auto" Width="900" >
-           
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200" Header="^LL" />
-                        <GridViewColumn Width="350" Header="设置标签长度" />
-                        <GridViewColumn Width="300">
-                            <StackPanel Orientation="Horizontal"  >
-
-                                <RadioButton x:Name="Preview"  IsChecked="True" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-
-                                    <TextBlock Text="预览" FontSize="16"  />
-                                </RadioButton>
-
-                                <RadioButton x:Name="Copy" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-                                    <TextBlock Text="复制" FontSize="16"/>
-                                </RadioButton>
-                                <RadioButton x:Name="Delete" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
-                                    <TextBlock Text="删除" FontSize="16"/>
-                                </RadioButton>
-                            </StackPanel>
-                        </GridViewColumn>
-                  
-                    </GridView>
-
-                </ListView.View>
-
-
-            </ListView>
-
-        </Grid>-->
+            <Button Style="{DynamicResource iconButton}" ToolTip="管理全部" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
+                <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="18"/>
+            </Button>
+        </StackPanel>
 
         <Grid x:Name="ZPL" Grid.Row="1" Background="White" VerticalAlignment="Top" Visibility="Visible">
 
@@ -107,13 +84,19 @@
                     <GridView>
                         <GridViewColumn Header="指令" Width="300" DisplayMemberBinding="{Binding Path=Direct}"/>
                         <GridViewColumn Header="说明" Width="200" DisplayMemberBinding="{Binding Path=Explain}"/>
-                        <GridViewColumn Header="设置" Width="200" DisplayMemberBinding="{x:Null}">
-
-                            <!--<StackPanel Orientation="Horizontal">
-                                        <Button Width="30" Content="预览" Click="Preview_Click" />
-                                        <Button Width="30" Content="复制" Click="Copy_Click" />
-                                        <Button Width="30" Content="删除" Click="Delete_Click" />
-                            </StackPanel>-->
+                        <GridViewColumn Header="设置" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Preview_Click"
+                                                Width="50" Content="编辑" Margin="0 0 5 0"/>
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                                Width="50" Content="复制" Margin="0 0 5 0"/>
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                                Width="50" Content="删除" Margin="0 0 5 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
 
                         </GridViewColumn>
 
@@ -130,17 +113,18 @@
                     <GridView>
                         <GridViewColumn x:Name="col1" Width="300" Header="指令1" DisplayMemberBinding="{Binding Path=Direct}"/>
                         <GridViewColumn Width="200" Header="说明" DisplayMemberBinding="{Binding Path=Explain}"/>
-                        <GridViewColumn Width="200" Header="操作" DisplayMemberBinding="{Binding Path=Operate}">
+                        <GridViewColumn Width="200" Header="操作" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <RadioButton Width="50" Content="预览" Click="Preview_Click" />
-                                        <RadioButton Width="50" Content="复制" Click="Copy_Click" />
-                                        <RadioButton Width="50" Content="删除" Click="Copy_Click" />
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Preview_Click"
+                                                Width="50" Content="编辑" Margin="0 0 5 0"/>
+                                        <Button Style="{StaticResource OperateButtonStyle}"  Click="Copy_Click"
+                                                Width="50" Content="复制" Margin="0 0 5 0"/>
+                                        <Button Name="btnSGDDelete" Click="btnSGDDelete_Click" Style="{StaticResource OperateButtonStyle}"
+                                                Width="50" Content="删除" Margin="0 0 5 0"/>
                                     </StackPanel>
-
                                 </DataTemplate>
-
                             </GridViewColumn.CellTemplate>
 
                         </GridViewColumn>

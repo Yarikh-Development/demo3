@@ -663,7 +663,7 @@ namespace WebSocketConsole
 
         private void listView1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            msCurrentSelectedDeviceSN = "";
+            /*msCurrentSelectedDeviceSN = "";
             // user clicked an item of listview control
             if (listView1.SelectedItems.Count == 1)
             {               
@@ -671,7 +671,7 @@ namespace WebSocketConsole
                 frm.Title = "Device:" + msCurrentSelectedDeviceSN;
                 //将DeviceDetails从窗体转成页面，下面代码需要注释
                 //frm.ShowDialog();
-            }
+            }*/
         } 
 
         public static string json_Create_message_for_PrintLabel(String sSN, String sData)
@@ -709,7 +709,7 @@ namespace WebSocketConsole
 
         private void dialog_Click(object sender, RoutedEventArgs e)
         {
-            try
+            /*try
             {
                 DeviceDetails deviceDetails = new DeviceDetails(this);
                 deviceDetails.Title = "Device:" + msCurrentSelectedDeviceSN;
@@ -719,7 +719,7 @@ namespace WebSocketConsole
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
-            }
+            }*/
         }
     }
 }

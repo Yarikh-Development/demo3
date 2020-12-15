@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:demo.Style">
+                    xmlns:local="clr-namespace:WebSocketConsole.Style">
     <Style x:Key="RadioButtonStyle1" TargetType="{x:Type RadioButton}">
         <Setter Property="Template">
             <Setter.Value>

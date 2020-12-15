@@ -97,10 +97,10 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBox.Style>
-                            </TextBox>                            
-                            <RadioButton Style="{DynamicResource defaultRadioButton}" Margin="0 0 10 0">
-                                <TextBlock Text="&#xe627;" FontFamily="/#iconfont" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            </RadioButton>
+                            </TextBox>
+                            <Button Style="{DynamicResource iconButton}" Margin="0 0 5 0">
+                                <TextBlock Text="&#xe6c9;" FontFamily="/#iconfont" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Button>
                             
                         </StackPanel>
                         

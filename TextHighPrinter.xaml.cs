@@ -47,7 +47,7 @@ namespace demo
             try
             {                
                 //skipPages.Content = deviceDetails;
-                deviceDetails = new DeviceDetails(mainWindow);
+                deviceDetails = new DeviceDetails(mainWindow, txtPrinterSN.Text, FileTools.commandPath);
                 //deviceDetails.ShowDialog();
                 skipPages.Content = deviceDetails;
             }
@@ -224,7 +224,7 @@ namespace demo
                 if (button.IsFocused)
                 {
                     TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
-                    txtPrinterSN.Text = txt.Text;
+                    txtPrinterSN.Text = txt.Text.Substring(1);
                 }
             }
         }
