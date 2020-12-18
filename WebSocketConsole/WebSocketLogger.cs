@@ -48,24 +48,42 @@ namespace WebSocketsCmd
 
         public void Error(String LogFileName, Type type, string format, params object[] args)
         {
-            if (LogFileName == "")
+            try
             {
-                LogFileName = AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyyMMdd") + ".log";
+                if (LogFileName == "")
+                {
+                    LogFileName = AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyyMMdd") + ".log";
+                }
+                string logMessage = format.Length > 1024 * 16 ? format.Substring(0, 1024 * 16) + "..." : format;
+                logMessage = string.Format(logMessage, args);
+                // Trace.TraceError(logMessage, args);
+                System.IO.File.AppendAllText(LogFileName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + logMessage + Environment.NewLine);
             }
-            string logMessage = format.Length > 1024 * 16 ? format.Substring(0, 1024 * 16) + "..." : format;
-            logMessage = string.Format(logMessage, args);
-           // Trace.TraceError(logMessage, args);
-            System.IO.File.AppendAllText(LogFileName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + logMessage + Environment.NewLine);
+            catch (Exception)
+            {
+                //在停止WebLink服务时有几率抛出异常
+                //先不做处理
+            }
+            
         }
 
         public void Error(String LogFileName, Type type, Exception exception)
         {
-            if (LogFileName == "")
+            try
             {
-                LogFileName = AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyyMMdd") + ".log";
+                if (LogFileName == "")
+                {
+                    LogFileName = AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyyMMdd") + ".log";
+                }
+                Error(LogFileName, type, "{0}", exception);
+                System.IO.File.AppendAllText(LogFileName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + exception.Message + Environment.NewLine);
             }
-            Error(LogFileName,type, "{0}", exception);
-            System.IO.File.AppendAllText(LogFileName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + exception.Message  + Environment.NewLine);
+            catch (Exception)
+            {
+
+                //同上，有可能会抛异常，但不知道怎么解决
+            }
+            
         }
     }
 }

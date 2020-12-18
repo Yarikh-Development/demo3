@@ -13,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -166,6 +167,7 @@
         <Grid Grid.Column="1">
             <TextBlock Name="txtPrinterSN" Margin="10" FontSize="14"/>
             <StackPanel Orientation="Horizontal" Margin="10 10 20 0" HorizontalAlignment="Right">
+                <RadioButton Name="btnHome" Click="btnHome_Click" Content="首页" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
                 <RadioButton Name="btnPrinterDetail" Click="btnPrinterDetail_Click" Content="查看打印机" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
                 <RadioButton Name="txtDialogBox" Click="txtDialogBox_Click" Content="进行对话" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
                 <RadioButton Name="btnOrderList" Click="btnOrderList_Click" Content="指令列表" FontSize="16" Style="{StaticResource MenuRadioButton}"/>
@@ -188,13 +190,34 @@
         </Grid>
 
         <Grid Name="isVisibilityForEnter" Grid.Row="1" Grid.Column="1">
-            <!-- 显示打印机品牌（LOGO及品牌信息） -->
-            <!--<Grid Background="#1578F6" Opacity="0.3">
-                --><!-- 用后端代码来实现这个功能 --><!--
-                <TextBlock Name="txtPrinterName" Text="{Binding ElementName=itemsPrinters, Path=ItemsSource}"/>
-            </Grid>-->
-
             <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
+            <!--<ListView Name="lvMonitor" Foreground="#FFFFFF" BorderThickness="0" Visibility="Visible">
+                <ListView.View>
+                    
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding ID}"/>
+                        <GridViewColumn Header="IP" Width="100" DisplayMemberBinding="{Binding IP}"/>
+                        <GridViewColumn Header="SN" Width="100" DisplayMemberBinding="{Binding SN}"/>
+                        <GridViewColumn Header="介质" Width="100" DisplayMemberBinding="{Binding WareStatus}"/>
+                        <GridViewColumn Header="打印头" Width="100" DisplayMemberBinding="{Binding HeadStatus}"/>
+                        <GridViewColumn Header="碳带" Width="100"/>
+                        --><!--<GridViewColumn Header="设置" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Preview_Click"
+                                                Width="50" Content="编辑" Margin="0 0 5 0"/>
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                                Width="50" Content="复制" Margin="0 0 5 0"/>
+                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                                Width="50" Content="删除" Margin="0 0 5 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>--><!--
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
             <Frame Name="skipPages"/>
         </Grid>
 

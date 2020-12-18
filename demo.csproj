@@ -218,6 +218,9 @@
     <Compile Include="TextMenuDetail.xaml.cs">
       <DependentUpon>TextMenuDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextMonitorList.xaml.cs">
+      <DependentUpon>TextMonitorList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextSearchPrints.xaml.cs">
       <DependentUpon>TextSearchPrints.xaml</DependentUpon>
     </Compile>
@@ -288,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextHighPrinter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextMonitorList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

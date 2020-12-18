@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,21 +25,32 @@ namespace demo
     /// </summary>
     public partial class TextHighPrinter : Page
     {
-        WebServer server = null;
+        //WebServer server = null;
         Printer printer = null;
         String sTemp = "";
-        ObservableCollection<LinkOSPrinters> linkOSPrinter;
+        public static ObservableCollection<LinkOSPrinters> linkOSPrinter = null;
         DeviceDetails deviceDetails;
         TextBasicSituation basicSituation;
         TextAdminInterface adminInterface;
-        DispatcherTimer dispatcherTimer;
+        private DispatcherTimer dispatcherTimer;
+        //private DispatcherTimer realTimeUpdata;
         WebSocketConsole.MainWindow mainWindow = new WebSocketConsole.MainWindow();
+        //private Timer timerClose;
         public TextHighPrinter()
         {
+            
+            
+
             InitializeComponent();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(Timer);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+
+            //timerClose = new Timer(new TimerCallback(RealTime2), this, 5000, 0);
+            /*realTimeUpdata = new DispatcherTimer();
+            realTimeUpdata.Tick += new EventHandler(RealTime);
+            realTimeUpdata.Interval = new TimeSpan(0, 0, 5);*/
+
             btnStopService.IsEnabled = false;
         }
 
@@ -77,6 +89,7 @@ namespace demo
             mainWindow.StartService(btnStartService, btnStopService);
             
             dispatcherTimer.Start();
+            //realTimeUpdata.Start();
             btnDMP.IsEnabled = true;
         }
 
@@ -90,6 +103,8 @@ namespace demo
                 linkOSPrinter.Clear();
                 printersCount.Text = "0";
                 dispatcherTimer.Stop();
+                //realTimeUpdata.Stop();
+                TextMonitorList.realTimeUpdata.Stop();
                 btnStartService.IsEnabled = true;
                 btnStartService.Focus();
                 btnStopService.IsEnabled = false;
@@ -160,6 +175,35 @@ namespace demo
             
         }
 
+        //这里写个方法每个30秒发送LinkOS打印机的集合到某个类里获取到想要检测的信息，然后展示
+        /*private void RealTime(object sender, EventArgs e)
+        {
+            if (linkOSPrinter != null)
+            {
+
+                String command = "{}{\"media\":null,\"head\":null}";                    
+                String message = "";
+                String[] str;
+                foreach (var item in linkOSPrinter)
+                {
+                    message = mainWindow.SendRawDataToPrinter(command,item.SN.Substring(1));
+                    //将接收到的信息发送给JSON解析出想要的信息
+                    str = LinkOSRealTime.SetJsonMessage(message);
+                    item.WareStatus = str[0];
+                    item.HeadStatus = str[1];
+                }
+                lvMonitor.ItemsSource = linkOSPrinter;
+                //return linkOSPrinter;
+                //DispatcherTimer realTimeUpdata = new DispatcherTimer();
+            }
+            else
+            {
+                
+            }
+        }*/
+
+        
+
         private void btnDMP_Click(object sender, RoutedEventArgs e)
         {
             new AnalysisDMP(mainWindow).Show() ;
@@ -195,18 +239,6 @@ namespace demo
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            /*//读取打印机列表的第一项
-            printer = new Printer();
-            btnPrinterDetail.IsChecked = true;
-            basicSituation = new TextBasicSituation();
-            skipPages.Content = basicSituation;
-            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
-            if(buttonItems.Count > 0)
-            {
-                Button button = buttonItems.First();
-                TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
-                txtPrinterSN.Text = txt.Text;
-            }*/
             
         }
 
@@ -227,6 +259,12 @@ namespace demo
                     txtPrinterSN.Text = txt.Text.Substring(1);
                 }
             }
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            TextMonitorList textMonitorList = new TextMonitorList(mainWindow);
+            skipPages.Content = textMonitorList;
         }
 
         //private void 

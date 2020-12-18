@@ -66,16 +66,6 @@
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
-                           <!-- <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsMouseOver" Value="True"/>
-                                    <Condition Property="IsFocused" Value="True"/>
-                                </MultiTrigger.Conditions>
-                                <MultiTrigger.Setters>
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                </MultiTrigger.Setters>
-                                
-                            </MultiTrigger>-->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="BorderThickness" Value="0"/>
                             </Trigger>
@@ -290,7 +280,10 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="TextBox">
-                                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="border" SnapsToDevicePixels="True">
+                                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
+                                            BorderBrush="{TemplateBinding Border.BorderBrush}" 
+                                            Background="{TemplateBinding Panel.Background}" 
+                                            Name="border" SnapsToDevicePixels="True">
                                         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Name="PART_ContentHost" Focusable="False" />
                                     </Border>
                                     <ControlTemplate.Triggers>

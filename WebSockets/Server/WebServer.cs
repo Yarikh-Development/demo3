@@ -19,6 +19,7 @@ using WebSockets.Events;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace WebSockets
 {
@@ -336,7 +337,13 @@ namespace WebSockets
                         {
                             broadcastSocket._Client_Message_Buffer = "";//先清空缓存
                             broadcastSocket.Send_BinaryFrame(sMessage);
-                            Thread.Sleep(ResponseTimeout_Millisecond);
+                            //Thread.Sleep(ResponseTimeout_Millisecond);
+                            DateTime current = DateTime.Now;
+                            while (current.AddMilliseconds(ResponseTimeout_Millisecond) > DateTime.Now)
+                            {
+                                Application.DoEvents();
+                            }
+                            
                             sRet = broadcastSocket._Client_Message_Buffer;
                             broadcastSocket._Client_Message_Buffer = "";//读完数据顺便也清空缓存
                             return sRet;

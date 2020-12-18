@@ -689,7 +689,7 @@ namespace WebSocketConsole
 
         public String SendRawDataToPrinter(String sData, String sDeviceSN)
         {
-            String sTemp = server.SendRawData(sDeviceSN, sData, 1500);
+            String sTemp = server.SendRawData(sDeviceSN, sData, 500);
             return sTemp;
         }
 
