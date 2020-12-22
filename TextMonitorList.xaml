@@ -24,10 +24,12 @@
                     <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="IP" Width="100" DisplayMemberBinding="{Binding IP}"/>
                     <GridViewColumn Header="SN" Width="100" DisplayMemberBinding="{Binding SN}"/>
+                    <GridViewColumn Header="型号" Width="100" DisplayMemberBinding="{Binding PrinterType}"/>
                     <GridViewColumn Header="介质" Width="100" DisplayMemberBinding="{Binding WareStatus}"/>
                     <GridViewColumn Header="打印头" Width="100" DisplayMemberBinding="{Binding HeadStatus}"/>
-                    <GridViewColumn Header="碳带" Width="100"/>
+                    <!--<GridViewColumn Header="碳带" Width="100"/>-->
                     <GridViewColumn Header="电量" Width="100" DisplayMemberBinding="{Binding PowerFull}"/>
+                    <GridViewColumn Header="打印里程(cm)" Width="100" DisplayMemberBinding="{Binding PrintOdometer}"/>
                     <!--<GridViewColumn Header="设置" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

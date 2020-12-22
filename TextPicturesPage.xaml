@@ -101,11 +101,32 @@
                 <RowDefinition Height="35*" />
             </Grid.RowDefinitions>
 
-            <Image x:Name="EE_Piceture_Image" Grid.Column="0" Grid.Row="0" Margin="5"/>
+            <Border Grid.Column="0" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
+                <Grid>
+                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <Image x:Name="EE_Piceture_Image" />
+                </Grid>
+                
+            </Border>
+            
             <Button x:Name="EE_Picture_Change_Button" Grid.Column="0" Grid.Row="1" Content="能效图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
-            <Image x:Name="Overprint_Picture_Image" Grid.Column="1" Grid.Row="0" Margin="5"/>
+            <Border Grid.Column="1" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
+                <Grid>
+                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <Image x:Name="Overprint_Picture_Image"/>
+                </Grid>
+                
+            </Border>
+            
             <Button x:Name="Overprint_Picture_Change_Button" Grid.Column="1" Grid.Row="1" Content="套打图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
-            <Image x:Name="Preview_Picture_Image" Grid.Column="2" Grid.Row="0" Margin="5"/>
+            <Border Grid.Column="2" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
+                <Grid>
+                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <Image x:Name="Preview_Picture_Image" />
+                </Grid>
+                
+            </Border>
+            
             <Button x:Name="Preview_Picture_Change_Button" Grid.Column="2" Grid.Row="1" Content="预览图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
         </Grid>
 

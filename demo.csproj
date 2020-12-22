@@ -203,6 +203,9 @@
     <Compile Include="TextBasicSituation.xaml.cs">
       <DependentUpon>TextBasicSituation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextCommandSetting.xaml.cs">
+      <DependentUpon>TextCommandSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextFiles.xaml.cs">
       <DependentUpon>TextFiles.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextBasicSituation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextCommandSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

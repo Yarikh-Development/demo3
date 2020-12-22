@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
         mc:Ignorable="d"
-        Title="Window1" MinHeight="600" MinWidth="850" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
+        Title="Window1" MinHeight="600" MinWidth="900" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
         MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
@@ -45,6 +45,8 @@
                 <MenuItem Style="{StaticResource defaultMenuStyle}" Header="&#xe66d; 查看" FontFamily="/#iconfont" Margin="10 5 0 5">
                     <MenuItem Name="btnPrintLogs" Click="btnPrintLogs_Click"
                               Header="打印记录" BorderThickness="0" Foreground="#000000"></MenuItem>
+                    <MenuItem Name="btnRealTimePage" Click="btnRealTimePage_Click"
+                              Header="实时面板" BorderThickness="0" Foreground="#000000"></MenuItem>
                     <MenuItem Name="btnOrderList" Click="btnOrderList_Click"
                               Header="指令列表" BorderThickness="0" Foreground="#000000"></MenuItem>
                     <MenuItem Name="btnLabelList" Click="btnLabelList_Click"
@@ -155,8 +157,8 @@
                 </StackPanel>
 
 
-                <Border Grid.Row="1" VerticalAlignment="Bottom" Height="100" Margin="0 0 0 20">
-                    <Image x:Name="Logo_Image" Width="130" Source="logo.png" HorizontalAlignment="Left" Margin="10 10 0 0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Border Grid.Row="1" VerticalAlignment="Bottom" Height="80" Margin="0 0 0 10">
+                    <Image x:Name="Logo_Image" Width="140" Source="logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Border>
             </Grid>
 

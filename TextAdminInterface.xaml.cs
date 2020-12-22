@@ -173,6 +173,16 @@ namespace demo
 			//刷新item
 			//list1.Items.Refresh();
 		}
-	}
+
+        private void btnAddCommand_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 
 }

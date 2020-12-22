@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace demo
         public string PaperStatus { get; set; } //耗材-切纸状态
         public string RibbonStatus { get; set; }//耗材-碳带状态
         public string PowerFull { get; set; }   //电量百分比
+        public string PrinterType { get; set; } //型号
+        public string PrintOdometer { get; set; }  //打印里程
 
     }
 
@@ -43,8 +46,8 @@ namespace demo
 
         public static String[] SetJsonMessage(String jsonMessage)
         {
-            //try
-            //{
+            try
+            {
                 //monitorPrinter = new ObservableCollection<LinkOSPrinters>();
                 /*RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonMessage);
                 Console.WriteLine(rb.companyID);
@@ -54,32 +57,54 @@ namespace demo
                     Console.WriteLine(ep.age);
                 }
                 Console.ReadKey();*/
-                String[] str = new string[3];
+                
+                String[] str = new string[5];
                 JObject jobj = JObject.Parse(jsonMessage);
-                JObject media = JObject.Parse(jobj["media"].ToString());
+                /*JObject media = JObject.Parse(jobj["media"].ToString());
                 JObject head = JObject.Parse(jobj["head"].ToString());
                 JObject power = JObject.Parse(jobj["power"].ToString());
+                JObject device = JObject.Parse(jobj["device"].ToString());*/
+                //String printOdometer = (jobj["odometer.media_marker_count1"].ToString().Split(',')[1]).Split(' ')[0];
 
-                str[0] = media["media.status"].ToString();
-                str[1] = head["head.latch"].ToString();
-                str[2] = power["power.percent_full"].ToString();
-                /*monitorPrinter.Add(new LinkOSPrinters
-                {
-                    WareStstus = media["media.status"].ToString(),
-                    HeadStatus = head["head.latch"].ToString()
-
-                });*/
+                str[0] = jobj["media.status"].ToString();
+                str[1] = jobj["head.latch"].ToString();
+                str[2] = (jobj["power.percent_full"] ?? "").ToString();
+                str[3] = (jobj["device.product_name"] ?? "").ToString();
+                str[4] = (jobj["odometer.media_marker_count1"] ?? "").ToString();
                 return str;
                 //Console.WriteLine("a:" + jobj["a"]);
                 //Console.Read();
                 //return null;
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
+                //当接收到的数据为空时会抛出异常，返回空值
                 //MessageBox.Show(ex.Message);
-                //return null;
-            //}
+                return null;
+            }
             
+        }
+
+        public static ArrayList SetJsonMessageForList(String jsonMessage)
+        {
+            try
+            {
+                ArrayList arrayList = new ArrayList();
+                JObject jobj = JObject.Parse(jsonMessage);
+                arrayList.Add(jobj["media.status"].ToString());
+                arrayList.Add(jobj["head.latch"].ToString());
+                arrayList.Add((jobj["power.percent_full"] ?? "").ToString());
+                arrayList.Add((jobj["device.product_name"] ?? "").ToString());
+                arrayList.Add((jobj["odometer.media_marker_count1"] ?? "").ToString());
+                return arrayList;
+            }
+            catch (Exception ex)
+            {
+                //当接收到的数据为空时会抛出异常，返回空值
+                //MessageBox.Show(ex.Message);
+                return null;
+            }
+
         }
     }
 }

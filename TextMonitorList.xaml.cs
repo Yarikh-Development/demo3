@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -44,21 +45,35 @@ namespace demo
         {
             if (TextHighPrinter.linkOSPrinter != null)
             {
-                String command = "{}{\"media\":null,\"head\":null,\"power\":null}";
+                String command = "{}{\"media\":null,\"head\":null,\"power\":null,\"device\":null}";
+                String command2 = "{}{\"media.status\":null,\"head.latch\":null,\"power.percent_full\":null,\"device.product_name\":null,\"odometer.media_marker_count1\":null}";
                 String message = "";
                 String[] str;
+                ArrayList array;
                 linkOSPrinter2 = TextHighPrinter.linkOSPrinter;
                 foreach (var item in linkOSPrinter2)
                 {
-                    message = mainWindow.SendRawDataToPrinter(command, item.SN.Substring(1));
+                    message = mainWindow.SendRawDataToPrinter(command2, item.SN);
                     //将接收到的信息发送给JSON解析出想要的信息
-                    str = LinkOSRealTime.SetJsonMessage(message);
+                    str = LinkOSRealTime.SetJsonMessage(message); //返回一个数组
+                    //array = LinkOSRealTime.SetJsonMessageForList(message);  //返回一个列表
+
                     if (str != null)
                     {
                         item.WareStatus = str[0];
                         item.HeadStatus = str[1];
                         item.PowerFull = str[2];
+                        item.PrinterType = str[3];
+                        item.PrintOdometer = str[4];
                     }
+                    /*if (array != null)
+                    {
+                        item.WareStatus = array[0];
+                        foreach (var msg in array)
+                        {
+                            item.WareStatus = msg.;
+                        }
+                    }*/
 
                 }
                 lvMonitor.ItemsSource = linkOSPrinter2;

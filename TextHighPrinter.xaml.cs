@@ -34,6 +34,7 @@ namespace demo
         TextAdminInterface adminInterface;
         private DispatcherTimer dispatcherTimer;
         //private DispatcherTimer realTimeUpdata;
+        //private int linkosPrinterNum = 0;
         WebSocketConsole.MainWindow mainWindow = new WebSocketConsole.MainWindow();
         //private Timer timerClose;
         public TextHighPrinter()
@@ -124,13 +125,13 @@ namespace demo
         {
             try
             {
-                int linkosPrinterNum = 0;
+                
                 String sTempLine = "";
                 linkOSPrinter = new ObservableCollection<LinkOSPrinters>();
                 sTemp = mainWindow.sTemp;
                 if (sTemp != "" && sTemp != "0|")
                 {
-                    linkosPrinterNum++;
+                    
                     //MessageBox.Show(mainWindow.sTemp);
                     printersCount.Text = sTemp.Split('|')[0];
                     int nTotal = System.Text.RegularExpressions.Regex.Matches(sTemp, Environment.NewLine).Count;
@@ -141,11 +142,11 @@ namespace demo
                         {
                             linkOSPrinter.Add(new LinkOSPrinters
                             {
-                                ID = linkosPrinterNum,
+                                ID = i + 1,
                                 ClientID = sTempLine.Split('|')[1],
                                 DeviceName = sTempLine.Split('|')[2],
                                 FWVersion = sTempLine.Split('|')[3],
-                                SN = sTempLine.Split('|')[4],
+                                SN = sTempLine.Split('|')[4].Substring(1),
                                 IP = sTempLine.Split('|')[5],
                                 Type = sTempLine.Split('|')[8]
                             });
@@ -154,16 +155,16 @@ namespace demo
                         {
                             linkOSPrinter.Add(new LinkOSPrinters
                             {
-                                ID = linkosPrinterNum,
+                                ID = i + 1,
                                 ClientID = sTempLine.Split('|')[0],
                                 DeviceName = sTempLine.Split('|')[1],
                                 FWVersion = sTempLine.Split('|')[2],
-                                SN = sTempLine.Split('|')[3],
+                                SN = sTempLine.Split('|')[3].Substring(1),
                                 IP = sTempLine.Split('|')[4],
                                 Type = sTempLine.Split('|')[7]
                             });
                         }
-                    }
+                    }                    
                 }
                 itemsPrinters.ItemsSource = linkOSPrinter;
             }
@@ -242,6 +243,25 @@ namespace demo
             
         }
 
+        public void OpenPageInitialize(int flag)
+        {
+            if (flag == 1)
+            {
+                TextMonitorList textMonitorList = new TextMonitorList(mainWindow);
+                skipPages.Content = textMonitorList;
+            }
+            if (flag == 3)
+            {
+                deviceDetails = new DeviceDetails(mainWindow, txtPrinterSN.Text, FileTools.commandPath);
+                skipPages.Content = deviceDetails;
+            }
+            if (flag == 4)
+            {
+                adminInterface = new TextAdminInterface();
+                skipPages.Content = adminInterface;
+            }
+        }
+
         //点击按钮找到打印机列表的SN码
         private void printerMessage_Click_1(object sender, RoutedEventArgs e)
         {
@@ -256,7 +276,7 @@ namespace demo
                 if (button.IsFocused)
                 {
                     TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
-                    txtPrinterSN.Text = txt.Text.Substring(1);
+                    txtPrinterSN.Text = txt.Text;
                 }
             }
         }

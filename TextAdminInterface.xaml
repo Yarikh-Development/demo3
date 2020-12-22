@@ -61,12 +61,13 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 5 0 0">
-            <Button x:Name="btnSetting" Style="{DynamicResource iconButton}" 
+            <Button x:Name="btnSave" Click="btnSave_Click" Style="{DynamicResource iconButton}" 
                     ToolTip="保存" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
                 <TextBlock Text="&#xec09;" FontFamily="/#iconfont" FontSize="18"/>
             </Button>
 
-            <Button Style="{DynamicResource iconButton}" ToolTip="添加" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
+            <Button Name="btnAddCommand" Click="btnAddCommand_Click" Style="{DynamicResource iconButton}" 
+                    ToolTip="添加" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
                 <TextBlock Text="&#xeb8c;" FontFamily="/#iconfont" FontSize="18"/>
             </Button>
 

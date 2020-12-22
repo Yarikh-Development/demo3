@@ -1,6 +1,7 @@
 ﻿using BarcodeScanner;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -182,17 +183,17 @@ namespace demo
 
         private void btnOpenPrinterConfigFile_Click(object sender, RoutedEventArgs e)
         {
-
+            //Process.Start(FileTools.logDirPath);
         }
 
         private void btnOpenLogPath_Click(object sender, RoutedEventArgs e)
         {
-
+            Process.Start(FileTools.logDirPath);
         }
 
         private void btnOpenLabelPath_Click(object sender, RoutedEventArgs e)
         {
-
+            Process.Start(FileTools.labelDirPath);
         }
 
         private void btnNormalPrinters_Click(object sender, RoutedEventArgs e)
@@ -207,27 +208,37 @@ namespace demo
 
         private void btnClosingWindow_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnPrintLogs_Click(object sender, RoutedEventArgs e)
         {
-
+            textLogPage = new TextLogPage();
+            frameShowPages.Content = textLogPage;
+            this.btnLogPage.IsChecked = true;
         }
 
         private void btnOrderList_Click(object sender, RoutedEventArgs e)
         {
-
+            frameShowPages.Content = TextHighPrinter;
+            this.LinkOSPrinters.IsChecked = true;
+            TextHighPrinter.btnOrderList.IsChecked = true;
+            TextHighPrinter.OpenPageInitialize(4);
         }
 
         private void btnLabelList_Click(object sender, RoutedEventArgs e)
         {
-
+            textFiles = new TextFiles();
+            frameShowPages.Content = textFiles;
+            btnFiles.IsChecked = true;
         }
 
         private void btnDeviceDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            frameShowPages.Content = TextHighPrinter;
+            this.LinkOSPrinters.IsChecked = true;
+            TextHighPrinter.txtDialogBox.IsChecked = true;
+            TextHighPrinter.OpenPageInitialize(3);
         }
 
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
@@ -258,6 +269,14 @@ namespace demo
         private void btnAboutYarikh_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnRealTimePage_Click(object sender, RoutedEventArgs e)
+        {
+            frameShowPages.Content = TextHighPrinter;
+            this.LinkOSPrinters.IsChecked = true;
+            TextHighPrinter.btnHome.IsChecked = true;
+            TextHighPrinter.OpenPageInitialize(1);
         }
     }
 }

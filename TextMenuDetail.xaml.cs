@@ -367,6 +367,9 @@ namespace demo
 			MainWindow.isWriteLog = false;
 		}
 
-
-	}
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+			listener.Stop();
+		}
+    }
 }

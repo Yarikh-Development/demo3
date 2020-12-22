@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded"
@@ -72,9 +73,16 @@
                             <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="15"/>
                         </Button>
 
-                        <Button Style="{DynamicResource iconButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
-                            <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
-                        </Button>
+                        <pu:DropDown Style="{DynamicResource iconDropDown}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
+                            <pu:DropDown.Content>
+                                <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
+                            </pu:DropDown.Content>
+                            <pu:DropDown.Child>
+                                <Grid Height="100">
+                                    <Button Width="30" BorderThickness="0" Background="#FFFFFF" Content="里程管理"/>
+                                </Grid>
+                            </pu:DropDown.Child>
+                        </pu:DropDown>
                     </StackPanel>
                 </UniformGrid>
 
@@ -145,9 +153,9 @@
                                                 <!-- 添加打印机图标，正常一个，其他状态一个 -->
                                                 <TextBlock/>
                                                 <StackPanel Grid.Column="1" Margin="3 0 0 0">
-                                                    <TextBlock x:Name="txtPrintersName" Text="{Binding DeviceName}" TextWrapping="Wrap"  />
+                                                    <TextBlock x:Name="txtPrintersSN" Text="{Binding SN}" TextWrapping="Wrap"  />
                                                     <!-- 显示打印机的SN码 -->
-                                                    <TextBlock x:Name="txtPrintersSN" Text="{Binding SN}" FontSize="10" Foreground="#808080" FontWeight="Light"/>
+                                                    <TextBlock x:Name="txtPrintersName" Text="{Binding IP}" FontSize="10" Foreground="#808080" FontWeight="Light"/>
                                                 </StackPanel>
 
                                             </Grid>
