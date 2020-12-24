@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
-        mc:Ignorable="d" WindowStyle="None" ResizeMode="NoResize"
-        Title="TextCommandSetting" Height="440" Width="600">
+        mc:Ignorable="d" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
+        Title="TextCommandSetting" Height="440" Width="600" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -126,8 +126,8 @@
         </StackPanel>
 
         <Grid Name="grid1" Grid.Row="1" Grid.Column="1">
-            <!-- 发送文件 -->
-            <Grid Name="gridSendFile" Margin="20" Visibility="Visible">
+            <!-- 编辑指令 -->
+            <Grid Name="gdEditCommand" Margin="20" Visibility="Hidden">
                 <!-- 排版：每一行30的高度就能保证左右对齐，后续再添加 -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90"/>
@@ -138,7 +138,7 @@
                     <Border Height="25">
                         <TextBlock Text="指令" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </Border>
-                   
+                    <Border Height="30"/>
                     <Border Height="25" Margin="0 5 0 0">
                         <TextBlock Text="设置标题" FontSize="14" VerticalAlignment="Center"/>
                     </Border>
@@ -148,8 +148,14 @@
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Grid.Column="2">
                     <TextBox Name="txtCommand" Height="25" Width="270"/>
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Height="25" >
+                        <RadioButton Name="btnSelectZPL" Style="{StaticResource RadioButtonStyle3}" IsChecked="True"
+                                     Content="ZPL" FontSize="14" Margin="0 0 20 0" VerticalAlignment="Center"/>
+                        <RadioButton Name="btnSelectSGD" Style="{StaticResource RadioButtonStyle3}"
+                                     Content="SGD" FontSize="14" VerticalAlignment="Center"/>
+                    </StackPanel>
                     <TextBox Name="txtCommandTitle" Height="25" Margin="0 5 0 0"/>
-                    <TextBox Name="txtCommandExplain" Height="85" Margin="0 5 0 0" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBox Name="txtCommandExplain" Height="85" Margin="0 5 0 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"/>
                     <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Height="25" HorizontalAlignment="Left">
                         <Button Name="btnSaveCommand" Click="btnSaveCommand_Click" Content="保存"  Width="60" Margin="0 0 5 0"/>
                         <Button Name="btnClear" Click="btnClear_Click" Content="清空"  Width="60"/>

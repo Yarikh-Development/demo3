@@ -164,7 +164,7 @@
                                                             </Grid.ColumnDefinitions>
                                                             <Border Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="#A8A4AD" Margin="10 0"/>
                                                             <TextBlock Text="{Binding Explain}" VerticalAlignment="Center" Margin="10 0 10 0"/>
-                                                            <Button Margin="0 0 10 0" Style="{StaticResource DIYButtonStyle0}"
+                                                            <Button Name="btnSendZPL" Click="btnSend_Click" Margin="0 0 10 0" Style="{StaticResource DIYButtonStyle0}"
                                                                     Grid.Column="1" Content="发送" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                                                         </Grid>
                                                     </DataTemplate>

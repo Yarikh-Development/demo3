@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Button = System.Windows.Controls.Button;
+using MessageBox = System.Windows.MessageBox;
 
 namespace demo
 {
@@ -24,6 +25,7 @@ namespace demo
     {
         public string Direct { get; set; }
         public string Explain { get; set; }
+        public string DetailExplain { get; set; }
     }
 
     /// <summary>
@@ -33,7 +35,12 @@ namespace demo
     {
 		private ObservableCollection<CommandContent> commandContentSGD = null;
 		private ObservableCollection<CommandContent> commandContentZPL = null;
-		public TextAdminInterface()
+		private TextCommandSetting commandSetting = null;
+		private int countZPL = 0;
+		private int countSGD = 0;
+		private string filePathZPL = "";
+		private string filePathSGD = "";
+ 		public TextAdminInterface()
         {
             InitializeComponent();
 
@@ -58,7 +65,7 @@ namespace demo
 			}
 			catch (ArgumentNullException)
 			{
-				FileTools.WriteLineFile(DateTime.Now.ToString() + FileTools.exceptionFilePath, " 路径为空！！");
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " 路径为空！！");
 			}
 		}
 
@@ -71,30 +78,6 @@ namespace demo
 		{
 			this.SGD.Visibility = Visibility.Visible;
 			this.ZPL.Visibility = Visibility.Hidden;
-		}
-
-		private void Preview_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-		private void Copy_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-		private void Delete_Click(object sender, RoutedEventArgs e)
-		{
-			/*//删除选中的某项
-			var btn = sender as Button;
-			var c = btn.DataContext as demo.CShowTag;
-			int index = int.Parse(c.Id);
-			this.listView.Items.GetItemAt(index);
-			MessageBoxResult boxResult = MessageBox.Show($"确定删除：id={c.Id},Qr={c.Qr} 吗？", "提示", MessageBoxButton.YesNo, MessageBoxImage.Question);
-			if (boxResult == MessageBoxResult.Yes)
-			{
-				_bindingClass.ShowList.Remove(c);
-				this.listView.Items.Refresh();
-			}
-			return;*/
 		}
 
 		//写记录到listView
@@ -115,12 +98,12 @@ namespace demo
 			try
 			{
 				commandContentZPL = new ObservableCollection<CommandContent>();
-				string filePathZPL = FileTools.commandPath + "\\commandZPL.txt";
+				filePathZPL = FileTools.commandPath + "\\commandZPL.txt";
 				FileStream fileStreamZPL = new FileStream(filePathZPL, FileMode.OpenOrCreate, FileAccess.Read);
 				StreamReader streamReaderZPL = new StreamReader(fileStreamZPL);
 
 				commandContentSGD = new ObservableCollection<CommandContent>();
-				string filePathSGD = FileTools.commandPath + "\\commandSGD.txt";
+				filePathSGD = FileTools.commandPath + "\\commandSGD.txt";
 				FileStream fileStreamSGD = new FileStream(filePathSGD, FileMode.OpenOrCreate, FileAccess.Read);
 				StreamReader streamReaderSGD = new StreamReader(fileStreamSGD);
 
@@ -129,15 +112,17 @@ namespace demo
 				while ((line = streamReaderSGD.ReadLine()) != null)
 				{
 					data = line.Split(';');
-					commandContentSGD.Add(new CommandContent{ Direct = data[0], Explain = data[1] });
+					commandContentSGD.Add(new CommandContent{ Direct = data[0], Explain = data[1], DetailExplain = data[2] });
 				}
+				countSGD = commandContentSGD.Count;
 				listView2.ItemsSource = commandContentSGD;
 
 				while ((line = streamReaderZPL.ReadLine()) != null)
 				{
 					data = line.Split(';');
-					commandContentZPL.Add(new CommandContent{ Direct = data[0], Explain = data[1] });
+					commandContentZPL.Add(new CommandContent{ Direct = data[0], Explain = data[1], DetailExplain = data[2] });
 				}
+				countZPL = commandContentZPL.Count;
 				listView.ItemsSource = commandContentZPL;
 
 				streamReaderZPL.Close();
@@ -151,10 +136,25 @@ namespace demo
 			{
 				FileTools.WriteLineFile(FileTools.exceptionFilePath, " 指令文件路径为空！！");
 			}
+			catch(IndexOutOfRangeException)
+            {
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, "指令配置文件出错，请前往bin/Command/目录下查看源文件");
+			}
 		}
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
+			if (countSGD != commandContentSGD.Count || countZPL != commandContentZPL.Count)
+            {
+				MessageBoxResult result = MessageBox.Show("尚有未保存的更改，是否保存更改！","", MessageBoxButton.YesNo);
+				if (result == MessageBoxResult.Yes)
+				{
+					btnSave_Click(sender, e);
+					
+				}
+				
+				
+            }
 			commandContentZPL.Clear();
 			commandContentSGD.Clear();
 		}
@@ -162,11 +162,7 @@ namespace demo
         private void btnSGDDelete_Click(object sender, RoutedEventArgs e)
         {
 			var btn = sender as Button;
-
 			var c = btn.DataContext as CommandContent;
-
-			//MessageBox.Show(c.id);
-
 			//移除当前点击按钮所在行
 			commandContentSGD.Remove(c);
 
@@ -174,15 +170,88 @@ namespace demo
 			//list1.Items.Refresh();
 		}
 
-        private void btnAddCommand_Click(object sender, RoutedEventArgs e)
-        {
+		private void btnZPLDelete_Click(object sender, RoutedEventArgs e)
+		{
+			var btn = sender as Button;
+			var c = btn.DataContext as CommandContent;
+			commandContentZPL.Remove(c);
+		}
 
-        }
+		private void btnAddCommand_Click(object sender, RoutedEventArgs e)
+        {
+			commandSetting = new TextCommandSetting();
+			commandSetting.btnEdit.IsChecked = true;
+			commandSetting.ShowDialog();		
+		}
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+			List<string> strList = new List<string>();
+			try
+            {
+				if (countSGD == commandContentSGD.Count && countZPL == commandContentZPL.Count)
+				{
+					MessageBox.Show("没有删除操作，无需保存！");
+					return;
+				}
+				if (countZPL != commandContentZPL.Count)
+                {
+					foreach (var item in commandContentZPL)
+					{
+						strList.Add($"{item.Direct};{item.Explain};{item.DetailExplain};");
+					}
+					File.WriteAllLines(filePathZPL, strList.ToArray());
+					strList.Clear();
+				}
+				
+				if (countSGD != commandContentSGD.Count)
+                {
+					foreach (var item in commandContentSGD)
+					{
+						strList.Add($"{item.Direct};{item.Explain};{item.DetailExplain};");
+					}
+					File.WriteAllLines(filePathSGD, strList.ToArray());
+					strList.Clear();
+				}
+				
+					
+				MessageBox.Show("保存成功");
+			}
+            catch (Exception ex)
+            {
 
+				MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+				strList.Clear();
+			}
+		}
+
+        private void btnEditCommand_Click(object sender, RoutedEventArgs e)
+        {
+			
+			var btn = sender as Button;
+			var c = btn.DataContext as CommandContent;
+			listView.SelectedItem = c;
+			commandSetting = new TextCommandSetting(c.Direct,c.Explain,"",listView.SelectedIndex,"ZPL");
+			commandSetting.btnEdit.IsChecked = true;
+			commandSetting.ShowDialog();			
+		}
+
+        private void btnEditSGDCommand_Click(object sender, RoutedEventArgs e)
+        {
+			var btn = sender as Button;
+			var c = btn.DataContext as CommandContent;
+			listView2.SelectedItem = c;
+			commandSetting = new TextCommandSetting(c.Direct, c.Explain, c.DetailExplain, listView2.SelectedIndex, "SGD");
+			commandSetting.btnEdit.IsChecked = true;
+			commandSetting.ShowDialog();
+		}
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+			Page_Loaded(sender,e);
         }
     }
-
 }

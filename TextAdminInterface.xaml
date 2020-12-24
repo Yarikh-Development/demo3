@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
-      Height="Auto" Width="Auto" Loaded="Page_Loaded" Unloaded="Page_Unloaded"
+      Height="Auto" Width="Auto" Loaded="Page_Loaded" Unloaded="Page_Unloaded" 
       Title="TextAdminInterface">
     <Page.Resources>
         <ResourceDictionary>
@@ -61,6 +61,11 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 5 0 0">
+            <Button x:Name="btnRefresh" Click="btnRefresh_Click" Style="{DynamicResource iconButton}" 
+                    ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
+                <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="18"/>
+            </Button>
+            
             <Button x:Name="btnSave" Click="btnSave_Click" Style="{DynamicResource iconButton}" 
                     ToolTip="保存" VerticalAlignment="Center" Margin="0 0 15 0" Height="20" Width="20">
                 <TextBlock Text="&#xec09;" FontFamily="/#iconfont" FontSize="18"/>
@@ -84,16 +89,17 @@
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
                         <GridViewColumn Header="指令" Width="300" DisplayMemberBinding="{Binding Path=Direct}"/>
-                        <GridViewColumn Header="说明" Width="200" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Header="指令标题" Width="200" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Header="说明" Width="200" DisplayMemberBinding="{Binding Path=DetailExplain}"/>
                         <GridViewColumn Header="设置" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Preview_Click"
+                                        <Button Name="btnEditZPLCommand" Click="btnEditCommand_Click" Style="{StaticResource OperateButtonStyle}" 
                                                 Width="50" Content="编辑" Margin="0 0 5 0"/>
-                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                        <Button Style="{StaticResource OperateButtonStyle}" 
                                                 Width="50" Content="复制" Margin="0 0 5 0"/>
-                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Copy_Click"
+                                        <Button Name="btnZPLDelete" Click="btnZPLDelete_Click" Style="{StaticResource OperateButtonStyle}" 
                                                 Width="50" Content="删除" Margin="0 0 5 0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -113,14 +119,15 @@
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
                         <GridViewColumn x:Name="col1" Width="300" Header="指令1" DisplayMemberBinding="{Binding Path=Direct}"/>
-                        <GridViewColumn Width="200" Header="说明" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Width="200" Header="指令标题" DisplayMemberBinding="{Binding Path=Explain}"/>
+                        <GridViewColumn Width="200" Header="说明" DisplayMemberBinding="{Binding Path=DetailExplain}"/>
                         <GridViewColumn Width="200" Header="操作" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource OperateButtonStyle}" Click="Preview_Click"
+                                        <Button Name="btnEditSGDCommand" Click="btnEditSGDCommand_Click" Style="{StaticResource OperateButtonStyle}" 
                                                 Width="50" Content="编辑" Margin="0 0 5 0"/>
-                                        <Button Style="{StaticResource OperateButtonStyle}"  Click="Copy_Click"
+                                        <Button Style="{StaticResource OperateButtonStyle}"  
                                                 Width="50" Content="复制" Margin="0 0 5 0"/>
                                         <Button Name="btnSGDDelete" Click="btnSGDDelete_Click" Style="{StaticResource OperateButtonStyle}"
                                                 Width="50" Content="删除" Margin="0 0 5 0"/>
