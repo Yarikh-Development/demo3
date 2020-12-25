@@ -20,6 +20,7 @@ namespace demo
 		public static string settingFilePath { get; private set; } = Base + "\\setting.txt";
 		public static string commandPath { get; private set; } = Base + "\\Command";
 		public static string executePrintersFilePath { get; private set; } = Base + "\\executePrinters.txt";
+		public static string odometerLogPath { get; private set; } = Base + "\\odometerLog";
 
 		//读取设置文件，读取相关路径进行初始化
 		public static void Init()

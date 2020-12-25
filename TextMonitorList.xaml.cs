@@ -24,7 +24,7 @@ namespace demo
     public partial class TextMonitorList : Page
     {
         public static DispatcherTimer realTimeUpdata;
-        private ObservableCollection<LinkOSPrinters> linkOSPrinter2 = null;
+        public static ObservableCollection<LinkOSPrinters> linkOSPrinter2 = null;
         private WebSocketConsole.MainWindow mainWindow = null;
         public TextMonitorList( WebSocketConsole.MainWindow mainWindow)
         {

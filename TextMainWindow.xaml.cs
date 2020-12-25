@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RadioButton = System.Windows.Forms.RadioButton;
+using demo.Quartz;
 
 namespace demo
 {
@@ -105,6 +106,7 @@ namespace demo
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = textMenu;
+            Task.Run(() => CronTriggersQuartz.UsingQAsync());
             //System.Windows.Application.MainWindow = this;
             //this.MaxHeight = Screen.PrimaryScreen.Bounds.Height;
             //WindowState = WindowState.Maximized;
