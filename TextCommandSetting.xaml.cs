@@ -29,6 +29,13 @@ namespace demo
             InitializeComponent();
         }
 
+        public TextCommandSetting(string buttonName)
+        {
+            InitializeComponent();
+            RadioButton radioButton = panelMenu.FindName(buttonName) as RadioButton;
+            radioButton.IsChecked = true;
+        }
+
         public TextCommandSetting(string direct, string explain, string detailExplain, int line, string flag)
         {
             InitializeComponent();
@@ -54,6 +61,10 @@ namespace demo
             if (btnEdit.IsChecked == true)
             {
                 gdEditCommand.Visibility = Visibility.Visible;
+            }
+            if (btnOdometerAdmin.IsChecked == true)
+            {
+                gdOdometerAdmin.Visibility = Visibility.Visible;
             }
         }
 
@@ -109,12 +120,13 @@ namespace demo
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             gdEditCommand.Visibility = Visibility.Visible;
-
+            gdOdometerAdmin.Visibility = Visibility.Hidden;
         }
 
         private void btnOdometerAdmin_Click(object sender, RoutedEventArgs e)
         {
-
+            gdEditCommand.Visibility = Visibility.Hidden;
+            gdOdometerAdmin.Visibility = Visibility.Visible;
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)

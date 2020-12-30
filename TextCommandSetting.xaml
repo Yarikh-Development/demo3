@@ -164,8 +164,10 @@
                 </StackPanel>
             </Grid>
 
-            <!-- 其他信息 -->
-            
+            <!-- 里程管理 -->
+            <Grid Name="gdOdometerAdmin" Margin="20" Visibility="Hidden">
+                <TextBlock Text="里程设置"/>
+            </Grid>
 
 
         </Grid>

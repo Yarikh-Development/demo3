@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,129 @@ namespace demo
         public string PrinterType { get; set; } //型号
         public string PrintOdometer { get; set; }  //打印里程
 
+        //读取打印里程日志，返回一个集合
+        public static List<LinkOSPrinters> CalcOdometer(DateTime logFileName)
+        {
+            try
+            {
+                var printOdometer = new List<LinkOSPrinters>();
+                string filePathOdometer = FileTools.odometerLogPath + "\\" + logFileName.ToString("yyyy-MM-dd") + ".txt";
+                FileStream fileStreamOdometer = new FileStream(filePathOdometer, FileMode.Open, FileAccess.Read);
+                StreamReader streamReaderOdometer = new StreamReader(fileStreamOdometer);
+                //streamReaderOdometer.ReadLine[0]
+                string line;
+                string[] data;
+                while ((line = streamReaderOdometer.ReadLine()) != null)
+                {
+                    data = line.Split(';');
+                    printOdometer.Add(new LinkOSPrinters { SN = data[1], IP = data[2], PrintOdometer = data[3] });
+                }                
+                streamReaderOdometer.Close();
+                
+                return Calc(printOdometer);
+            }
+            catch (FileNotFoundException)
+            {
+                string msg = $"没有关于{logFileName:yyyy-MM-dd}的打印数据！";
+                MessageBox.Show(msg);
+                FileTools.WriteLineFile(FileTools.exceptionFilePath, $"{DateTime.Now} {msg}");
+                return null;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " 日志文件路径为空！！");
+                return null;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return null;
+            }
+            catch(NotSupportedException)
+            {
+                MessageBox.Show("不支持给定数据的格式！");
+                FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " 不支持给定数据的格式！！！");
+                return null;
+            }
+        }
+
+        //读取打印里程日段日志，返回一个集合
+        public static List<LinkOSPrinters> CalcOdometer(DateTime logFileName1,DateTime logFileName2)
+        {
+            try
+            {
+                DateTime logFileName = logFileName1;
+                var printOdometer = new List<LinkOSPrinters>();
+                while (logFileName1 <= logFileName2)
+                {
+                    string filePathOdometer = FileTools.odometerLogPath + "\\" + logFileName1.ToString("yyyy-MM-dd") + ".txt";
+                    if (!File.Exists(filePathOdometer))
+                    {
+                        logFileName1 = logFileName1.AddDays(1);
+                        continue;
+                    }
+                        
+                    FileStream fileStreamOdometer = new FileStream(filePathOdometer, FileMode.Open, FileAccess.Read);
+                    StreamReader streamReaderOdometer = new StreamReader(fileStreamOdometer);
+                    
+                    string line;
+                    string[] data;
+                    while ((line = streamReaderOdometer.ReadLine()) != null)
+                    {
+                        data = line.Split(';');
+                        printOdometer.Add(new LinkOSPrinters { SN = data[1], IP = data[2], PrintOdometer = data[3] });
+                    }                    
+                    streamReaderOdometer.Close();
+                    logFileName1 = logFileName1.AddDays(1);
+                }
+                if (printOdometer.Count == 0)
+                {
+                    MessageBox.Show($"没有关于{logFileName:yyyy-MM-dd}至{logFileName2:yyyy-MM-dd}的打印数据！");
+                    return null;
+                }                    
+                return Calc(printOdometer);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " 日志文件路径为空！！");
+                return null;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return null;
+            }
+            catch (NotSupportedException)
+            {
+                MessageBox.Show("不支持给定数据的格式！");
+                FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " 不支持给定数据的格式！！！");
+                return null;
+            }
+        }
+
+        //计算日段内的里程，返回计算好里程的集合
+        public static List<LinkOSPrinters> Calc(List<LinkOSPrinters> listOdometer)
+        {
+            
+            ArrayList list = new ArrayList();
+            list.Add(listOdometer.First().SN);
+            foreach (var item in listOdometer)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (!list.Contains(item.SN))
+                    {
+                        list.Add(item.SN);
+                    }        
+                }
+            }
+            var odo = new List<LinkOSPrinters>();
+            foreach (var item in list)
+            {
+                var CalcOdo1 = listOdometer.Where(info => info.SN == item.ToString()).ToList();
+                int num = Int32.Parse(CalcOdo1.Last().PrintOdometer) - Int32.Parse(CalcOdo1.First().PrintOdometer);
+                odo.Add(new LinkOSPrinters { SN = item.ToString(),PrintOdometer = num.ToString()});
+            }
+            return odo;          
+        }
     }
 
     /// <summary>

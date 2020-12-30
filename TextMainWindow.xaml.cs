@@ -102,10 +102,10 @@ namespace demo
             WindowState = WindowState.Minimized;
         }
 
-        //主界面？？
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             frameShowPages.Content = textMenu;
+            //闹钟器，每隔一段时间保存linkos打印机的里程
             Task.Run(() => CronTriggersQuartz.UsingQAsync());
             //System.Windows.Application.MainWindow = this;
             //this.MaxHeight = Screen.PrimaryScreen.Bounds.Height;

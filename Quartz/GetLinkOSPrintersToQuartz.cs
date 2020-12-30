@@ -23,7 +23,7 @@ namespace demo.Quartz
             {
                 foreach (var item in printers)
                 {
-                    data = DateTime.Now.ToString() + $";{item.SN};{item.IP};{item.PrintOdometer};";
+                    data = $"{DateTime.Now.ToString()};{item.SN};{item.IP};{item.PrintOdometer};";
                     FileTools.WriteLineFile(path, data);
                 }
                 
