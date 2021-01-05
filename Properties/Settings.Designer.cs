@@ -22,5 +22,97 @@ namespace demo.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string odoAdminTime {
+            get {
+                return ((string)(this["odoAdminTime"]));
+            }
+            set {
+                this["odoAdminTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime anyTime {
+            get {
+                return ((global::System.DateTime)(this["anyTime"]));
+            }
+            set {
+                this["anyTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime days {
+            get {
+                return ((global::System.DateTime)(this["days"]));
+            }
+            set {
+                this["days"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime hours {
+            get {
+                return ((global::System.DateTime)(this["hours"]));
+            }
+            set {
+                this["hours"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime minutes {
+            get {
+                return ((global::System.DateTime)(this["minutes"]));
+            }
+            set {
+                this["minutes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isDays {
+            get {
+                return ((bool)(this["isDays"]));
+            }
+            set {
+                this["isDays"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isHours {
+            get {
+                return ((bool)(this["isHours"]));
+            }
+            set {
+                this["isHours"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isMinutes {
+            get {
+                return ((bool)(this["isMinutes"]));
+            }
+            set {
+                this["isMinutes"] = value;
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace demo.Control
+namespace demo.DiyControl
 {
     class BackgroundConverter: IValueConverter
     {

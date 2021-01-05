@@ -3,15 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         xmlns:local="clr-namespace:demo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
-        Title="TextCommandSetting" Height="440" Width="600" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="TextCommandSetting" Height="440" Width="600" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Background="#F5F5F5">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/RadioButtonStyle.xaml"/>
+                <ResourceDictionary Source="Style/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="Style/TimePickerStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
+            
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Template">
@@ -90,6 +101,20 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Template" Value="{StaticResource YDefualtCheckBoxTemplate}">
+                    
+                </Setter>
+            </Style>
+            <Style TargetType="pu:DateTimePicker" BasedOn="{StaticResource {x:Type pu:DateTimePicker}}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="#939393"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid >
@@ -125,7 +150,7 @@
                          Style="{StaticResource RightLineRadioButton}" FontSize="14"/>
         </StackPanel>
 
-        <Grid Name="grid1" Grid.Row="1" Grid.Column="1">
+        <Grid Name="grid1" Grid.Row="1" Grid.Column="1" >
             <!-- 编辑指令 -->
             <Grid Name="gdEditCommand" Margin="20" Visibility="Hidden">
                 <!-- 排版：每一行30的高度就能保证左右对齐，后续再添加 -->
@@ -166,7 +191,82 @@
 
             <!-- 里程管理 -->
             <Grid Name="gdOdometerAdmin" Margin="20" Visibility="Hidden">
-                <TextBlock Text="里程设置"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Right" >
+                    <Border Height="25">
+                        <TextBlock Text="重复" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    </Border>
+                    <Border Height="60"/>
+                    <Border Height="25">
+                        <TextBlock Text="选择时间" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" Height="25">
+                        <CheckBox Name="cbIsDays" Click="cbIsDays_Click"/>
+                        <ComboBox Name="cbbSelectDaysMode" SelectionChanged="cbbSelectDaysMode_SelectionChanged"
+                                  SelectedIndex="0" FontSize="14" Width="80" IsEnabled="False" Height="25">
+                            <ComboBoxItem Content="每天"/>
+                            <ComboBoxItem Content="自定义"/>
+                        </ComboBox>
+                        <CheckBox Name="cbIsHours" Click="cbIsHours_Click" Content="每小时" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbIsMinutes" Click="cbIsMinutes_Click" Content="每分钟" Margin="10 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Name="panelSelectDays1" Orientation="Horizontal" Height="25" Margin="0 5 0 0" IsEnabled="False">
+                        <TextBlock Text="星期" FontSize="14" Width="30" VerticalAlignment="Center"/>
+                        <CheckBox Name="cbMON" Content="一" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbTUE" Content="二" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbWED" Content="三" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbTHU" Content="四" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbFRI" Content="五" Margin="10 0 0 0"/>
+                        
+                    </StackPanel>
+                    <StackPanel Name="panelSelectDays2" Orientation="Horizontal" Height="25" Margin="0 5 0 0" IsEnabled="False">
+                        <Border Width="30"/>
+                        <CheckBox Name="cbSAT" Content="六" Margin="10 0 0 0"/>
+                        <CheckBox Name="cbSUN" Content="日" Margin="10 0 0 0"/>
+                    </StackPanel>
+                    
+                    <pu:DateTimePicker Name="dtpAnyTime" Height="25" Margin="0 5 0 0"
+                                       DateTimePickerMode="DateTime" DropDownPlacement="BottomRight" IsDropDownOpen="False" />
+                    
+                    
+                    <StackPanel Orientation="Horizontal" Height="25" Margin="0 5 0 0">
+                        <pu:DateTimePicker Name="dtpDays" Width="80" HorizontalAlignment="Left" 
+                                       DateTimePickerMode="Time" DropDownPlacement="BottomRight" IsDropDownOpen="False" IsEnabled="False"/>
+                        <pu:DateTimePicker Name="dtpHours" Width="80" HorizontalAlignment="Left" Margin="10 0 0 0"
+                                       DateTimePickerMode="Time" DropDownPlacement="BottomRight" IsDropDownOpen="False" IsEnabled="False">
+                            <pu:DateTimePicker.Style>
+                                <Style BasedOn="{StaticResource {x:Type pu:DateTimePicker}}" TargetType="{x:Type pu:DateTimePicker}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DateTimePickerMode" Value="Time">
+                                            <Setter Property="TextStringFormat" Value="{}{0:mm:ss}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </pu:DateTimePicker.Style>
+                        </pu:DateTimePicker>
+                        <pu:DateTimePicker Name="dtpMinutes" Width="80" Margin="10 0 0 0" HorizontalAlignment="Left"
+                                       DateTimePickerMode="Time" DropDownPlacement="BottomRight" IsDropDownOpen="False" IsEnabled="False">
+                            <pu:DateTimePicker.Style>
+                                <Style BasedOn="{StaticResource {x:Type pu:DateTimePicker}}" TargetType="{x:Type pu:DateTimePicker}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DateTimePickerMode" Value="Time">
+                                            <Setter Property="TextStringFormat" Value="{}{0:ss}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </pu:DateTimePicker.Style>
+                        </pu:DateTimePicker>
+                    </StackPanel>
+                    
+                    <Button Name="btnSaveOdometer" Click="btnSaveOdometer_Click" 
+                            Content="保存" Width="60" Height="25" Margin="0 10 0 0" HorizontalAlignment="Left"/>
+                </StackPanel>
             </Grid>
 
 

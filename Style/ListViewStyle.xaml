@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="clr-namespace:demo.Control"
-                    xmlns:local="clr-namespace:demo.Style">
-    <c:BackgroundConverter x:Key="myConverter"/>
+                    xmlns:c="clr-namespace:demo.DiyControl"
+                    >
+    <c:BackgroundConverter2 x:Key="myConverter"/>
 
     <ControlTemplate x:Key="tmpForThumb" TargetType="{x:Type Thumb}">
         <Border>

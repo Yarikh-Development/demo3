@@ -2,6 +2,9 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BB5E7085-448C-49E5-B043-C2F725AF2D85}</ProjectGuid>
@@ -95,8 +98,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Panuon.UI.Silver, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Panuon.UI.Silver.1.1.3\lib\net45\Panuon.UI.Silver.dll</HintPath>
+    <Reference Include="Panuon.UI.Silver, Version=2.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Panuon.UI.Silver.2.0.0.9-alpha\lib\net45\Panuon.UI.Silver.dll</HintPath>
     </Reference>
     <Reference Include="Quartz, Version=3.2.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>packages\Quartz.3.2.3\lib\net461\Quartz.dll</HintPath>
@@ -194,9 +197,11 @@
       <DependentUpon>AnalysisDMP.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnalysisOrderResult.cs" />
-    <Compile Include="Control\BackgroundConverter.cs" />
-    <Compile Include="Control\ControlAttachProperty.cs" />
     <Compile Include="CornerButton.cs" />
+    <Compile Include="DiyControl\BackgroundConverter.cs" />
+    <Compile Include="DiyControl\BackgroundConverter2.cs" />
+    <Compile Include="DiyControl\ControlAttachProperty.cs" />
+    <Compile Include="DiyControl\TimePicker.cs" />
     <Compile Include="FileTools.cs" />
     <Compile Include="LinkOSPrinters.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -306,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\ListViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,6 +324,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\TimePickerStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
