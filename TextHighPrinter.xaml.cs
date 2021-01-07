@@ -25,7 +25,7 @@ namespace demo
     /// </summary>
     public partial class TextHighPrinter : Page
     {
-        //WebServer server = null;
+        
         Printer printer = null;
         String sTemp = "";
         public static ObservableCollection<LinkOSPrinters> linkOSPrinter = null;
@@ -33,10 +33,9 @@ namespace demo
         TextBasicSituation basicSituation;
         TextAdminInterface adminInterface;
         private DispatcherTimer dispatcherTimer;
-        //private DispatcherTimer realTimeUpdata;
-        //private int linkosPrinterNum = 0;
+        
         WebSocketConsole.MainWindow mainWindow = new WebSocketConsole.MainWindow();
-        //private Timer timerClose;
+        
         public TextHighPrinter()
         {
             
@@ -51,8 +50,14 @@ namespace demo
             /*realTimeUpdata = new DispatcherTimer();
             realTimeUpdata.Tick += new EventHandler(RealTime);
             realTimeUpdata.Interval = new TimeSpan(0, 0, 5);*/
+        }
 
-            btnStopService.IsEnabled = false;
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextMonitorList textMonitorList = new TextMonitorList(mainWindow);
+            skipPages.Content = textMonitorList;
+            btnHome.IsChecked = true;
+            Timer(sender, e);
         }
 
         private void txtDialogBox_Click(object sender, RoutedEventArgs e)
@@ -85,40 +90,45 @@ namespace demo
             }
         }
 
-        private void btnStartService_Click(object sender, RoutedEventArgs e)
+        private void cbService_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.StartService(btnStartService, btnStopService);
-            
-            dispatcherTimer.Start();
-            //realTimeUpdata.Start();
-            btnDMP.IsEnabled = true;
-        }
-
-        
-
-        private void btnStopService_Click(object sender, RoutedEventArgs e)
-        {
-            try
+            if (cbService.IsChecked == true)
             {
-                mainWindow.StopService();                
-                linkOSPrinter.Clear();
-                printersCount.Text = "0";
-                dispatcherTimer.Stop();
-                //realTimeUpdata.Stop();
-                TextMonitorList.realTimeUpdata.Stop();
-                btnStartService.IsEnabled = true;
-                btnStartService.Focus();
-                btnStopService.IsEnabled = false;
-                btnDMP.IsEnabled = false;
+                try
+                {
+                    mainWindow.StartService();
+
+                    dispatcherTimer.Start();
+                    //realTimeUpdata.Start();
+                    btnDMP.IsEnabled = true;
+                    cbService.Content = "关闭服务";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    cbService.IsChecked = false;
+                }                
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
-                btnStartService.IsEnabled = true;
-                btnStopService.IsEnabled = false;
-                
+                try
+                {
+                    mainWindow.StopService();
+                    linkOSPrinter.Clear();
+                    printersCount.Text = "0";
+                    dispatcherTimer.Stop();
+                    //realTimeUpdata.Stop();
+                    TextMonitorList.realTimeUpdata.Stop();
+                    cbService.Content = "开启服务";
+
+                    btnDMP.IsEnabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+                    cbService.IsChecked = true;
+                }
             }
-            
         }
 
         private void Timer(object sender, EventArgs e)
@@ -236,12 +246,7 @@ namespace demo
                 MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
 
             }
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        }        
 
         public void OpenPageInitialize(int flag)
         {
@@ -286,46 +291,5 @@ namespace demo
             TextMonitorList textMonitorList = new TextMonitorList(mainWindow);
             skipPages.Content = textMonitorList;
         }
-
-        //private void 
-
-        /*public void StopService(Button btnStart, Button btnStop)
-        {
-            try
-            {
-                String sErr = "";
-                
-                // timer1.Enabled = false;
-                server.Dispose();
-                server = null;
-                serviceFactory = null;
-                _logger = null;
-
-                My_CommObject.Close(ref sErr);
-                My_CommObject = null;
-
-                btnStart.IsEnabled = true;
-                btnStart.Focus();
-                btnStop.IsEnabled = false;
-                
-
-                
-                picOrange.Visibility = Visibility.Visible;
-                picGreen.Visibility = Visibility.Hidden;
-                // pnlSC.BackColor = Color.PaleGreen;
-                
-                
-                
-                msCurrentSelectedDeviceSN = "";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
-                btnStart.IsEnabled = true;
-                btnStop.IsEnabled = false;               
-                picOrange.Visibility = Visibility.Visible;
-                picGreen.Visibility = Visibility.Hidden;               
-            }
-        }*/
     }
 }

@@ -49,6 +49,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Style/RadioButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
     <Grid Height="auto" Width="auto">
@@ -64,26 +67,12 @@
         <Grid Grid.Row="0" >
 
             <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
-
-                <!--<Menu>-->
-                <!--<MenuItem>-->
-
-                <!--<MenuItem x:Name="Auto_MenuItem" Header="自动打印" IsCheckable="True" Click="AutoPrint" IsChecked="True"></MenuItem>-->
-
-                <Menu x:Name="OP_Menu" VerticalAlignment="Center">
-                    <MenuItem x:Name="Auto_MenuItem" Header="自动打印" Click="PrintModeClick" IsChecked="True"></MenuItem>
-
-                    <MenuItem x:Name="Manual_MenuItem" Header="手动打印" Click="PrintModeClick"></MenuItem>
-                </Menu>
-
-                <!--<RadioButton x:Name="Auto_MenuItem" Content="自动打印" Click="PrintModeClick" IsChecked="True"></RadioButton>
-                    <RadioButton x:Name="Manual_MenuItem" Content="手动打印" Click="PrintModeClick"></RadioButton>-->
-                <Button x:Name="Start_Print_MenuItem" Click="PrintClick" Content="开始打印" IsEnabled="False" Width="60"/>
+                <RadioButton x:Name="Auto_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Auto_MenuItem_Click"
+                             Content="自动打印" Margin="10 0 0 0" IsChecked="True" VerticalAlignment="Center"/>
+                <RadioButton x:Name="Manual_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Manual_MenuItem_Click"
+                             Content="手动打印" Margin="10 0 0 0"  VerticalAlignment="Center"/>
+                <Button x:Name="Start_Print_MenuItem" Click="PrintClick" Margin="10 0 0 0" Content="开始打印" IsEnabled="False" Width="60"/>
                 <TextBlock x:Name="State_TextBox" Height="auto" Width="auto" Foreground="OrangeRed"/>
-
-                <!--</MenuItem>-->
-                <!--</Menu>-->
-
             </StackPanel>
 
         </Grid>
@@ -103,7 +92,7 @@
 
             <Border Grid.Column="0" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
                 <Grid>
-                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <TextBlock Name="txtEE_Piceture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
                     <Image x:Name="EE_Piceture_Image" />
                 </Grid>
                 
@@ -112,7 +101,7 @@
             <Button x:Name="EE_Picture_Change_Button" Grid.Column="0" Grid.Row="1" Content="能效图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
             <Border Grid.Column="1" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
                 <Grid>
-                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <TextBlock Name="txtOverprint_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
                     <Image x:Name="Overprint_Picture_Image"/>
                 </Grid>
                 
@@ -121,7 +110,7 @@
             <Button x:Name="Overprint_Picture_Change_Button" Grid.Column="1" Grid.Row="1" Content="套打图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
             <Border Grid.Column="2" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
                 <Grid>
-                    <TextBlock Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                    <TextBlock Name="txtPreview_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
                     <Image x:Name="Preview_Picture_Image" />
                 </Grid>
                 

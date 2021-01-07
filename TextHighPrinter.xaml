@@ -11,10 +11,17 @@
 
     <Page.Resources>
         <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource YDefualtButtonTemplate}">
+                    
+                </Setter>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="Style/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Style/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -27,42 +34,38 @@
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 1"/>
+        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 0"/>
         <Border Grid.Row="1" BorderBrush="#A8A4AD" BorderThickness="0 0 1 0"/>
         <Border Grid.Column="1" BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
         <Border Grid.Row="1" Grid.Column="1" BorderBrush="#A8A4AD"/>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印机列表" FontSize="30"/>
-        <Grid Grid.Row="1">
+        <!--<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印机列表" FontSize="30"/>-->
+        <Grid Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="10 0 10 0"/>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button Name="btnStartService" Click="btnStartService_Click" Content="开启服务"/>
-                    <Button Name="btnStopService" Click="btnStopService_Click" Content="暂停服务"/>
-                    <Grid>
-                        <Image Name="picOrange"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Oringe.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
-                        <Image Name="picGreen"  Grid.Column="1" Source="WebSocketConsole/Printer_Pics/Green.jpg" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    </Grid>
-                    <Button Name="btnDMP" Click="btnDMP_Click" Content="文件对比" IsEnabled="False"/>
-                    <!--<Border CornerRadius="15" Width="30" Background="#000000"/>-->
-                </StackPanel>
-                
-                <UniformGrid Columns="2" Grid.Row="1">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <!-- 这里需要后台写入或绑定写入打印机数量 -->
-                        <TextBlock Name="printersCount" Text="0" Margin="15 0 0 0" FontSize="11" Foreground="#696969"/>
-                        <TextBlock Text="台打印机" FontSize="11" Foreground="#696969"/>
-                    </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
 
+                    <!-- 这里需要后台写入或绑定写入打印机数量 -->
+                    <TextBlock Name="printersCount" Text="0" Margin="15 0 0 0" FontSize="11" Foreground="#696969"/>
+                    <TextBlock Text="台打印机" FontSize="11" Foreground="#696969"/>
+                </StackPanel>
+
+                <UniformGrid Columns="2" Grid.Row="0">
+
+                    <!--<CheckBox Name="Checker1" Style="{DynamicResource SliderCheckBox}" Content="{Binding ElementName=Checker1,Path=IsChecked}" 
+                                  Margin="10 0 0 0" VerticalAlignment="Center"/>-->
+                    <CheckBox Name="cbService" Click="cbService_Click" Style="{DynamicResource SliderCheckBox}" Content="开启服务" 
+                                  Margin="10 0 0 0" VerticalAlignment="Center"/>
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="btnSetting" Click="btnSetting_Click" Style="{DynamicResource iconButton}" 
                                 ToolTip="设置" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
@@ -78,9 +81,12 @@
                                 <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
                             </pu:DropDown.Content>
                             <pu:DropDown.Child>
-                                <Grid Height="100">
-                                    <Button Width="30" BorderThickness="0" Background="#FFFFFF" Content="里程管理"/>
-                                </Grid>
+                                <StackPanel Height="100" Width="100">
+                                    <Button Height="30" BorderThickness="0" Background="#FFFFFF" Content="里程管理"/>
+                                    
+                                    <Button Name="btnDMP" Click="btnDMP_Click" 
+                                            Height="30" BorderThickness="0" Background="#FFFFFF" Content="文件对比" IsEnabled="False"/>
+                                </StackPanel>
                             </pu:DropDown.Child>
                         </pu:DropDown>
                     </StackPanel>
@@ -151,7 +157,8 @@
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
                                                 <!-- 添加打印机图标，正常一个，其他状态一个 -->
-                                                <TextBlock/>
+                                                <TextBlock Text="&#xe640;" Foreground="#1578F6" FontFamily="/#iconfont"  FontSize="35"
+                                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                                 <StackPanel Grid.Column="1" Margin="3 0 0 0">
                                                     <TextBlock x:Name="txtPrintersSN" Text="{Binding SN}" TextWrapping="Wrap"  />
                                                     <!-- 显示打印机的SN码 -->

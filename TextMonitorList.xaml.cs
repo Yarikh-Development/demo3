@@ -80,13 +80,19 @@ namespace demo
             }
             else
             {
-                linkOSPrinter2.Clear();
+                //linkOSPrinter2.Clear();
                 //lvMonitor.Items.Clear();
             }
 
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            StopTime();
+            //realTimeUpdata.Stop();
+        }
+
+        public static void StopTime()
         {
             realTimeUpdata.Stop();
         }

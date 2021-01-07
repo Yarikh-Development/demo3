@@ -56,9 +56,9 @@ namespace demo
         {
             if (cbTimesSelect.IsChecked == false)
             {
-                if (dpTimeSelect.SelectedDate != null)
+                if (dpTimeSelect.SelectedDateTime != null)
                 {
-                    lvTimesOdometer.ItemsSource =  LinkOSPrinters.CalcOdometer((DateTime)dpTimeSelect.SelectedDate);
+                    lvTimesOdometer.ItemsSource =  LinkOSPrinters.CalcOdometer((DateTime)dpTimeSelect.SelectedDateTime);
 
                 }
                 else
@@ -68,7 +68,7 @@ namespace demo
             }
             else
             {
-                if (dpTimesSelect1.SelectedDate != null && dpTimesSelect2.SelectedDate != null)
+                if (dpTimesSelect1.SelectedDateTime != null && dpTimesSelect2.SelectedDateTime != null)
                 {
                     //此段注释不要删除，判断如果选择的时间没找到文件时的提示
                     /*string filePath1 = FileTools.odometerLogPath + "\\" + 
@@ -83,7 +83,7 @@ namespace demo
                     {
                         MessageBox.Show($"没有找到{dpTimesSelect2.SelectedDate}的日志！");
                     }*/
-                    lvTimesOdometer.ItemsSource = LinkOSPrinters.CalcOdometer((DateTime)dpTimesSelect1.SelectedDate, (DateTime)dpTimesSelect2.SelectedDate);
+                    lvTimesOdometer.ItemsSource = LinkOSPrinters.CalcOdometer((DateTime)dpTimesSelect1.SelectedDateTime, (DateTime)dpTimesSelect2.SelectedDateTime);
 
                 }
                 else

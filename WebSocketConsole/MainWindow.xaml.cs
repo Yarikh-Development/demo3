@@ -311,7 +311,7 @@ namespace WebSocketConsole
             }
         }
 
-        public void StartService(Button radioButton,Button cmdStopSerivce)
+        public void StartService()
         {
             _logger = new WebSocketLogger();
             String sErr = "";
@@ -320,33 +320,25 @@ namespace WebSocketConsole
             gsSerialNumber = Utility.GetSerialNumber(ref sErr);
             if (sErr != "")
             {
-                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
-                radioButton.Focus();
-                return;
+                throw new Exception(sErr);
             }
 
             gsCurrentIP = Utility.GetCurrentIP(ref sErr);
             if (sErr != "")
             {
-                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
-                radioButton.Focus();
-                return;
+                throw new Exception(sErr);
             }
 
             gsLocalMachineName = Utility.GetLocalMachineName(ref sErr);
             if (sErr != "")
             {
-                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
-                radioButton.Focus();
-                return;
+                throw new Exception(sErr);
             }
 
             gsPlatForm = Utility.GetPlatFormType(ref sErr);
             if (sErr != "")
             {
-                MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
-                radioButton.Focus();
-                return;
+                throw new Exception(sErr);
             }
 
             try
@@ -404,9 +396,7 @@ namespace WebSocketConsole
                 if (sErr != "")
                 {
                     this.Cursor = Cursors.Arrow;
-                    MessageBox.Show(sErr, this.Title, MessageBoxButton.OK);
-                    radioButton.Focus();
-                    return;
+                    throw new Exception(sErr);                    
                 }
 
                 // used to decide what to do with incoming connections
@@ -433,17 +423,13 @@ namespace WebSocketConsole
                 }
 
                 this.Cursor = Cursors.Arrow;
-                radioButton.IsEnabled = false;
-                cmdStopSerivce.IsEnabled = true;
-                cmdStopSerivce.Focus();
-                //image1.Visibility = Visibility.Hidden;
-                //image2.Visibility = Visibility.Visible;
                 msCurrentSelectedDeviceSN = "";
             }
             catch (Exception ex)
             {
                 this.Cursor = Cursors.Arrow;
-                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
+                throw;
+                //MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
             }
         }
 
@@ -462,19 +448,11 @@ namespace WebSocketConsole
 
                 My_CommObject.Close(ref sErr);
                 My_CommObject = null;
-
-                
-                
-                //picOrange.Visibility = Visibility.Visible;
-                //picGreen.Visibility = Visibility.Hidden;
                 msCurrentSelectedDeviceSN = "";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, this.Title, MessageBoxButton.OK);
-                
-                //picOrange.Visibility = Visibility.Visible;
-                //picGreen.Visibility = Visibility.Hidden;                
+                throw;
             }
         }
 

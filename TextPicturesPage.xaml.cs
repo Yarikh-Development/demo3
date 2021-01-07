@@ -79,14 +79,8 @@ namespace demo
 		}
 
 		//打印模式选择
-		private void PrintModeClick(object sender, RoutedEventArgs e)
+		/*private void PrintModeClick(object sender, RoutedEventArgs e)
 		{
-			/*if((bool)Auto_MenuItem.IsChecked)
-            {
-				
-				listener.Start();
-				this.HideControl(true);
-			}*/
 			System.Windows.Controls.MenuItem menuItem = sender as System.Windows.Controls.MenuItem;
 			if (menuItem.Name == "Auto_MenuItem")
 			{
@@ -112,6 +106,44 @@ namespace demo
 			this.Overprint_Picture_Image.Source = null;
 			this.Preview_Number_TextBlock.Text = "";
 			this.Preview_Picture_Image.Source = null;
+		}*/
+
+		private void Auto_MenuItem_Click(object sender, RoutedEventArgs e)
+		{
+			listener.Start();
+			Manual_MenuItem.IsChecked = false;
+			Auto_MenuItem.IsChecked = true;
+			Start_Print_MenuItem.IsEnabled = false;
+			//picturesPage.HideControl(true);
+			this.HideControl(true);
+			Refresh();
+			
+		}
+
+		private void Manual_MenuItem_Click(object sender, RoutedEventArgs e)
+		{
+			listener.Stop();
+			Auto_MenuItem.IsChecked = false;
+			Manual_MenuItem.IsChecked = true;
+			Start_Print_MenuItem.IsEnabled = true;
+			//picturesPage.HideControl(false);
+			this.HideControl(false);
+			Refresh();
+			
+		}
+
+		private void Refresh()
+        {
+			this.EE_Number_TextBlock.Text = "";
+			this.EE_Piceture_Image.Source = null;
+			this.Overprint_Number_TextBlock.Text = "";
+			this.Overprint_Picture_Image.Source = null;
+			this.Preview_Number_TextBlock.Text = "";
+			this.Preview_Picture_Image.Source = null;
+
+			txtEE_Piceture.Visibility = Visibility.Visible;
+			txtOverprint_Picture.Visibility = Visibility.Visible;
+			txtPreview_Picture.Visibility = Visibility.Visible;
 		}
 
 		//自动打印
@@ -279,18 +311,21 @@ namespace demo
             if (EEPath != "")
             {
                 EE_Piceture_Image.Source = new BitmapImage(new Uri(EEPath)).Clone();
+				txtEE_Piceture.Visibility = Visibility.Hidden;
             }
 
             if (overprintPath != "")
             {
                 Overprint_Picture_Image.Source = new BitmapImage(new Uri(overprintPath)).Clone();
                 Overprint_Number_TextBlock.Text = FileTools.GetFileShortName(overprintPath);
+				txtOverprint_Picture.Visibility = Visibility.Hidden;
             }
 
             if (previewPath != "")
             {
                 Preview_Picture_Image.Source = new BitmapImage(new Uri(previewPath)).Clone();
                 Preview_Number_TextBlock.Text = FileTools.GetFileShortName(overprintPath);
+				txtPreview_Picture.Visibility = Visibility.Hidden;
             }
             return "";
         }
@@ -312,5 +347,7 @@ namespace demo
         {
 			listener.Start();
 		}
+
+        
     }
 }

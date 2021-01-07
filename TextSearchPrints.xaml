@@ -25,12 +25,12 @@
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 1"/>
+        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 1 0"/>
         <Border Grid.Row="1" BorderBrush="#A8A4AD" BorderThickness="0 0 1 0"/>
         <Border Grid.Column="1" BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
         <Border Grid.Row="1" Grid.Column="1" BorderBrush="#A8A4AD"/>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印机列表" FontSize="30"/>
-        <Grid Grid.Row="1">
+        <!--<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印机列表" FontSize="30"/>-->
+        <Grid Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
@@ -139,7 +139,8 @@
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
                                                 <!-- 添加打印机图标，正常一个，其他状态一个 -->
-                                                <TextBlock/>
+                                                <TextBlock Text="&#xe640;" Foreground="#1578F6" FontFamily="/#iconfont"  FontSize="35"
+                                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                                 <StackPanel Grid.Column="1" Margin="3 0 0 0">
                                                     <TextBlock x:Name="txtPrintersName" Text="{Binding Name}" TextWrapping="Wrap"  />
                                                     <!-- 显示打印机状态（正常、脱机、错误、等） -->
@@ -196,14 +197,14 @@
             </Grid.RowDefinitions>
             
             <!-- 显示打印机品牌（LOGO及品牌信息） -->
-            <Grid Background="#1578F6" Opacity="0.3">
-                <!-- 用后端代码来实现这个功能 -->
+            <!--<Grid Background="#1578F6" Opacity="0.3">
+                --><!-- 用后端代码来实现这个功能 --><!--
                 <TextBlock Name="txtPrinterName" Text="{Binding ElementName=itemsPrinters, Path=ItemsSource}"/>
-            </Grid>
+            </Grid>-->
             
-            <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>
+            <!--<Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>-->
 
-            <WrapPanel Grid.Row="1" Orientation="Horizontal">
+            <WrapPanel Grid.RowSpan="2" Orientation="Horizontal">
                 
 
                 <Button Name="btnSendFile" Click="btnSentFile_Click"
