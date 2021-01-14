@@ -107,7 +107,7 @@ namespace demo
             try
             {
                 OpenFileDialog openFile = new OpenFileDialog();//声明类，用于打开文件
-                openFile.Filter = "TestOpenWrite(*.zpl)|*.zpl";//文件过滤器
+                openFile.Filter = "选择模板(*.zpl)|*.zpl;*.prn;*.dmp;*.btw";//文件过滤器
                 openFile.ShowDialog();//调用系统文件夹展示文件列表，用于查找文件
                 txtFilePath.Text = openFile.FileName;//将获取到的文件名赋值
             }
@@ -199,9 +199,9 @@ namespace demo
                 }
                 string result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
                 bool zpl = false;
-                string command = "! U setvar \"weblink.ip.conn1.location\" \"" +
-                    txtServerName + "\"\r\n! U setvar \"internal_wired.ip.dns.servers\" \"" +
-                    txtDNSServer + "\"\r\n! U setvar \"device.reset\" \"\" ";
+                string command = "! U1 setvar \"weblink.ip.conn1.location\" \"" +
+                    txtServerName + "\"\r\n! U1 setvar \"internal_wired.ip.dns.servers\" \"" +
+                    txtDNSServer + "\"\r\n! U1 setvar \"device.reset\" \"\" ";
                 if (result != "")
                 {
                     txtLogMessage.Text = result;

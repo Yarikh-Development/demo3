@@ -1,4 +1,6 @@
-﻿using System;
+﻿using demo.ViewModels;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +26,12 @@ namespace demo
         public TextBasicSituation()
         {
             InitializeComponent();
+        }
+
+        public TextBasicSituation(string SN)
+        {
+            InitializeComponent();
+            this.DataContext = new BasicSituationViewModel(SN);
         }
 
         private void btnBaseMessage_Click(object sender, RoutedEventArgs e)

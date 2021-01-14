@@ -47,13 +47,20 @@ namespace demo
             {
                 String command = "{}{\"media\":null,\"head\":null,\"power\":null,\"device\":null}";
                 String command2 = "{}{\"media.status\":null,\"head.latch\":null,\"power.percent_full\":null,\"device.product_name\":null,\"odometer.media_marker_count1\":null}";
+                String command3 = "{}{\"media.status\":null,\"head.latch\":null,\"power.percent_full\":null," +
+                    "\"device.product_name\":null,\"odometer.media_marker_count1\":null,\"print.tone\":null," +
+                    "\"media.speed\":null,\"media.printmode\":null}";
                 String message = "";
                 String[] str;
                 ArrayList array;
                 linkOSPrinter2 = TextHighPrinter.linkOSPrinter;
                 foreach (var item in linkOSPrinter2)
                 {
-                    message = mainWindow.SendRawDataToPrinter(command2, item.SN);
+                    message = mainWindow.SendRawDataToPrinter(command3, item.SN);
+                    //message有可能是：Device:XXZKJ181100121 is not online.需不需要做判断
+                    //将Json数据保存到指定打印机的Json文件中
+                    string file = $"{FileTools.LinkOSPrintersJsonPath}\\{item.SN}.json";
+                    FileTools.WriteNewFile(file, message);
                     //将接收到的信息发送给JSON解析出想要的信息
                     str = LinkOSRealTime.SetJsonMessage(message); //返回一个数组
                     //array = LinkOSRealTime.SetJsonMessageForList(message);  //返回一个列表

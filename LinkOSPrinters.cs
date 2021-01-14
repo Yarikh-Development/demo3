@@ -31,6 +31,11 @@ namespace demo
         public string PowerFull { get; set; }   //电量百分比
         public string PrinterType { get; set; } //型号
         public string PrintOdometer { get; set; }  //打印里程
+        public string Speed { get; set; }       //速度
+        public string Tone { get; set; }        //浓度
+        public string PrintMode { get; set; }   //操作模式
+        public string PaperMode { get; set; }   //纸张类型
+        public string TrackMode { get; set; }   //跟踪模式
 
         //读取打印里程日志，返回一个集合
         public static List<LinkOSPrinters> CalcOdometer(DateTime logFileName)
@@ -134,24 +139,27 @@ namespace demo
         public static List<LinkOSPrinters> Calc(List<LinkOSPrinters> listOdometer)
         {
             
-            ArrayList list = new ArrayList();
-            list.Add(listOdometer.First().SN);
+            ArrayList array = new ArrayList();
+            var list = new List<LinkOSPrinters>();
+            array.Add(listOdometer.First().SN);
+            list.Add(listOdometer.First());
             foreach (var item in listOdometer)
             {
-                for (int i = 0; i < list.Count; i++)
+                for (int i = 0; i < array.Count; i++)
                 {
-                    if (!list.Contains(item.SN))
+                    if (!array.Contains(item.SN))
                     {
-                        list.Add(item.SN);
+                        array.Add(item.SN);
+                        list.Add(item);
                     }        
                 }
             }
             var odo = new List<LinkOSPrinters>();
             foreach (var item in list)
             {
-                var CalcOdo1 = listOdometer.Where(info => info.SN == item.ToString()).ToList();
+                var CalcOdo1 = listOdometer.Where(info => info.SN == item.SN).ToList();
                 int num = Int32.Parse(CalcOdo1.Last().PrintOdometer) - Int32.Parse(CalcOdo1.First().PrintOdometer);
-                odo.Add(new LinkOSPrinters { SN = item.ToString(),PrintOdometer = num.ToString()});
+                odo.Add(new LinkOSPrinters { IP = item.IP ,SN = item.SN,PrintOdometer = num.ToString()});
             }
             return odo;          
         }
@@ -209,7 +217,7 @@ namespace demo
             
         }
 
-        public static ArrayList SetJsonMessageForList(String jsonMessage)
+        public static ArrayList JsonMessageForList(String jsonMessage)
         {
             try
             {

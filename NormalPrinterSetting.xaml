@@ -355,7 +355,8 @@
             </Grid>
         </Grid>
         <Border Grid.Row="2" Grid.Column="1" CornerRadius="3" BorderThickness="0" Margin="10" Background="#CBCBCB">
-            <TextBlock Name="txtLogMessage" Margin="5 0 0 0" Foreground="#FF0000" VerticalAlignment="Center"/>
+            <TextBlock Name="txtLogMessage" Margin="5 0 0 0" Foreground="#FF0000" VerticalAlignment="Center" 
+                       ToolTip="{Binding Path=Text,ElementName=txtLogMessage}"/>
         </Border>
     </Grid>
 </Window>

@@ -21,6 +21,7 @@ namespace demo
 		public static string commandPath { get; private set; } = Base + "\\Command";
 		public static string executePrintersFilePath { get; private set; } = Base + "\\executePrinters.txt";
 		public static string odometerLogPath { get; private set; } = Base + "\\odometerLog";
+		public static string LinkOSPrintersJsonPath { get; private set; } = Base + "\\LinkOSPrintersJson";
 
 		//读取设置文件，读取相关路径进行初始化
 		public static void Init()
@@ -116,7 +117,7 @@ namespace demo
 			return "";
         }
 
-		//写数据到文件
+		//写数据到文件，并在文件结尾添加数据
 		public static void WriteLineFile(string path, string data)
         {
             try
@@ -133,6 +134,24 @@ namespace demo
 				streamWriter.Close();
 			}
         }
+
+		//写数据到文件，覆盖原有数据
+		public static void WriteNewFile(string path, string data)
+		{
+			try
+			{
+				FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
+				StreamWriter streamWriter = new StreamWriter(fileStream);
+				streamWriter.WriteLine(data);
+				streamWriter.Close();
+			}
+			catch (IOException)
+			{
+				StreamWriter streamWriter = new StreamWriter(exceptionFilePath);
+				streamWriter.WriteLine(DateTime.Now.ToString() + path + " " + " 文件写入失败！数据：" + data);
+				streamWriter.Close();
+			}
+		}
 
 		//删除指定行
 		public static void DeleteLine(string path, int line)
@@ -182,6 +201,19 @@ namespace demo
 			return "";
 		}
 
-		
+		//读取文件中所有字符，如果发生异常则返回"".
+		public static String ReaderAll(string File)
+        {
+            try
+            {
+				FileStream fileStream = new FileStream(File, FileMode.Open, FileAccess.Read);
+				StreamReader reader = new StreamReader(fileStream);
+				return reader.ReadToEnd();
+			}
+            catch (Exception)
+            {
+				return "";
+            }			
+		}
 	}
 }

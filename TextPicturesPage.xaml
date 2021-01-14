@@ -133,7 +133,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="能效编号" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"  FontSize="16" />
-            <TextBox x:Name="EE_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" IsReadOnly="False"  Width="500"  FontSize="16" Grid.ColumnSpan="2"  />
+            <TextBox x:Name="EE_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" IsReadOnly="True"  Width="500"  FontSize="16" Grid.ColumnSpan="2"  />
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontSize="16" ><Run Text="套打"/><Run Text="编号"/></TextBlock>
             <TextBox x:Name="Overprint_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" IsReadOnly="True"  Width="500" FontSize="16" Grid.ColumnSpan="2"   />
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="16"><Run Text="预览"/><Run Text="编号"/></TextBlock>

@@ -66,7 +66,9 @@ namespace demo
 			//设置能效编号
 			if (Auto_MenuItem.IsChecked==true)
 			{
-				//this.SetNumber(codes.Result);	//将钩子捕获到的结果集展示在界面框里，但扫描时已经扫过一次在了，会导致显示两次信息。
+				//将钩子捕获到的结果集展示在界面框里，但扫描时已经扫过一次在了，会导致显示两次信息。
+				//0112，将自动打印的标签码输入框改成readonly就不会出现上面说的这个问题了。
+				this.SetNumber(codes.Result);	
 				AutoPrint(codes.Result);
 			}
 		}
@@ -288,7 +290,7 @@ namespace demo
                 EE_Picture_Change_Button.IsEnabled = false;
                 Overprint_Picture_Change_Button.IsEnabled = false;
                 Preview_Picture_Change_Button.IsEnabled = false;
-                EE_Number_TextBlock.IsReadOnly = false;
+                EE_Number_TextBlock.IsReadOnly = true;
             } else //手动
             {
                 EE_Picture_Change_Button.IsEnabled = true;

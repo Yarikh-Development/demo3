@@ -72,7 +72,6 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Template" Value="{StaticResource YDefualtCheckBoxTemplate}">
-
                 </Setter>
             </Style>
             <Style TargetType="pu:DateTimePicker" BasedOn="{StaticResource {x:Type pu:DateTimePicker}}">
@@ -209,8 +208,8 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Border>
                                 <StackPanel Margin="15 0 0 0">
-                                    <TextBlock Text="标签长度" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="dddd" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                    <TextBlock Text="打印里程" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="{Binding PBasicMsg.PrintOdometer}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -232,7 +231,7 @@
                                 </Border>
                                 <StackPanel Margin="15 0 0 0">
                                     <TextBlock Text="打印头是否抬起" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="抬起" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -295,7 +294,7 @@
                                 </Border>
                                 <StackPanel Margin="15 0 0 0">
                                     <TextBlock Text="电源情况" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="90%" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                    <TextBlock Text="{Binding Path=PBasicMsg.PowerFull, StringFormat=0%}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

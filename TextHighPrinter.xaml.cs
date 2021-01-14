@@ -273,17 +273,20 @@ namespace demo
             printer = new Printer();
             //isVisibilityForEnter.Visibility = Visibility.Visible;
             btnPrinterDetail.IsChecked = true;
-            basicSituation = new TextBasicSituation();
-            skipPages.Content = basicSituation;
+            
             List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
+            TextBlock txt = null;
             foreach (Button button in buttonItems)
             {
                 if (button.IsFocused)
                 {
-                    TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
+                    txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersSN");
                     txtPrinterSN.Text = txt.Text;
+                    break;
                 }
             }
+            basicSituation = new TextBasicSituation(txt.Text);
+            skipPages.Content = basicSituation;
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
