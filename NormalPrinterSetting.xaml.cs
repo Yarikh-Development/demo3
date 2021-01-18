@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using demo.ClassFolder;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -23,6 +25,7 @@ namespace demo
     {
         private string printerName = "";
         private List<string> scale;
+        private IntPtr _windowHandle;
         public NormalPrinterSetting(string printerName,string buttonName)
         {
             InitializeComponent();
@@ -31,6 +34,8 @@ namespace demo
             RadioButton radioButton = panelMenu.FindName(buttonName) as RadioButton;
             radioButton.IsChecked = true;
             GetPrinterAllStatus();
+            //获取窗口的句柄
+            _windowHandle = new WindowInteropHelper(this).Handle;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -275,33 +280,29 @@ namespace demo
                     txtLableLength.Text = Printer.LabelLength().ToString();
                     txtLabelRemain.Text = Printer.LabelsRemainingInBatch().ToString();
                     //txtPrinterMode.Text = Printer.PrinterMode().ToString();
+                    
+                    //以下这部分注释掉的代码是放弃掉的打印机设置代码功能，说不定哪天还得用上就不删除了
                     //打印速度
-                    string printSpeed = Printer.GetPrinterSettingValus("media.speed");
+                    /*string printSpeed = Printer.GetPrinterSettingValus("media.speed");
                     for (int i = 0; i < cbbPrintSpeed.Items.Count; i++)
                     {
                         if (((ComboBoxItem)cbbPrintSpeed.Items[i]).Content.ToString() == printSpeed)
                         {
                             cbbPrintSpeed.SelectedIndex = i;
                         }
-                    }
+                    }*/
                     //打印浓度
-                    txtPrintRibbon.Text = Printer.GetPrinterSettingValus("print.tone_zpl");
+                    /*txtPrintRibbon.Text = Printer.GetPrinterSettingValus("print.tone_zpl");*/
                     //打印模式-操作模式
-                    string printMode = Printer.PrinterMode().ToString();
+                    /*string printMode = Printer.PrinterMode().ToString();
                     for (int i = 0; i< cbbPrintMode.Items.Count;i++)
                     {
                         if (((ComboBoxItem)cbbPrintMode.Items[i]).Content.ToString() == printMode)
                         {
                             cbbPrintMode.SelectedIndex = i;
                         }
-                    }
-                    /*foreach (ComboBoxItem mode in cbbPrintMode.Items)
-                    {
-                        if (mode.Content.ToString() == printMode)
-                        {
-                            cbbPrintMode.SelectedItem = mode;
-                        }
                     }*/
+                    
                 }
                 else
                 {
@@ -454,6 +455,41 @@ namespace demo
                 MessageBox.Show("不可以");
                 //e.Handled = false;
             }*/
+        }
+
+        private void btnDocumentProp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int ptrPrompt = 0;
+                foreach (var ptr in Printer.SetPrinters())
+                {
+                    if (ptr.Name.Contains(printerName))
+                    {
+                        ptrPrompt = ptr.ID;
+                    }
+                }
+                string ptrName = printerName;
+                if (ptrName != null && ptrName.Length > 0)
+                {
+                    IntPtr pPrinter = IntPtr.Zero;
+                    IntPtr pDevModeOutput = IntPtr.Zero;
+                    IntPtr pDevModeInput = IntPtr.Zero;
+                    IntPtr nullPointer = IntPtr.Zero;
+
+                    PtrPage.OpenPrinter(ptrName, ref pPrinter, ref nullPointer);
+
+                    int iNeeded = PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, 0);
+                    pDevModeOutput = System.Runtime.InteropServices.Marshal.AllocHGlobal(iNeeded);
+                    PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, ptrPrompt--);
+                    PtrPage.ClosePrinter(pPrinter);
+                }
+            }
+            catch (Exception)
+            {
+                txtLogMessage.Text = "打印机不存在！";
+            }
+            
         }
     }
 }

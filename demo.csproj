@@ -200,6 +200,7 @@
       <DependentUpon>AnalysisDMP.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnalysisOrderResult.cs" />
+    <Compile Include="ClassFolder\PtrPage.cs" />
     <Compile Include="CornerButton.cs" />
     <Compile Include="DiyControl\BackgroundConverter.cs" />
     <Compile Include="DiyControl\BackgroundConverter2.cs" />
@@ -467,7 +468,6 @@
     <Resource Include="img\caidan.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClassFolder\" />
     <Folder Include="CustomControls\" />
   </ItemGroup>
   <ItemGroup>

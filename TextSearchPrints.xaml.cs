@@ -1,4 +1,5 @@
-﻿using System;
+﻿using demo.ClassFolder;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Printing;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -27,7 +29,7 @@ namespace demo
         private string printerName = "";
         private AddPrinter add = null;
         //private ObservableCollection<AddPrintersMessage> executePrinters = null;
-        public TextSearchPrints()
+        public TextSearchPrints(Window window)
         {
             InitializeComponent();
             //Printer.SetPrinters();
@@ -92,6 +94,8 @@ namespace demo
         {
             NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnPrintSetting.Name);
             normalPrinter.ShowDialog();
+            
+            
         }
 
         private void btnBasicMessage_Click(object sender, RoutedEventArgs e)

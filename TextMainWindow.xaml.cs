@@ -25,7 +25,7 @@ namespace demo
     /// </summary>
     public partial class Window1 : Window
     {
-        private TextSearchPrints textSearchPrints = new TextSearchPrints();
+        private TextSearchPrints textSearchPrints;
         private TextFiles textFiles = null;
         private TextMenu textMenu = new TextMenu();
         private TextLogPage textLogPage = null;
@@ -37,6 +37,7 @@ namespace demo
         {
             InitializeComponent();
             FileTools.Init();
+            textSearchPrints = new TextSearchPrints(this);
         }
 
         //窗口缩放
@@ -280,5 +281,10 @@ namespace demo
             TextHighPrinter.btnHome.IsChecked = true;
             TextHighPrinter.OpenPageInitialize(1);
         }
+
+        /*public static Window1 GetHandle()
+        {
+            return this;
+        }*/
     }
 }

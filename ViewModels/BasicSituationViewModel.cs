@@ -41,6 +41,7 @@ namespace demo.ViewModels
                     JObject jobj = JObject.Parse(jsonMsg);
                     printer = new LinkOSPrinters()
                     {
+                        HeadStatus = (jobj["head.latch"] ?? "").ToString(),
                         PowerFull = (jobj["power.percent_full"] ?? "").ToString(),
                         PrinterType = (jobj["device.product_name"] ?? "").ToString(),
                         PrintOdometer = (jobj["odometer.media_marker_count1"] ?? "").ToString(),

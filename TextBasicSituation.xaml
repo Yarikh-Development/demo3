@@ -231,7 +231,7 @@
                                 </Border>
                                 <StackPanel Margin="15 0 0 0">
                                     <TextBlock Text="打印头是否抬起" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="否" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                    <TextBlock Text="{Binding PBasicMsg.HeadStatus}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -324,7 +324,7 @@
 
                 </Grid>
 
-                <Grid Grid.Row="1" Grid.Column="0" Width="200" Height="100">
+                <!--<Grid Grid.Row="1" Grid.Column="0" Width="200" Height="100">
 
                     <Border  CornerRadius="5" Background="White" Margin="10">
                         <Border.Effect>
@@ -344,8 +344,9 @@
                         </Grid>
                     </Border>
 
-                </Grid>
+                </Grid>-->
 
+                <!-- 打印模式 -->
                 <Grid Width="200" Height="100">
                     <Border  CornerRadius="5" Background="White" Margin="10">
                         <Border.Effect>
@@ -359,7 +360,49 @@
                                 </Border>
                                 <StackPanel Margin="15 0 0 0">
                                     <TextBlock Text="打印模式" Foreground="#3F4C5D"/>
-                                    <TextBlock Text="预留" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                    <TextBlock Text="{Binding PBasicMsg.PrintMode}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- 速度 -->
+                <Grid Width="200" Height="100">
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <Grid>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Margin="15 0 0 0">
+                                    <TextBlock Text="速度" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="{Binding PBasicMsg.Speed}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- 浓度 -->
+                <Grid Width="200" Height="100">
+                    <Border  CornerRadius="5" Background="White" Margin="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#F2F2F2" ShadowDepth="10" BlurRadius="10" Opacity="0.4" Direction="270"/>
+                        </Border.Effect>
+                        <Grid>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="15 0 0 0">
+                                <Border Width="65" Height="65" Background="#B5C9E0" CornerRadius="5" Margin="-25 -30 0 0">
+                                    <TextBlock Text="&#xe640;" Foreground="#085AD9" FontFamily="/#iconfont"  FontSize="40"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Margin="15 0 0 0">
+                                    <TextBlock Text="浓度" Foreground="#3F4C5D"/>
+                                    <TextBlock Text="{Binding PBasicMsg.Tone}" FontWeight="Bold" Foreground="#3F4C5D" FontSize="28"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

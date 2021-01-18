@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:demo"
       xmlns:c="clr-namespace:demo.DiyControl"
       mc:Ignorable="d" 
-      d:DesignHeight="590" d:DesignWidth="740"
+      d:DesignHeight="590" d:DesignWidth="740" x:Name="pageSearch"
       Title="TextSearchPrints" Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary>
