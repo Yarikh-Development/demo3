@@ -23,22 +23,18 @@ namespace demo
 			Printer.SetPrinters(Printer_List_ComboBox);
 		}
 
-		public ManualPrintWindow(PicturesPage picturesPage)
+/*		public ManualPrintWindow(TextMenuDetail textMenuDetail)
 		{
-			this.picturesPage = picturesPage;
-		}
-
-		public ManualPrintWindow(TextMenuDetail textMenuDetail)
-		{
+			InitializeComponent();
 			this.textMenuDetail = textMenuDetail;
-		}
+		}*/
 
-		public ManualPrintWindow(TextPicturesPage textPicturesPage)
+		public ManualPrintWindow(Page textPicturesPage)
 		{
 			InitializeComponent();
 			
 			Printer.SetPrinters(Printer_List_ComboBox);
-			this.textPicturesPage = textPicturesPage;
+			this.textPicturesPage = (TextPicturesPage)textPicturesPage;
 		}
 
 		//选择模板按钮

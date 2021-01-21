@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:local="clr-namespace:demo"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -51,93 +52,139 @@
             </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Style/RadioButtonStyle.xaml"/>
+                <ResourceDictionary Source="DefinedStyle.xaml"/>
+                <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
     <Grid Height="auto" Width="auto">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="91*" />
-            <RowDefinition Height="34*" />
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" >
-
-            <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
-                <RadioButton x:Name="Auto_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Auto_MenuItem_Click"
+        <Border Background="#FFFFFF" CornerRadius="3" Margin="10 5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                    <RadioButton x:Name="Auto_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Auto_MenuItem_Click"
                              Content="自动打印" Margin="10 0 0 0" IsChecked="True" VerticalAlignment="Center"/>
-                <RadioButton x:Name="Manual_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Manual_MenuItem_Click"
+                    <RadioButton x:Name="Manual_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Manual_MenuItem_Click"
                              Content="手动打印" Margin="10 0 0 0"  VerticalAlignment="Center"/>
-                <Button x:Name="Start_Print_MenuItem" Click="PrintClick" Margin="10 0 0 0" Content="开始打印" IsEnabled="False" Width="60"/>
-                <TextBlock x:Name="State_TextBox" Height="auto" Width="auto" Foreground="OrangeRed"/>
-            </StackPanel>
+                    <StackPanel Name="panelManualPrint" Orientation="Horizontal" Visibility="Hidden">
+                        <TextBlock Text="输入编码：" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                        <TextBox Name="txtAutoPrintNumber" BorderThickness="0 0 0 1" Background="Transparent" VerticalAlignment="Center" Width="150"/>
+                        <TextBlock Text="打印数量：" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                        <TextBox Name="txtPrintCount" Text="1"  BorderThickness="0 0 0 1" Background="Transparent" VerticalAlignment="Center" Width="30"/>
+                        <ComboBox x:Name="Printer_List_ComboBox" 
+                                  DisplayMemberPath="Name" SelectedValuePath="ID" Width="200" Margin="10 0 0 0"/>
+                    </StackPanel>
 
-        </Grid>
+                </StackPanel>
+                <Button x:Name="Start_Print_MenuItem" Click="PrintClick" Grid.Column="1" Margin="0 0 10 0" 
+                        Content="开始打印" IsEnabled="False" Width="60" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
 
-
-        <Grid Grid.Row="1" Margin="0,0,0,123" Grid.RowSpan="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="418*" />
-                <RowDefinition Height="35*" />
-            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Margin="10" BorderBrush="#A8A4AD" BorderThickness="0" Background="#FFFFFF">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.ColumnSpan="2" Background="#1578F6" BorderThickness="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="能效编码：" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                        <TextBlock Name="EE_Number_TextBlock" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                    </StackPanel>
+                    <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1 0 1 1" BorderBrush="#A8A4AD">
+                        <Grid>
+                            <TextBlock Name="txtEE_Piceture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                            <Image x:Name="EE_Piceture_Image" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
 
-            <Border Grid.Column="0" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
+            <Border Grid.Column="1" Margin="10" BorderBrush="#A8A4AD" BorderThickness="0" Background="#FFFFFF">
                 <Grid>
-                    <TextBlock Name="txtEE_Piceture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
-                    <Image x:Name="EE_Piceture_Image" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.ColumnSpan="2" Background="#1578F6" BorderThickness="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="套打编码：" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                        <TextBlock Name="Overprint_Number_TextBlock" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                    </StackPanel>
+                    <Button Name="Overprint_Picture_Change_Button" Click="PictureChangeButtonClick"
+                            Grid.Column="1" Style="{StaticResource iconButton}" IsEnabled="False" ToolTip="浏览文件">
+                        <Button.Content>
+                            <TextBlock Text="&#xebdf;" FontFamily="/#iconfont" Foreground="#FFFFFF" FontSize="16"/>
+                        </Button.Content>
+                    </Button>
+                    <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1 0 1 1" BorderBrush="#A8A4AD">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="227*"/>
+                                <ColumnDefinition Width="17*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="txtOverprint_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD" Margin="104,147,87,145.667"/>
+                            <Image x:Name="Overprint_Picture_Image" Grid.ColumnSpan="2" Margin="0,0,0,-0.333" />
+                        </Grid>
+                    </Border>
                 </Grid>
-                
             </Border>
-            
-            <Button x:Name="EE_Picture_Change_Button" Grid.Column="0" Grid.Row="1" Content="能效图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
-            <Border Grid.Column="1" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
+
+            <Border Grid.Column="2" Margin="10" BorderBrush="#A8A4AD" BorderThickness="0" Background="#FFFFFF">
                 <Grid>
-                    <TextBlock Name="txtOverprint_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
-                    <Image x:Name="Overprint_Picture_Image"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.ColumnSpan="2" Background="#1578F6" BorderThickness="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="预览编码：" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                        <TextBlock Name="Preview_Number_TextBlock" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+                    </StackPanel>
+                    <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1 0 1 1" BorderBrush="#A8A4AD">
+                        <Grid>
+                            <TextBlock Name="txtPreview_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
+                            <Image x:Name="Preview_Picture_Image" />
+                        </Grid>
+                    </Border>
                 </Grid>
-                
             </Border>
-            
-            <Button x:Name="Overprint_Picture_Change_Button" Grid.Column="1" Grid.Row="1" Content="套打图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
-            <Border Grid.Column="2" Grid.Row="0" Margin="5" BorderBrush="#A8A4AD" BorderThickness="1" Background="#FFFFFF">
-                <Grid>
-                    <TextBlock Name="txtPreview_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
-                    <Image x:Name="Preview_Picture_Image" />
-                </Grid>
-                
-            </Border>
-            
-            <Button x:Name="Preview_Picture_Change_Button" Grid.Column="2" Grid.Row="1" Content="预览图片" Click="PictureChangeButtonClick" Width="60" IsEnabled="False"/>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="0,33.8,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="263*" />
-                <ColumnDefinition Width="465*" />
-                <ColumnDefinition Width="149*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="能效编号" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"  FontSize="16" />
-            <TextBox x:Name="EE_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" IsReadOnly="True"  Width="500"  FontSize="16" Grid.ColumnSpan="2"  />
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontSize="16" ><Run Text="套打"/><Run Text="编号"/></TextBlock>
-            <TextBox x:Name="Overprint_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" IsReadOnly="True"  Width="500" FontSize="16" Grid.ColumnSpan="2"   />
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="16"><Run Text="预览"/><Run Text="编号"/></TextBlock>
-            <TextBox x:Name="Preview_Number_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" IsReadOnly="True"  Width="500" FontSize="16" Grid.ColumnSpan="2"   />
+        <Grid Grid.Row="2">
+            <Border Grid.Row="3" CornerRadius="3" BorderThickness="0" Margin="10 5" Background="#CBCBCB">
+                <TextBlock Name="State_TextBox" Margin="5 0" Foreground="#FF0000" VerticalAlignment="Center" 
+                       ToolTip="{Binding Path=Text,ElementName=State_TextBox}"/>
+            </Border>
         </Grid>
     </Grid>
 </Page>

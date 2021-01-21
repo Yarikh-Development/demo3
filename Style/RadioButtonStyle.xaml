@@ -115,6 +115,7 @@
         </Setter>
     </Style>
 
+    <!-- YDefaultRadioButtonStyle -->
     <Style x:Key="RadioButtonStyle3" TargetType="{x:Type RadioButton}">
         <Setter Property="Template">
             <Setter.Value>

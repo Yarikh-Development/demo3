@@ -481,7 +481,8 @@ namespace demo
 
                     int iNeeded = PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, 0);
                     pDevModeOutput = System.Runtime.InteropServices.Marshal.AllocHGlobal(iNeeded);
-                    PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, ptrPrompt--);
+                    //PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, ptrPrompt--);
+                    PtrPage.DocumentProperties(_windowHandle, pPrinter, ptrName, ref pDevModeOutput, ref pDevModeInput, 20);
                     PtrPage.ClosePrinter(pPrinter);
                 }
             }

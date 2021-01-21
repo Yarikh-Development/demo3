@@ -245,7 +245,7 @@
             </Grid>
             
             <!-- 打印设置 -->
-            <Grid Name="gridPrintSetting" Margin="20" Visibility="Visible">
+            <Grid Name="gridPrintSetting" Margin="20" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="50"/>

@@ -40,22 +40,6 @@ namespace demo
 			ClearNumber();
 
 			listener.ScanerEvent += ListenerScanerEvent;
-			/*if (IsOnlyOneProcess())
-			{
-				InitializeComponent();
-				FileTools.Init();
-				TabItem tabitem = new TabItem();
-				tabitem.Header = "图片";
-				Frame tabFrame = new Frame();
-				picturesPage = new PicturesPage();
-				tabFrame.Content = picturesPage;
-				tabitem.Content = tabFrame;
-				Displaying_TabControl.Items.Add(tabitem);
-
-				listener.ScanerEvent += ListenerScanerEvent;
-			}
-			else
-				this.Close();*/
 		}
 
 		//进程判断
@@ -79,7 +63,7 @@ namespace demo
 		private void ListenerScanerEvent(ScanerHook.ScanerCodes codes)
 		{
 			//设置能效编号
-			if (Auto_MenuItem.IsChecked)
+			if ((bool)Auto_MenuItem.IsChecked)
 			{
 				//picturesPage.SetNumber(codes.Result);
 				this.SetNumber(codes.Result);
@@ -87,63 +71,33 @@ namespace demo
 			}
 		}
 
-		//获取关联页面
-		/*public RelationPage GetRelationPage()
+		private void Auto_MenuItem_Click(object sender, RoutedEventArgs e)
 		{
-			return relationPage;
+			listener.Start();
+			Manual_MenuItem.IsChecked = false;
+			Auto_MenuItem.IsChecked = true;
+			Start_Print_MenuItem.IsEnabled = false;
+			//picturesPage.HideControl(true);
+			this.HideControl(true);
+			Refresh();
 		}
 
-		//获取记录页面
-		public TextLogPage GetLogPage()
+		private void Manual_MenuItem_Click(object sender, RoutedEventArgs e)
 		{
-			return textLogPage;
-		}*/
+			listener.Stop();
+			Auto_MenuItem.IsChecked = false;
+			Manual_MenuItem.IsChecked = true;
+			Start_Print_MenuItem.IsEnabled = true;
+			//picturesPage.HideControl(false);
+			this.HideControl(false);
+			Refresh();
+		}
 
-
-		//打印模式选择
-		private void PrintModeClick(object sender, RoutedEventArgs e)
+		private void Refresh()
 		{
-			System.Windows.Controls.MenuItem menuItem = sender as System.Windows.Controls.MenuItem;
-			if (menuItem.Name == "Auto_MenuItem")
-			{
-				listener.Start();
-				Manual_MenuItem.IsChecked = false;
-				Auto_MenuItem.IsChecked = true;
-				Start_Print_MenuItem.IsEnabled = false;
-				//picturesPage.HideControl(true);
-				this.HideControl(true);
-			}
-			else if (menuItem.Name == "Manual_MenuItem")
-			{
-				listener.Stop();
-				Auto_MenuItem.IsChecked = false;
-				Manual_MenuItem.IsChecked = true;
-				Start_Print_MenuItem.IsEnabled = true;
-				//picturesPage.HideControl(false);
-				this.HideControl(false);
-			}
-
-			/*picturesPage.EE_Number_TextBlock.Text = "";
-			picturesPage.EE_Piceture_Image.Source = null;
-			picturesPage.Overprint_Number_TextBlock.Text = "";
-			picturesPage.Overprint_Picture_Image.Source = null;
-			picturesPage.Preview_Number_TextBlock.Text = "";
-			picturesPage.Preview_Picture_Image.Source = null;*/
-
-			//this.EE_Number_TextBlock.Text = "";
-			//this.EE_Piceture_Image.Source = null;
-			//this.Overprint_Number_TextBlock.Text = "";
-			//this.Overprint_Picture_Image.Source = null;
-			//this.Preview_Number_TextBlock.Text = "";
-			//this.Preview_Picture_Image.Source = null;
-
 			this.EE_Number_TextBlock.Text = "";
 			this.EE_Piceture_Image.Source = null;
-			this.EE_Number_TextBlock.Text = "";
-			this.EE_Piceture_Image.Source = null;
-			this.EE_Number_TextBlock.Text = "";
-			this.EE_Piceture_Image.Source = null;
-
+			txtPicetureState.Visibility = Visibility.Visible;
 		}
 
 		//自动打印
@@ -263,16 +217,7 @@ namespace demo
 			texts[0].obj = new List<FrameworkElement>();
 			texts[1].obj = new List<FrameworkElement>();
 			texts[2].obj = new List<FrameworkElement>();
-			//设置字符串对应的TextBox控件
-			//texts[0].name = "EE_Picture_Change_Button";
-			//texts[0].obj.Add(EE_Number_TextBlock);
-			//texts[0].obj.Add(EE_Piceture_Image);
-			//texts[1].name = "Overprint_Picture_Change_Button";
-			//texts[1].obj.Add(Overprint_Number_TextBlock);
-			//texts[1].obj.Add(Overprint_Picture_Image);
-			//texts[2].name = "Preview_Picture_Change_Button";
-			//texts[2].obj.Add(Preview_Number_TextBlock);
-			//texts[2].obj.Add(Preview_Picture_Image);
+			
 
 			texts[0].name = "EE_Picture_Change_Button";
 			texts[0].obj.Add(EE_Number_TextBlock);
@@ -288,6 +233,7 @@ namespace demo
 
 		private void PictureChangeButtonClick(object sender, RoutedEventArgs e)
 		{
+			ShowImagePage(0);
 			Button button = sender as Button;
 			string path = FileTools.OpenFile("*.png|*.png|*.jpg|*.jpg|*.jepg|*.jepg", ".png");
 
@@ -371,5 +317,13 @@ namespace demo
         {
 			listener.Stop();
 		}
+
+		//点击三个关于图片的按钮后将布局的宽度设置为300，也就是将右边的页面展示出来
+		private void ShowImagePage(int flag)
+        {
+			var cdf = gd1.ColumnDefinitions;
+			cdf[1].Width = new GridLength(300);
+		}
+        
     }
 }

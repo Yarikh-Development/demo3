@@ -189,16 +189,22 @@ namespace demo
 		public static string FindFiles(string dirPath, string keyword, string Extension)
         {
 			string[] directorieStrings = Directory.GetFiles(dirPath);
+			string backupPath = "";
 
 			for (int cnt = 0; cnt < directorieStrings.Length; ++cnt)
-			{
-				if (directorieStrings[cnt].Contains(keyword) && 
-					(Path.GetExtension(directorieStrings[cnt]) == Extension))
-
-					return directorieStrings[cnt];
+            {
+				if (Path.GetExtension(directorieStrings[cnt]) == Extension)
+                {
+					if (directorieStrings[cnt].Contains(keyword))
+						backupPath = directorieStrings[cnt];
+					if (GetFileShortName(directorieStrings[cnt]).Split('.')[0] == keyword){
+						return directorieStrings[cnt];
+					}					
+				}
+				if (cnt == directorieStrings.Length - 1)
+					return backupPath;
 			}
-
-			return "";
+				return "";
 		}
 
 		//读取文件中所有字符，如果发生异常则返回"".

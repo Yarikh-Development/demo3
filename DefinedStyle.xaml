@@ -218,12 +218,17 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="FontWeight" Value="Bold"/>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#DEDEDE"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="#1578F6"/>
                         </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                        
+                        
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
 
@@ -419,6 +424,7 @@
     -->
     <Style x:Key="CornerRadiusButton" TargetType="{x:Type Button}">
 
+        <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -431,18 +437,21 @@
                                           RecognizesAccessKey="True"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
+                            
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="#1578F6" TargetName="border"/>
+                            <Setter Property="Foreground" Value="#FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
                             <Setter Property="Foreground" Value="#DEDEDE"/>
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#000000" TargetName="border"/>
-                        </Trigger>
-                        
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="#679EE4" TargetName="border"/>
-                            <!--<Setter Property="Foreground" Value="#DEDEDE"/>-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#7BA7E0" TargetName="border"/>
+                            <Setter Property="Foreground" Value="#DEDEDE"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

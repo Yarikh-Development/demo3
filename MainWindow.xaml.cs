@@ -20,7 +20,18 @@ namespace demo
 
 		public MainWindow()
 		{
-			if (IsOnlyOneProcess())
+			InitializeComponent();
+			FileTools.Init();
+			TabItem tabitem = new TabItem();
+			tabitem.Header = "图片";
+			Frame tabFrame = new Frame();
+			picturesPage = new PicturesPage();
+			tabFrame.Content = picturesPage;
+			tabitem.Content = tabFrame;
+			Displaying_TabControl.Items.Add(tabitem);
+
+			listener.ScanerEvent += ListenerScanerEvent;
+			/*if (IsOnlyOneProcess())
 			{
 				InitializeComponent();
 				FileTools.Init();
@@ -35,7 +46,7 @@ namespace demo
 				listener.ScanerEvent += ListenerScanerEvent;
 			}
 			else
-				this.Close();
+				this.Close();*/
 		}
 
 		//进程判断

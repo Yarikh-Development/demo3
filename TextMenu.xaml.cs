@@ -21,10 +21,11 @@ namespace demo
     public partial class TextMenu : Page
     {
         TextPicturesPage simplePage = new TextPicturesPage();
-        TextMenuDetail detailPage = new TextMenuDetail();
+        
         public TextMenu()
         {
             InitializeComponent();
+            
         }
 
         public void SkipPages()
@@ -39,13 +40,14 @@ namespace demo
 
         private void DetailPage_Click(object sender, RoutedEventArgs e)
         {
-            
+            TextMenuDetail detailPage = new TextMenuDetail();
             SkipPage.Content = detailPage;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             SkipPage.Content = simplePage;
+            SimplePage.IsChecked = true;
         }
     }
 }

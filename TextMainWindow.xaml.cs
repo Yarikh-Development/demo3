@@ -32,7 +32,7 @@ namespace demo
         private TextHighPrinter TextHighPrinter = new TextHighPrinter();
 		private RelationPage relationPage;
         public static bool isWriteLog;
-        private ScanerHook listener = new ScanerHook();
+        //private ScanerHook listener = new ScanerHook();
         public Window1()
         {
             InitializeComponent();
@@ -160,12 +160,12 @@ namespace demo
 
 		private void MainWindowDeactivated(object sender, EventArgs e)
         {
-            this.listener.Stop();
+            //this.listener.Stop();
         }
 
         private void MainWindowActivated(object sender, EventArgs e)
         {
-            this.listener.Start();
+            //this.listener.Start();
         }
 
         private void TestWindow_Click(object sender, RoutedEventArgs e)
