@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:demo"
         mc:Ignorable="d"
         Title="Window1" MinHeight="600" MinWidth="900" WindowStyle="None"  AllowsTransparency="False" ResizeMode="CanResizeWithGrip"
-        MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"
+        MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseLeftButtonUp="Window_MouseLeftButtonUp"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.Resources>
@@ -80,14 +80,21 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top">
             <Button x:Name="MiniWindow" Click="MiniWindow_Click" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Width="40" Height="30"
-                    Style="{DynamicResource shallowBackgroundButton}" Content="—" Foreground="#FFFFFF" ToolTip="最小化">
-
-                <!--<TextBlock Text="—" Foreground="#FFFFFF" ToolTip="最小化"/>-->
+                    Style="{DynamicResource shallowBackgroundButton}" ToolTip="最小化"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="—" Foreground="#FFFFFF"/>
+                </StackPanel>
+                
             </Button>
 
             <Button x:Name="WindowSize" Click="WindowSize_Click" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Width="40" Height="30"
                     Style="{DynamicResource shallowBackgroundButton}" IsEnabled="True">
-                <TextBlock Text="☐" Foreground="#FFFFFF"/>
+                <Grid>
+                    <TextBlock Name="txtMinWindow" Text="☐" Foreground="#FFFFFF"/>
+                    <TextBlock Name="txtMaxWindow" Text="❐" Foreground="#FFFFFF" Visibility="Hidden"/>
+                </Grid>
+                
             </Button>
 
             <Button x:Name="CloseWindow" Click="CloseWindow_Click" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Width="40" Height="30"
@@ -113,7 +120,7 @@
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                             <!-- 添加icon图标 -->
                             <TextBlock/>
-                            <TextBlock Text="&#xe692; 扫描打印" FontFamily="/#iconfont" FontSize="17" Foreground="#313030" Margin="10 0 0 0"/>
+                            <TextBlock Text="&#xe692; 扫描打印" FontFamily="/#iconfont" FontSize="17" Margin="10 0 0 0"/>
                         </StackPanel>
                     </RadioButton>
 
@@ -126,17 +133,17 @@
 
                     <RadioButton x:Name="LinkOSPrinters" Click="LinkOSPrinters_Click" Style="{StaticResource leftLineRadioButton}"  Background="Transparent" BorderBrush="Transparent" Height="40"
                         HorizontalContentAlignment="Left">
-                        <TextBlock x:Name="TextLinkOSPrinter" Text="&#xe698; 高级打印机" FontFamily="/#iconfont" FontSize="17" Margin="10 0 0 0"/>
+                        <TextBlock x:Name="TextLinkOSPrinter" Text="&#xebd0; 高级打印机" FontFamily="/#iconfont" FontSize="17" Margin="10 0 0 0"/>
                     </RadioButton>
 
                     <RadioButton Name="btnFiles" Click="btnFiles_Click" Style="{StaticResource leftLineRadioButton}"  Background="Transparent" BorderBrush="Transparent" Height="40"
                         HorizontalContentAlignment="Left">
-                        <TextBlock x:Name="TextSearchPrint" Text="&#xe69e; 文件" FontSize="17" FontFamily="/#iconfont"  Foreground="#808080" Margin="10 0 0 0"/>
+                        <TextBlock x:Name="TextSearchPrint" Text="&#xe69e; 文件" FontSize="17" FontFamily="/#iconfont" Margin="10 0 0 0"/>
                     </RadioButton>
 
                     <RadioButton Name="btnLogPage" Click="btnLogPage_Click" Style="{StaticResource leftLineRadioButton}" Background="Transparent" BorderBrush="Transparent" Height="40" 
                                  HorizontalContentAlignment="Left">
-                        <TextBlock x:Name="SeeLogPage" Text="&#xe66d; 查看" FontFamily="/#iconfont" FontSize="17" Foreground="#808080" Margin="10 0 0 0"/>
+                        <TextBlock x:Name="SeeLogPage" Text="&#xe66d; 查看" FontFamily="/#iconfont" FontSize="17"  Margin="10 0 0 0"/>
                     </RadioButton>
                     <!--<RadioButton Name="btnLogPage" Click="CreateDataListWindowClick" Style="{StaticResource leftLineRadioButton}" Background="Transparent" BorderBrush="Transparent" Height="40" 
                                  HorizontalContentAlignment="Left">

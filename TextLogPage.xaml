@@ -12,27 +12,19 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         </Page.Resources>
-    <Grid>
-        <!--<ListView x:Name="Log_ListView" HorizontalAlignment="Left" Height="555" VerticalAlignment="Top" Width="880" Margin="0,25,0,0">-->
-        <ListView x:Name="Log_ListView"  Height="775" VerticalAlignment="Top" Margin="0,25,0,0" Foreground="#FFFFFF">
-            <!--<ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="FontSize" Value="13"/>
-                    <Setter Property="BorderBrush">
-                        <Setter.Value>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="LightBlue" Offset="0.5"/>
-                                <GradientStop Color="LightBlue" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="BorderThickness" Value="0.4"/>
-                    <Setter Property="Height" Value="25"/>
-                </Style>
-            </ListView.ItemContainerStyle>-->
+    <Grid Background="#EEEDEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"
+                  Style="{StaticResource YDefaultComboBoxStyle}" Width="320" Height="25"/>
+
+        <ListView x:Name="Log_ListView"  Height="775" VerticalAlignment="Top" Grid.Row="1" Foreground="#FFFFFF" BorderThickness="0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="时间" Width="80" DisplayMemberBinding="{Binding Path=date}"/>
@@ -42,9 +34,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <DockPanel>
-            <!--<ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="320" Height="26"/>-->
-            <ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"    VerticalAlignment="Top" Width="320" Height="26"/>
-        </DockPanel>
     </Grid>
 </Page>

@@ -17,16 +17,14 @@
 
     <Grid Background="#EEEDEF">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            
             <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="20 0 20 0"/>
-        <TextBlock Text="扫描打印" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 0 0"/>
 
-        <Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1" Margin="20 0 20 0" Grid.Row="1"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+        <StackPanel Orientation="Horizontal">
 
             <RadioButton x:Name="SimplePage"   Click="SimplePage_Click" IsChecked="True" Style="{DynamicResource MenuRadioButton}" Width="40" Margin="20 0 0 0" HorizontalContentAlignment="Center">
 

@@ -93,9 +93,13 @@
                 </UniformGrid>
 
                 <StackPanel Grid.Row="2">
-                    <Border Margin="15 0 20 0" Background="#FFFFFF" Height="20" HorizontalAlignment="Left" BorderBrush="#A8A4AD" BorderThickness="1">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox  Width="180" BorderThickness="0">
+                    <Border Margin="15 0" Background="#FFFFFF" Height="20" BorderBrush="#A8A4AD" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox BorderThickness="0">
                                 <TextBox.Resources>
                                     <VisualBrush x:Key="hinttext" TileMode="None" AlignmentX="Left" Stretch="None">
                                         <VisualBrush.Visual>
@@ -108,7 +112,7 @@
                                     <Style TargetType="TextBox">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
                                         <Setter Property="Foreground" Value="Black"/>
-                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="FontSize" Value="12"/>
                                         <Setter Property="BorderThickness" Value="0"/>
                                         <Setter Property="Background" Value="Transparent"/>
                                         <Setter Property="Opacity" Value="1"/>
@@ -124,11 +128,11 @@
                                     </Style>
                                 </TextBox.Style>
                             </TextBox>
-                            <Button Style="{DynamicResource iconButton}" Margin="0 0 5 0">
+                            <Button Style="{DynamicResource iconButton}" Margin="0 0 5 0" Grid.Column="1">
                                 <TextBlock Text="&#xe6c9;" FontFamily="/#iconfont" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Button>
 
-                        </StackPanel>
+                        </Grid>
 
                     </Border>
                 </StackPanel>

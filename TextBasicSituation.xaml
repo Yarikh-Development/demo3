@@ -177,7 +177,7 @@
             </RadioButton>
         </StackPanel>
 
-        <ScrollViewer Name="svBaseMessage" Grid.Row="1" Visibility="Visible">
+        <ScrollViewer Name="svBaseMessage" Style="{StaticResource for_scrollviewer}" Grid.Row="1" Visibility="Visible">
             <!--打印机图片-->
             <!--<Grid Grid.Row="0" Background="#EEEDEF" >
                         <Image x:Name="Printer" Height="auto" Width="auto" Source="img/printer.PNG" HorizontalAlignment="Center"  />

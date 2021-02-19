@@ -23,11 +23,12 @@ namespace demo.DiyControl
 
             if (index % 2 == 0)
             {
-                return Brushes.LightSteelBlue;
+                return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DBE1E8"));
+                //return Brushes.LightSteelBlue;
             }
             else
             {
-                return Brushes.White;
+                return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             }
         }
 

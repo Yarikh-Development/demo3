@@ -50,6 +50,27 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}" 
+                                    Background="{TemplateBinding Panel.Background}" 
+                                    Name="border" SnapsToDevicePixels="True">
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="PART_ContentHost" Focusable="False" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#1578F6" TargetName="border"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Style/RadioButtonStyle.xaml"/>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
@@ -58,6 +79,24 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="RadioButton.Click" SourceName="Manual_MenuItem">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.3" From="0" To="{Binding ElementName=panelManualPrint, Path=ActualWidth}"
+                                     Storyboard.TargetProperty="Width" Storyboard.TargetName="panelManualPrint"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="RadioButton.Click" SourceName="Auto_MenuItem">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.3"
+                                     Storyboard.TargetProperty="Width" Storyboard.TargetName="panelManualPrint"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
     <Grid Height="auto" Width="auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -75,13 +114,45 @@
                              Content="自动打印" Margin="10 0 0 0" IsChecked="True" VerticalAlignment="Center"/>
                     <RadioButton x:Name="Manual_MenuItem" Style="{StaticResource RadioButtonStyle3}" Click="Manual_MenuItem_Click"
                              Content="手动打印" Margin="10 0 0 0"  VerticalAlignment="Center"/>
-                    <StackPanel Name="panelManualPrint" Orientation="Horizontal" Visibility="Hidden">
-                        <TextBlock Text="输入编码：" VerticalAlignment="Center" Margin="10 0 0 0"/>
-                        <TextBox Name="txtAutoPrintNumber" BorderThickness="0 0 0 1" Background="Transparent" VerticalAlignment="Center" Width="150"/>
+                    <StackPanel Name="panelManualPrint" Width="0" Orientation="Horizontal">
+
+                        <Border Margin="10 0 0 0" Background="#FFFFFF" Height="25" BorderBrush="#A8A4AD" BorderThickness="1">
+                            <TextBox Name="txtAutoPrintNumber" BorderThickness="0" Width="150">
+                                <TextBox.Resources>
+                                    <VisualBrush x:Key="hinttext" TileMode="None" AlignmentX="Left" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock Text="输入编码" FontStyle="Normal"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="FontSize" Value="12"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource hinttext}"/>
+                                                <Setter Property="Opacity" Value="0.6"/>
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource hinttext}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Border>
                         <TextBlock Text="打印数量：" VerticalAlignment="Center" Margin="10 0 0 0"/>
-                        <TextBox Name="txtPrintCount" Text="1"  BorderThickness="0 0 0 1" Background="Transparent" VerticalAlignment="Center" Width="30"/>
-                        <ComboBox x:Name="Printer_List_ComboBox" 
-                                  DisplayMemberPath="Name" SelectedValuePath="ID" Width="200" Margin="10 0 0 0"/>
+                        <TextBox Name="txtPrintCount" Text="1" Height="25" Width="60"/>
+                        <ComboBox x:Name="Printer_List_ComboBox" Style="{DynamicResource YDefaultComboBoxStyle}"
+                                  DisplayMemberPath="Name" SelectedValuePath="ID" Width="200" Margin="10 0 0 0"
+                                  Height="25" ToolTip="{Binding Path=Text,ElementName=Printer_List_ComboBox}">
+                            
+                        </ComboBox>
                     </StackPanel>
 
                 </StackPanel>
@@ -137,18 +208,36 @@
                         <TextBlock Name="Overprint_Number_TextBlock" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFFFFF"/>
                     </StackPanel>
                     <Button Name="Overprint_Picture_Change_Button" Click="PictureChangeButtonClick"
-                            Grid.Column="1" Style="{StaticResource iconButton}" IsEnabled="False" ToolTip="浏览文件">
+                            Grid.Column="1"  IsEnabled="False" ToolTip="浏览文件" BorderThickness="0" Background="Transparent"
+                            FocusVisualStyle="{x:Null}">
                         <Button.Content>
-                            <TextBlock Text="&#xebdf;" FontFamily="/#iconfont" Foreground="#FFFFFF" FontSize="16"/>
+                            <TextBlock Text="&#xebdf;" FontFamily="/#iconfont" FontSize="16"/>
                         </Button.Content>
+                        <Button.Style>
+                            
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template" Value="{StaticResource iconButtonTemplate}"/>
+                                <Style.Triggers>
+                                    
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#DCE2E9"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Foreground" Value="#1578F6"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                     <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1 0 1 1" BorderBrush="#A8A4AD">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="227*"/>
-                                <ColumnDefinition Width="17*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Name="txtOverprint_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD" Margin="104,147,87,145.667"/>
+                            <TextBlock Name="txtOverprint_Picture" Text="没图源" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A8A4AD"/>
                             <Image x:Name="Overprint_Picture_Image" Grid.ColumnSpan="2" Margin="0,0,0,-0.333" />
                         </Grid>
                     </Border>

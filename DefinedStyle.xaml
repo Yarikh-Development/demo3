@@ -236,6 +236,30 @@
         </Setter>
     </Style>
 
+    <ControlTemplate x:Key="iconButtonTemplate" TargetType="Button">
+        <Grid>
+            <Border x:Name="border"/>
+            <ContentPresenter x:Name="contenPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#DEDEDE"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#1578F6"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <Style x:Key="iconDropDown" TargetType="pu:DropDown">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -307,29 +331,37 @@
     </Style>
 
     <!-- 触碰后颜色变浅，用在窗口调整大小和最小化上 -->
-    <Style x:Key="shallowBackgroundButton" TargetType="Button">
+    <Style x:Key="shallowBackgroundButton" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border x:Name="border"/>
-                        
-                        <ContentPresenter x:Name="contenPresenter" Focusable="False"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" Background="Transparent"/>
+
+                        <ContentPresenter x:Name="contenPresenter" Focusable="False" Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          RecognizesAccessKey="True"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#EEEEEE" TargetName="border"/>
                             <Setter Property="Opacity" Value="0.4" TargetName="border"/>
-                            <Setter Property="BorderThickness" Value="0"/>
+                            
                             
                         </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#EEEEEE" TargetName="border"/>
+                            <Setter Property="Opacity" Value="0.4" TargetName="border"/>
+                           
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="Black"/>
-                            <Setter Property="Opacity" Value="0.2"/>
+                            
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -339,11 +371,12 @@
     
     <!-- 触碰后背景颜色变红，用在关闭窗口上 -->
     <Style x:Key="redBackgroundButton" TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="border"/>
+                        <Border x:Name="border" Background="Transparent"/>
 
                         <ContentPresenter x:Name="contenPresenter" Focusable="False"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -370,7 +403,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="border"/>
+                        <Border x:Name="border" Background="Transparent" />
                         <ContentPresenter x:Name="contenPresenter" Focusable="False"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"

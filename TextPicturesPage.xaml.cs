@@ -86,12 +86,12 @@ namespace demo
 			if (state) //自动
 			{
 				Overprint_Picture_Change_Button.IsEnabled = false;
-				panelManualPrint.Visibility = Visibility.Hidden;
+				//panelManualPrint.Visibility = Visibility.Hidden;
 			}
 			else //手动
 			{
 				Overprint_Picture_Change_Button.IsEnabled = true;
-				panelManualPrint.Visibility = Visibility.Visible;
+				//panelManualPrint.Visibility = Visibility.Visible;
 			}
 		}
 		private void Refresh()

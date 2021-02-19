@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RadioButton = System.Windows.Forms.RadioButton;
 using demo.Quartz;
+using System.Threading;
 
 namespace demo
 {
@@ -32,6 +33,8 @@ namespace demo
         private TextHighPrinter TextHighPrinter = new TextHighPrinter();
 		private RelationPage relationPage;
         public static bool isWriteLog;
+        private bool _IsLeftMouseDown = false;
+        private Thread _th = null;
         //private ScanerHook listener = new ScanerHook();
         public Window1()
         {
@@ -46,6 +49,8 @@ namespace demo
             if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
+                txtMaxWindow.Visibility = Visibility.Hidden;
+                txtMinWindow.Visibility = Visibility.Visible;
             }
                 
             else
@@ -55,7 +60,8 @@ namespace demo
                 //this.MaxHeight = Screen.PrimaryScreen.Bounds.Height;
                 this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 WindowState = WindowState.Maximized;
-                
+                txtMaxWindow.Visibility = Visibility.Visible;
+                txtMinWindow.Visibility = Visibility.Hidden;
             }
              
         }
@@ -95,6 +101,34 @@ namespace demo
 		private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            // 以下是长按鼠标代码，没能实现，应用在窗口最大化时拖动窗口时缩小，暂时没有更好的方法
+            /*_IsLeftMouseDown = true;
+            if (_th != null)
+            {
+                if (_th.ThreadState == System.Threading.ThreadState.Running || _th.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
+                    _th.Abort();
+            }
+            _th = new Thread(new ThreadStart(() =>
+            {
+                Thread.Sleep(1500);
+
+                if (_IsLeftMouseDown)
+                {
+                    WindowState = WindowState.Normal;
+                    _IsLeftMouseDown = false;
+                }
+                else
+                {
+                    
+                }
+            }));
+            _th.Start();*/
+            
+        }
+
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //_IsLeftMouseDown = false;
         }
 
         //最小化
@@ -281,6 +315,9 @@ namespace demo
             TextHighPrinter.btnHome.IsChecked = true;
             TextHighPrinter.OpenPageInitialize(1);
         }
+
+        
+
 
         /*public static Window1 GetHandle()
         {
