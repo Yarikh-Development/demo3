@@ -451,4 +451,132 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="IconToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="#ABADB3"
+                            Background="{TemplateBinding Background}" Name="templateRoot" SnapsToDevicePixels="True">
+                        <!--<TextBlock Name="txtDownIcon" Grid.Column="1" Text="&#xe6ea;" FontFamily="/#iconfont" Visibility="Visible"
+                                   VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 3 0"/>-->
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <!--<Setter Property="BorderBrush" Value="#1578F6" TargetName="templateRoot"/>-->
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#1578F6" TargetName="templateRoot"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="IconComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Grid>
+                                    <Border Name="borderComboBoxItem" />
+                                    <ContentPresenter VerticalAlignment="Center" Margin="5 0 0 0" Width="{TemplateBinding Width}"
+                                                      SnapsToDevicePixels="True"
+                                                      />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Background" Value="#1578F6" TargetName="borderComboBoxItem"/>
+                                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                                    </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="false"/>
+                                            <Condition Property="IsMouseOver" Value="true"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="#7FAAE1" TargetName="borderComboBoxItem"/>
+                                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                                    </MultiTrigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton Focusable="false" Style="{StaticResource IconToggleButtonStyle}"
+                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      ClickMode="Press" Name="toggleButton" Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0 0 0 1"/>
+                        <!-- Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen -->
+                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom"  x:Name="Popup"
+                               Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" 
+                               HorizontalOffset="{TemplateBinding Popup.HorizontalOffset}" 
+                               VerticalOffset="{TemplateBinding Popup.VerticalOffset}">
+                            <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" 
+                                  x:Name="DropDown" SnapsToDevicePixels="True" 
+                                  Margin="5" Background="Transparent">
+
+                                <Border x:Name="DropDownBorder" Background="#FFFFFF" CornerRadius="5"
+                                        BorderBrush="{DynamicResource SolidBorderBrush}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="#1578F6" Direction="180" BlurRadius="8" ShadowDepth="0" Opacity="0.4"/>
+                                    </Border.Effect>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="10"/>
+                                        </Grid.RowDefinitions>
+                                        <ScrollViewer Style="{DynamicResource for_scrollviewer}" Grid.Row="1"
+                                              SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" 
+                                              VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                            <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Border>
+
+                            </Grid>
+                        </Popup>
+                        <!-- 目前知道contnet,ContentTemplateSelector是必要的 -->
+                        <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" 
+                                          ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}" 
+                                          ContentStringFormat="{TemplateBinding ComboBox.SelectionBoxItemStringFormat}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                          Name="contentPresenter" Margin="{TemplateBinding Control.Padding}"
+                                          HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                          VerticalAlignment="Center" 
+                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
+                                          IsHitTestVisible="False" />
+                        <!--<ContentPresenter HorizontalAlignment="Left" Margin="3,3,23,3" 
+                                          x:Name="ContentSite" VerticalAlignment="Center" 
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False"/>-->
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

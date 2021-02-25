@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:demo"
-      xmlns:c="clr-namespace:demo.DiyControl"
+      xmlns:c="clr-namespace:demo.DiyControl" 
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       mc:Ignorable="d" 
       d:DesignHeight="590" d:DesignWidth="740" x:Name="pageSearch"
       Title="TextSearchPrints" Loaded="Page_Loaded">
@@ -13,9 +14,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
+    
     <Grid Background="#EEEDEF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -59,10 +62,74 @@
                                      ToolTip="刷新" VerticalAlignment="Center" Margin="0 0 5 0" Height="20" Width="20">
                             <TextBlock Text="&#xe6c3;" FontFamily="/#iconfont" FontSize="15"/>
                         </Button>
+                        <Button Name="btnMoreSetting" Click="btnMoreSetting_Click" Style="{DynamicResource iconButton}" 
+                                Margin="0 0 10 0" Height="20" Width="20">
+                            <Button.Content>
+                                <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button.Content>
+                            <!-- 更改模板已达到MouseOver后下拉菜单的效果，但效果并不好 -->
+                            <!--<Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Border Name="border"/>
+                                        <Popup  Placement="Bottom"  x:Name="popup"
+                                                Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" 
+                                                HorizontalOffset="{TemplateBinding Popup.HorizontalOffset}" 
+                                                VerticalOffset="{TemplateBinding Popup.VerticalOffset}">
+                                            <StackPanel Height="Auto" Width="100">
+                                                <Button Name="btnSendFile" Click="btnSentFile_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="发送文件"/>
 
-                        <Button Style="{DynamicResource iconButton}" ToolTip="更多" VerticalAlignment="Center" Margin="0 0 10 0" Height="20" Width="20">
-                            <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15"/>
+                                                <Button Name="btnBasicMessage" Click="btnBasicMessage_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="基本信息"/>
+                                                <Button Name="btnPrintSetting" Click="btnPrintSetting_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="打印设置"/>
+                                                <Button Name="btnHighSetting" Click="btnHighSetting_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="高级设置"/>
+
+                                            </StackPanel>
+
+                                        </Popup>
+                                        <ContentPresenter RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}"
+                                                  ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                                  ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                                  Name="contentPresenter" Margin="{TemplateBinding Control.Padding}" 
+                                                  HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
+                                                  VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
+                                                  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Focusable="False" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            
+                                            <Setter Property="IsOpen" Value="True" TargetName="popup"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+
+                                            <Setter Property="IsOpen" Value="False" TargetName="popup"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>-->
+                            
                         </Button>
+                        <Popup Placement="Bottom"  x:Name="popup" StaysOpen="False" PlacementTarget="{Binding ElementName=btnMoreSetting}"
+                                 HorizontalAlignment="Left"
+                                Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" 
+                                        >
+                            <StackPanel Height="Auto" Width="100">
+                                <Button Name="btnSendFile" Click="btnSentFile_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="发送文件"/>
+
+                                <Button Name="btnBasicMessage" Click="btnBasicMessage_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="基本信息"/>
+                                <Button Name="btnPrintSetting" Click="btnPrintSetting_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="打印设置"/>
+                                <Button Name="btnHighSetting" Click="btnHighSetting_Click"
+                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="高级设置"/>
+
+                            </StackPanel>
+                        </Popup>
+
                     </StackPanel>
                 </UniformGrid>
 
@@ -168,99 +235,31 @@
 
         </Grid>
         <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="txtPrinterName2" Margin="10 10 0 0" FontSize="14"/>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>-->
+            <StackPanel Margin="10 10 0 0">
+                <TextBlock x:Name="txtPrinterName2"  FontSize="14"/>
+                <TextBlock x:Name="txtPrinterNetStatus" Foreground="#808080"/>
+            </StackPanel>
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-                <Button Style="{DynamicResource iconButton}" VerticalAlignment="Top" Margin="5 10 10 0" Height="20" Width="30" 
-                             ToolTip="删除">
-                    <TextBlock Text="&#xec83;" FontFamily="/#iconfont" FontSize="18"/>
-                </Button>
 
-                <Button Style="{DynamicResource iconButton}" VerticalAlignment="Top" Margin="5 10 10 0" Height="20" Width="30"
-                             ToolTip="添加打印机">
-                    <TextBlock Text="&#xeb8c;" FontFamily="/#iconfont" FontSize="18"/>
-                </Button>
-
-                <Button Style="{DynamicResource iconButton}" VerticalAlignment="Top" Margin="5 10 10 0" Height="20" Width="30" ToolTip="更多">
-                    <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="18" />
-                </Button>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 20 20 0">
+                <RadioButton Name="btnHome"  Content="首页" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
+                <RadioButton Name="btnPrinterDetail"  Content="查看打印机" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
+                <RadioButton Name="btnDialogBox" Click="btnDialogBox_Click" Content="进行对话" FontSize="16" Style="{StaticResource MenuRadioButton}" Margin="0 0 20 0"/>
+                <RadioButton Name="btnOrderList"  Content="指令列表" FontSize="16" Style="{StaticResource MenuRadioButton}"/>
             </StackPanel>
             
         </Grid>
 
         <Grid Name="isVisibilityForEnter" Visibility="Hidden" Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-            <!-- 显示打印机品牌（LOGO及品牌信息） -->
-            <!--<Grid Background="#1578F6" Opacity="0.3">
-                --><!-- 用后端代码来实现这个功能 --><!--
-                <TextBlock Name="txtPrinterName" Text="{Binding ElementName=itemsPrinters, Path=ItemsSource}"/>
-            </Grid>-->
-            
-            <!--<Border BorderBrush="#A8A4AD" BorderThickness="0 0 0 1"/>-->
-
-            <WrapPanel Grid.RowSpan="2" Orientation="Horizontal">
-                
-
-                <Button Name="btnSendFile" Click="btnSentFile_Click"
-                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                        Height="50" Width="200" Margin="20 20 0 10">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Button.Effect>
-                    <StackPanel>
-                        <TextBlock Text="发送文件" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                    </StackPanel>
-                </Button>
-
-                <Button Name="btnBasicMessage" Click="btnBasicMessage_Click"
-                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                        Height="50" Width="200" Margin="20 20 0 10">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Button.Effect>
-                    <StackPanel>
-                        <TextBlock Text="基本信息" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                    </StackPanel>
-                </Button>
-
-                <Button Name="btnPrintSetting" Click="btnPrintSetting_Click"
-                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                        Height="50" Width="200" Margin="20 20 0 10">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Button.Effect>
-                    <StackPanel>
-                        <TextBlock Text="打印设置" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                    </StackPanel>
-                </Button>
-
-                <Button Name="btnHighSetting" Click="btnHighSetting_Click"
-                        BorderThickness="0" Style="{StaticResource CornerRadiusButton}"
-                        HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                        Height="50" Width="200" Margin="20 20 0 10">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#1578F6" BlurRadius="15" Opacity="0.4"/>
-                    </Button.Effect>
-                    <StackPanel>
-                        <TextBlock Text="高级设置" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" Margin="5 5 5 0" Foreground="#FFFFFF"/>
-                        <TextBlock Text="其他说明" Margin="5 0 5 0" Foreground="#F7F7F7" />
-                    </StackPanel>
-                </Button>
-            </WrapPanel>
+            <Frame Name="skipPages" Grid.Row="1" Grid.Column="1"/>
         </Grid>
         
     </Grid>

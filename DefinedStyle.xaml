@@ -97,6 +97,9 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#9C9C9C"/>
+                        </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="#1578F6"/>
                             <Setter Property="FontWeight" Value="Bold"/>
@@ -206,6 +209,17 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="#565353"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <!--<Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#DEDEDE"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#1578F6"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+        </Style.Triggers>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -227,8 +241,8 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
-                        
-                        
+
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
 
@@ -275,6 +289,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="#1578F6"/>
             </Trigger>
+            <!--<Trigger Property="IsFocused" Value="False">
+                <Setter Property="IsOpen" Value="False"/>
+            </Trigger>-->
         </Style.Triggers>
     </Style>
 

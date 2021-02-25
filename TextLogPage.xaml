@@ -22,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ComboBox x:Name="Log_File_ComboBox" SelectionChanged="LogFileComboBoxSelectionChanged"
-                  Style="{StaticResource YDefaultComboBoxStyle}" Width="320" Height="25"/>
+                  Style="{StaticResource YDefaultComboBoxStyle}" Width="320" Height="25" HorizontalAlignment="Left"/>
 
         <ListView x:Name="Log_ListView"  Height="775" VerticalAlignment="Top" Grid.Row="1" Foreground="#FFFFFF" BorderThickness="0">
             <ListView.View>

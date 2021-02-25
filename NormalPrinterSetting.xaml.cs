@@ -38,6 +38,16 @@ namespace demo
             _windowHandle = new WindowInteropHelper(this).Handle;
         }
 
+        public NormalPrinterSetting(string printerName)
+        {
+            InitializeComponent();
+            this.printerName = printerName;
+            txtPrinterName.Text = printerName;
+            GetPrinterAllStatus();
+            //获取窗口的句柄
+            _windowHandle = new WindowInteropHelper(this).Handle;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -491,6 +501,30 @@ namespace demo
                 txtLogMessage.Text = "打印机不存在！";
             }
             
+        }
+
+        private void btnSendValueID_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                string result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+                string settingID = "media.speed";
+                string value = "5.0";
+                string value2 = "\0media.speed\0";
+                //MessageBox.Show(Printer.SetAvailableSetting(settingID, value));
+                //MessageBox.Show(Printer.GetPrinterSettingValus(txtTestValueID.Text));
+                MessageBox.Show(Printer.GetPrinterSettingValus(settingID));
+                //txtShowSettings.Text = Printer.GetAllAvailableSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Printer.ClosePrinter();
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ using System.Net.NetworkInformation;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer;
 using System.IO;
+using System.Collections;
 //using System.Windows.FrameworkElement;
 
 namespace demo
@@ -210,7 +211,7 @@ namespace demo
 		}
 
 		//获取斑马打印机列表
-		public static void SetPrinters(ItemsControl itemsControl)
+		public static List<City> SetPrinters(ItemsControl itemsControl)
 		{
             try
             {
@@ -232,10 +233,12 @@ namespace demo
 				printerCount = list.Count;
 				streamReaderExecutePrinter.Close();
 				itemsControl.ItemsSource = list;
+				return list;
 			}
             catch (Exception e)
             {
 				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + e.Message);
+				return null;
             }
 			
 
@@ -416,12 +419,50 @@ namespace demo
 			return false;
         }
 
+		//获取到全部可获取的设置
+		public static string GetAllAvailableSettings()
+        {
+			if (printerHTTP != null && linkOsPrinter != null)
+            {
+				HashSet<string> availableSettings = linkOsPrinter.GetAvailableSettings();
+				string availableSettingsValues = "";
+				foreach (var item in availableSettings)
+				{
+					availableSettingsValues += item + "\n";
+				}
+				return availableSettingsValues;
+			}
+			return "";
+		}
+
 		//通过指令ID获取打印机设置信息
 		public static string GetPrinterSettingValus(string settingID)
 		{
+			
 			if (printerHTTP != null && linkOsPrinter != null)
 			{
+				
+				
 				return linkOsPrinter.GetSettingValue(settingID);
+			}
+			return "";
+
+		}
+
+		//通过指令ID获取打印机设置信息,并返回新值
+		public static string SetAvailableSetting(string settingID, string value)
+		{
+
+			if (printerHTTP != null && linkOsPrinter != null)
+			{
+				HashSet<string> availableSettings = linkOsPrinter.GetAvailableSettings();
+				if (availableSettings.Contains(settingID) &&
+					linkOsPrinter.IsSettingReadOnly(settingID) == false)
+				{
+					//linkOsPrinter.SetSetting(settingID, value);
+					return linkOsPrinter.GetSettingValue(settingID);
+				}
+				//return linkOsPrinter.GetSettingValue(settingID);
 			}
 			return "";
 
@@ -488,6 +529,38 @@ namespace demo
 				}
 			}
 			return null;
+		}
+
+		//解析SGD指令
+		//! U1 setvar "input.capture" "run"
+		//! U1 getvar "input.capture"
+		//以以上两条指令为标准
+		public static ArrayList FormatSGD(string sgd)
+        {
+			ArrayList array = new ArrayList();
+			try
+            {
+				string[] sgdArray = sgd.Split(' ');
+				
+				if (sgdArray[0] == "!")
+				{
+					string stringID = sgdArray[3].Replace('"', (char)0x00);
+					if (sgdArray[2] == "getvar")
+					{
+						array.Add(stringID);
+					}
+					else if (sgdArray[2] == "setvar")
+					{
+						array.Add(stringID);
+						array.Add(sgdArray[4].Replace('"', (char)0x00));
+					}
+				}
+				return array;
+			}
+            catch (Exception)
+            {
+				return array;
+            }			
 		}
 	}
 }

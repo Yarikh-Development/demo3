@@ -150,6 +150,10 @@
                     <Border Height="25" Margin="0 5 0 0">
                         <TextBlock Text="升级固件" FontSize="14" VerticalAlignment="Center"/>
                     </Border>
+                    <Border Height="30"/>
+                    <Border Height="25" Margin="0 5 0 0">
+                        <TextBlock Text="ValueID" FontSize="14" VerticalAlignment="Center"/>
+                    </Border>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Grid.Column="2">
                     <StackPanel Orientation="Horizontal" Height="25">
@@ -177,6 +181,10 @@
                         <!-- 错误返回值 -->
                         <TextBlock Name="txtErrorMessage2" Foreground="#E65F5F"/>
                     </StackPanel>
+                    <TextBox Name="txtTestValueID" Height="25" Margin="0 5 0 0"/>
+                    <Button Name="btnSendValueID" Click="btnSendValueID_Click"
+                            Content="发送" Margin="0 5 0 0" Width="60" Height="25" HorizontalAlignment="Left"/>
+                    <TextBox Name="txtShowSettings" VerticalScrollBarVisibility="Visible" Height="400"/>
                 </StackPanel>
             </Grid>
             

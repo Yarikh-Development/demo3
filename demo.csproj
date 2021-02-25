@@ -276,6 +276,9 @@
       <DependentUpon>TextMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BasicSituationViewModel.cs" />
+    <Compile Include="View\NomalView\DeviceDetailsNomalView.xaml.cs">
+      <DependentUpon>DeviceDetailsNomalView.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddPrinter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -417,6 +420,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NomalView\DeviceDetailsNomalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

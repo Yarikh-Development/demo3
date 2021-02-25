@@ -1,4 +1,5 @@
 ﻿using demo.ClassFolder;
+using demo.View.NomalView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zebra.Sdk.Comm;
 
 namespace demo
 {
@@ -28,12 +30,15 @@ namespace demo
         Printer printer;
         private string printerName = "";
         private AddPrinter add = null;
+        private bool _isOpenPopup = false;
+        private List<City> _printers;
+        private City _printer;
         //private ObservableCollection<AddPrintersMessage> executePrinters = null;
         public TextSearchPrints(Window window)
         {
             InitializeComponent();
             //Printer.SetPrinters();
-            Printer.SetPrinters(itemsPrinters);
+            _printers = Printer.SetPrinters(itemsPrinters);
             printersCount.Text =  Printer.printerCount.ToString();
             //txtPrintersState.Text = Printer.GetPrinterStatus()
             //AddExecutePrinters();
@@ -42,34 +47,54 @@ namespace demo
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //读取打印机列表的第一项
-            printer = new Printer();
             isVisibilityForEnter.Visibility = Visibility.Visible;
-            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");
-            if (buttonItems.Count > 0)
+            var c = _printers.First();
+            txtPrinterName2.Text = c.Name;
+            txtPrinterNetStatus.Text = c.NetStatus.ToString();
+            printerName = c.Name;
+            _printer = c;
+            if (c.NetStatus == 0)
             {
-                Button button = buttonItems.First();
-                TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
-                txtPrinterName2.Text = txt.Text;
-                
+                btnDialogBox.IsEnabled = false;
             }
-            
+            else
+            {
+                try
+                {
+                    string result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+                }
+                catch (Exception)
+                {
+                    Printer.ClosePrinter();
+                }
+            }
 
         }
 
         //展示ItemsControl里的打印机名
         private void printerMessage_Click(object sender, RoutedEventArgs e)
         {
-            printer = new Printer();
-            isVisibilityForEnter.Visibility = Visibility.Visible;
-            List<Button> buttonItems = printer.GetChildObjects<Button>(itemsPrinters, "");            
-            foreach (Button button in buttonItems)
-            {                
-                if (button.IsFocused)
+            var btn = sender as Button;
+            var c = btn.DataContext as City;
+            txtPrinterName2.Text = c.Name;
+            txtPrinterNetStatus.Text = c.NetStatus.ToString();
+            printerName = c.Name;
+            _printer = c;
+            if (c.NetStatus == 0)
+            {
+                btnDialogBox.IsEnabled = false;
+            }
+            else
+            {
+                btnDialogBox.IsEnabled = true;
+                try
                 {
-                    TextBlock txt = printer.FindFirstVisualChild<TextBlock>(button, "txtPrintersName");
-                    txtPrinterName2.Text = txt.Text;
-                    printerName = txt.Text;
-                }                   
+                    string result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+                }
+                catch (Exception)
+                {
+                    Printer.ClosePrinter();
+                }
             }
         }
 
@@ -80,19 +105,22 @@ namespace demo
 
         private void btnSentFile_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnSendFile.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName);
+            normalPrinter.btnSendFile.IsChecked = true;
             normalPrinter.ShowDialog();
         }
 
         private void btnHighSetting_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnHighSetting.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName);
+            normalPrinter.btnHighSetting.IsChecked = true;
             normalPrinter.ShowDialog();
         }
 
         private void btnPrintSetting_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnPrintSetting.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName);
+            normalPrinter.btnPrintSetting.IsChecked = true;
             normalPrinter.ShowDialog();
             
             
@@ -100,7 +128,8 @@ namespace demo
 
         private void btnBasicMessage_Click(object sender, RoutedEventArgs e)
         {
-            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName, btnBasicMessage.Name);
+            NormalPrinterSetting normalPrinter = new NormalPrinterSetting(printerName);
+            normalPrinter.btnBasicMessage.IsChecked = true;
             normalPrinter.ShowDialog();
         }
 
@@ -114,6 +143,31 @@ namespace demo
         {
             add = new AddPrinter();
             add.ShowDialog();
+        }
+
+        private void btnDialogBox_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceDetailsNomalView deviceDetails = new DeviceDetailsNomalView(_printer.Port);
+            skipPages.Content = deviceDetails;
+        }
+
+        private void btnMoreSetting_Click(object sender, RoutedEventArgs e)
+        {
+            popup.IsOpen = true;
+            //以下代码为，在popupOpen的时候再次点击按钮将IsOpen设为false，但有一些Bug，便不使用。
+            /*if (_isOpenPopup == true)
+            {
+                _isOpenPopup = false;
+                popup.IsOpen = false;
+            }
+                
+            else
+            {
+                _isOpenPopup = true;
+                popup.IsOpen = true;
+
+            }*/
+
         }
     }
 }
