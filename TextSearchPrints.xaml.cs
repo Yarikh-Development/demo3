@@ -3,6 +3,7 @@ using demo.View.NomalView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
@@ -32,7 +33,10 @@ namespace demo
         private AddPrinter add = null;
         private bool _isOpenPopup = false;
         private List<City> _printers;
+        private List<City> _itemRefresh;
         private City _printer;
+        private BackgroundWorker bgMeet;
+        
         //private ObservableCollection<AddPrintersMessage> executePrinters = null;
         public TextSearchPrints(Window window)
         {
@@ -57,7 +61,7 @@ namespace demo
             {
                 btnDialogBox.IsEnabled = false;
             }
-            else
+            /*else
             {
                 try
                 {
@@ -67,7 +71,7 @@ namespace demo
                 {
                     Printer.ClosePrinter();
                 }
-            }
+            }*/
 
         }
 
@@ -135,8 +139,13 @@ namespace demo
 
         private void btnRafresh_Click(object sender, RoutedEventArgs e)
         {
-            Printer.SetPrinters(itemsPrinters);
-            printersCount.Text = Printer.printerCount.ToString();
+            bgMeet = new BackgroundWorker();
+            bgMeet.WorkerReportsProgress = true;
+            bgMeet.DoWork += new DoWorkEventHandler(bgMeet_DoWork);
+            bgMeet.ProgressChanged += new ProgressChangedEventHandler(bgMeet_ProgressChanged);
+            bgMeet.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgMeet_RunWorkerCompleted);
+            bgMeet.RunWorkerAsync();
+            
         }
 
         private void btnAddPrinter_Click(object sender, RoutedEventArgs e)
@@ -147,7 +156,7 @@ namespace demo
 
         private void btnDialogBox_Click(object sender, RoutedEventArgs e)
         {
-            DeviceDetailsNomalView deviceDetails = new DeviceDetailsNomalView(_printer.Port);
+            DeviceDetailsNomalView deviceDetails = new DeviceDetailsNomalView(_printer);
             skipPages.Content = deviceDetails;
         }
 
@@ -168,6 +177,42 @@ namespace demo
 
             }*/
 
+        }
+
+        void bgMeet_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            busyRefresh.IsActive = false;
+            
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                printersCount.Text = Printer.printerCount.ToString();
+                itemsPrinters.ItemsSource = _itemRefresh;
+                txtIsLoading.Text = "";
+            }));
+        }
+        void bgMeet_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            /*this.Dispatcher.Invoke(new Action(() =>
+            {
+                this.txtIsLoading.Text = "多线程开启！";
+            }));*/
+        }
+
+
+
+        void bgMeet_DoWork(object sender, DoWorkEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                busyRefresh.IsActive = true;
+                txtIsLoading.Text = "加载中";
+            }));
+            GetData();
+        }
+        public void GetData()
+        {
+            _itemRefresh = Printer.SetPrintersStatus();
+            
         }
     }
 }

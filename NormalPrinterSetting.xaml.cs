@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -508,14 +509,23 @@ namespace demo
             
             try
             {
-                string result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
-                string settingID = "media.speed";
-                string value = "5.0";
-                string value2 = "\0media.speed\0";
-                //MessageBox.Show(Printer.SetAvailableSetting(settingID, value));
-                //MessageBox.Show(Printer.GetPrinterSettingValus(txtTestValueID.Text));
-                MessageBox.Show(Printer.GetPrinterSettingValus(settingID));
-                //txtShowSettings.Text = Printer.GetAllAvailableSettings();
+                string result = "";
+                Task.Factory.StartNew(() =>
+                {
+                    result = Printer.LinkPrinter(printerName, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+                    string settingID = "media.speed";
+                    string value = "5.0";
+                    string value2 = "\0media.speed\0";
+                    try
+                    {                                                
+                        MessageBox.Show(Printer.GetPrinterSettingValus(settingID));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }                    
+                });
+                
             }
             catch (Exception ex)
             {

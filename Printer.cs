@@ -19,6 +19,8 @@ using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer;
 using System.IO;
 using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 //using System.Windows.FrameworkElement;
 
 namespace demo
@@ -63,6 +65,7 @@ namespace demo
 		private static ZebraPrinterLinkOs linkOsPrinter = null;
 		private static PrinterStatus ret;
 		private static PrinterReadyStatus rets;
+		private static Action Dispatcher;
 		public static int printerCount { get; set; }
         //Zebra.Sdk.Settings.
         //public static bool isPrinterOnline = false;
@@ -211,7 +214,7 @@ namespace demo
 		}
 
 		//获取斑马打印机列表
-		public static List<City> SetPrinters(ItemsControl itemsControl)
+		public static List<City> SetPrintersStatus()
 		{
             try
             {
@@ -232,7 +235,7 @@ namespace demo
 				}
 				printerCount = list.Count;
 				streamReaderExecutePrinter.Close();
-				itemsControl.ItemsSource = list;
+				//itemsControl.ItemsSource = list;
 				return list;
 			}
             catch (Exception e)
@@ -241,6 +244,44 @@ namespace demo
 				return null;
             }
 			
+
+		}
+
+		public static List<City> SetPrinters(ItemsControl itemsControl)
+		{
+			try
+			{
+				int cnt = 0;
+				List<City> list = new List<City>();
+				string filePathExecutePrinter = FileTools.executePrintersFilePath;
+				FileStream fileStreamExecutePrinter = new FileStream(filePathExecutePrinter, FileMode.OpenOrCreate, FileAccess.Read);
+				StreamReader streamReaderExecutePrinter = new StreamReader(fileStreamExecutePrinter);
+				string line;
+				string[] data;
+				while ((line = streamReaderExecutePrinter.ReadLine()) != null)
+				{
+					data = line.Split(';');
+					GetPrinterStatus(data[0]);
+					list.Add(new City
+					{
+						ID = ++cnt,
+						Name = data[0],
+						Port = data[1],
+						NetStatus = ret,
+						WareStatus = rets == 0 ? "" : rets.ToString()
+					});
+				}
+				printerCount = list.Count;
+				streamReaderExecutePrinter.Close();
+				itemsControl.ItemsSource = list;
+				return list;
+			}
+			catch (Exception e)
+			{
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + e.Message);
+				return null;
+			}
+
 
 		}
 
@@ -272,8 +313,64 @@ namespace demo
 				foreach (string s in ip.Split(new char[] { '.' }))
 					int.Parse(s);
 
+
 				Ping pingSender = new Ping();
-				PingReply reply = pingSender.Send(ip, 1);//第一个参数为ip地址，第二个参数为ping的时间
+				PingReply reply = pingSender.Send(ip, 1); ;
+				if (reply.Status != IPStatus.Success)
+					throw new ConnectionException("链接失败！");
+
+
+
+				/*Ping pingSender = new Ping();
+				Thread thread = new Thread(new ThreadStart()));
+				thread.Start();
+				PingReply reply = null;					
+				reply = pingSender.Send(ip, 1);//第一个参数为ip地址，第二个参数为ping的时间
+
+				Func<string, int, PingReply> func = new Func<string, int, PingReply>(Printer.PingIP);
+				reply = func(ip, 1);
+
+				if (reply.Status != IPStatus.Success)
+					throw new ConnectionException("链接失败！");*/
+
+				TcpConnection connection = new TcpConnection(ip, port);
+				connection.Open();
+				printerHTTP = ZebraPrinterFactory.GetInstance(connection);
+				linkOsPrinter = ZebraPrinterFactory.CreateLinkOsPrinter(printerHTTP);
+				printerStatus = printerHTTP.GetCurrentStatus();
+			}
+			catch (ConnectionException e)
+			{
+				printerHTTP = null;
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + printerName + e.Message);
+				return printerName + e.Message;
+			}
+			catch (FormatException e)
+			{
+				printerHTTP = null;
+				FileTools.WriteLineFile(FileTools.exceptionFilePath, DateTime.Now.ToString() + " " + printerName + "IP地址不正确！");
+				return printerName + "IP地址不正确！";
+			}
+
+			return "";
+		}
+
+
+		//链接打印机
+		/*public static async Task LinkPrinter2(string printerName, int port)
+		{
+			try
+			{
+				string ip = GetRegistryData(printerName + "\\DsSpooler", "portName");
+
+				if (ip == "" || ip.Split(new char[] { '.' }).Length != 4)
+					throw new ConnectionException("没找到IP");
+				foreach (string s in ip.Split(new char[] { '.' }))
+					int.Parse(s);
+
+
+				Ping pingSender = new Ping();
+				PingReply reply = pingSender.Send(ip, 1); ;
 				if (reply.Status != IPStatus.Success)
 					throw new ConnectionException("链接失败！");
 
@@ -297,6 +394,14 @@ namespace demo
 			}
 
 			return "";
+		}*/
+
+		private static PingReply PingIP(string ip, int sec)
+        {
+			Ping pingSender = new Ping();
+			PingReply reply = pingSender.Send(ip, sec);
+			//第一个参数为ip地址，第二个参数为ping的时间
+			return reply;
 		}
 
 		public static void GetPrinterAllSetting()
@@ -441,7 +546,6 @@ namespace demo
 			
 			if (printerHTTP != null && linkOsPrinter != null)
 			{
-				
 				
 				return linkOsPrinter.GetSettingValue(settingID);
 			}

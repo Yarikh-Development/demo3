@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:demo"
+      xmlns:local="clr-namespace:demo.CustomControl"
       xmlns:c="clr-namespace:demo.DiyControl" 
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       mc:Ignorable="d" 
@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="DefinedStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Style/BusyBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -67,50 +68,6 @@
                             <Button.Content>
                                 <TextBlock Text="&#xec90;" FontFamily="/#iconfont" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button.Content>
-                            <!-- 更改模板已达到MouseOver后下拉菜单的效果，但效果并不好 -->
-                            <!--<Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid>
-                                        <Border Name="border"/>
-                                        <Popup  Placement="Bottom"  x:Name="popup"
-                                                Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" 
-                                                HorizontalOffset="{TemplateBinding Popup.HorizontalOffset}" 
-                                                VerticalOffset="{TemplateBinding Popup.VerticalOffset}">
-                                            <StackPanel Height="Auto" Width="100">
-                                                <Button Name="btnSendFile" Click="btnSentFile_Click"
-                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="发送文件"/>
-
-                                                <Button Name="btnBasicMessage" Click="btnBasicMessage_Click"
-                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="基本信息"/>
-                                                <Button Name="btnPrintSetting" Click="btnPrintSetting_Click"
-                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="打印设置"/>
-                                                <Button Name="btnHighSetting" Click="btnHighSetting_Click"
-                                                        Height="30" BorderThickness="0" Background="#FFFFFF" Content="高级设置"/>
-
-                                            </StackPanel>
-
-                                        </Popup>
-                                        <ContentPresenter RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}"
-                                                  ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
-                                                  ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
-                                                  Name="contentPresenter" Margin="{TemplateBinding Control.Padding}" 
-                                                  HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" 
-                                                  VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" 
-                                                  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Focusable="False" />
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            
-                                            <Setter Property="IsOpen" Value="True" TargetName="popup"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-
-                                            <Setter Property="IsOpen" Value="False" TargetName="popup"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>-->
-                            
                         </Button>
                         <Popup Placement="Bottom"  x:Name="popup" StaysOpen="False" PlacementTarget="{Binding ElementName=btnMoreSetting}"
                                  HorizontalAlignment="Left"
@@ -177,8 +134,19 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Height="Auto" HorizontalAlignment="Center">
+                    <local:BusyBox x:Name="busyRefresh" Height="Auto" MaxHeight="20" Foreground="#696969"/>
+                    <TextBlock Name="txtIsLoading" MinHeight="0" Height="{Binding Height,ElementName=busyRefresh}" Foreground="#696969" VerticalAlignment="Center"/>
+                </StackPanel>
 
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Style="{StaticResource for_scrollviewer}">
+                
+                              
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Grid.Row="1"
+                              Style="{StaticResource for_scrollviewer}">
                     <ScrollViewer.Content>
                         <ItemsControl Name="itemsPrinters">
                             <ItemsControl.ItemsPanel>
@@ -190,7 +158,7 @@
                                 <DataTemplate x:Name="cmdTemplate">
 
                                     <Border Name="bdInItem" BorderBrush="#A8A4AD" BorderThickness="1" CornerRadius="5"  Height="60" Width="200" 
-                                            Background="#FFFFFF" VerticalAlignment="Top" Margin="0 10 0 10" >
+                                            Background="#FFFFFF" VerticalAlignment="Top" Margin="0 0 0 10" >
                                         <!-- 显示打印机内容 -->
                                         <Button Name="printerMessage" Click="printerMessage_Click" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Left" 
                                                 Style="{StaticResource BackGroundButton}" Initialized="printerMessage_Initialized">

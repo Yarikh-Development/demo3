@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zebra.Sdk.Comm;
 
 namespace demo.View.NomalView
 {
@@ -20,24 +21,24 @@ namespace demo.View.NomalView
     /// DeviceDetailsNomalView.xaml 的交互逻辑
     /// </summary>
     public partial class DeviceDetailsNomalView : Page
-    {
-        private string _port;
-        public DeviceDetailsNomalView(string printerPort)
+    {       
+        private City _printer;
+        public DeviceDetailsNomalView(City printer)
         {
-            _port = printerPort;
-            
+            _printer = printer;
             InitializeComponent();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            txtSendToDeviceIP.Text = _port;
+            txtSendToDeviceIP.Text = _printer.Port;
         }
 
         private void btnSendTo_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                Printer.LinkPrinter(_printer.Name, TcpConnection.DEFAULT_ZPL_TCP_PORT);
                 if (txtSendToDeviceIP.Text == "")
                 {
                     MessageBox.Show("请输入正确的IP地址！");
@@ -66,7 +67,10 @@ namespace demo.View.NomalView
 
                 MessageBox.Show(ex.Message);
             }
-            
+            finally
+            {
+                Printer.ClosePrinter();
+            }
         }
 
         private void ZPL_Click(object sender, RoutedEventArgs e)
